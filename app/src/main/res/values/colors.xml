@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F1F1F1</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#7CB342</color>
+    <color name="colorBackground">#FFF0F0</color>
+    <color name="colorTextHighLightRed">#F44336</color>
+    <color name="color_pinkForIns">#F8BBD0</color>
+    <color name="color_blueForFb">#3F51B5</color>
+    <color name="color_skyBlueForTwitter">#03A9F4</color>
+    <color name="color_yellow_highlight">#FDD835</color>
+    <color name="colorHighLightGreenAccent">#17D51E</color>
+    <color name="colorBackground_ActionBar">#D8ED99</color>
+</resources>

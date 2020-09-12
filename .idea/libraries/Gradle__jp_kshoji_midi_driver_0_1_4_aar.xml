@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: jp.kshoji:midi-driver:0.1.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/994a775548c225013903dd1eb64ad499/jetified-midi-driver-0.1.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/994a775548c225013903dd1eb64ad499/jetified-midi-driver-0.1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/994a775548c225013903dd1eb64ad499/jetified-midi-driver-0.1.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

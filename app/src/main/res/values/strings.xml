@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EzMusic</string>
+    <string name="action_settings">Settings</string>
+    <string name="thru_off">Thru OFF</string>
+    <string name="thru_on">Thru ON</string>
+    <string name="midi_input">MIDI Input</string>
+    <string name="midi_output">MIDI Output</string>
+    <string name="midi_message_data">_MIDI_MESSAGE_DATA</string>
+    <string name="cable_id">Cable ID :</string>
+    <string name="midi_thru_in_to_out">MIDI Thru(In to Out) :</string>
+    <string name="midi_device">MIDI Device :</string>
+</resources>

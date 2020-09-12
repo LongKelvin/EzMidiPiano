@@ -1,0 +1,3 @@
+include ':sherlockmidi'
+include ':app'
+rootProject.name = "EzMusic"
