@@ -16,6 +16,7 @@
         android:name="android.software.midi"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MidiDriver"
+            android:name=".view.MainActivity"
             android:screenOrientation="landscape"
             tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
             <intent-filter>
@@ -31,6 +32,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.InstrumentsActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+
         </activity>
     </application>
 
