@@ -9,4 +9,67 @@
     <string name="cable_id">Cable ID :</string>
     <string name="midi_thru_in_to_out">MIDI Thru(In to Out) :</string>
     <string name="midi_device">MIDI Device :</string>
+    <string name="select_sound">Select Sound</string>
+    <string name="file_error">FILE NOT FOUND</string>
+    <string name="instruments_name">Instruments Name_</string>
+    <string name="icon_for_instruments">icon for instruments_</string>
+
+    <!-- Order is important here: -->
+    <string-array name="instrument_name">
+        <item>Grand Piano"</item>
+        <item>Electric Piano</item>
+        <item>Organ</item>
+        <item>Clavi Wah</item>
+        <item>String</item>
+        <item>Acoustic Guitar</item>
+        <item>Brass</item>
+        <item>Synth Lead 1</item>
+        <item>Synth Lead 2</item>
+        <item>Accordion</item>
+        <item>Harmonic</item>
+        <item>Flute</item>
+        <item>Pad Wave 1 </item>
+        <item>Pad Wave 2 </item>
+        <item>Studio Kit 1 </item>
+        <item>Studio Kit 2 </item>
+    </string-array>
+
+    <string-array name="instrument_path">
+        <item>GrandPiano"</item>
+        <item>ElectricPiano</item>
+        <item>Organ</item>
+        <item>ClaviWah</item>
+        <item>String</item>
+        <item>AcousticGuitar</item>
+        <item>Brass</item>
+        <item>SynthLead1</item>
+        <item>SynthLead2</item>
+        <item>Accordion</item>
+        <item>Harmonic</item>
+        <item>Flute</item>
+        <item>PadWave1</item>
+        <item>PadWave2</item>
+        <item>StudioKit1</item>
+        <item>StudioKit2</item>
+    </string-array>
+
+    <string-array name="image">
+        <item>@drawable/grandpiano</item>
+        <item>@drawable/epiano</item>
+        <item>@drawable/pad</item>
+        <item>@drawable/pad2</item>
+        <item>@drawable/violin</item>
+        <item>@drawable/acguitar</item>
+        <item>@drawable/drum64</item>
+        <item>@drawable/synthesizer</item>
+        <item>@drawable/synthesizer</item>
+        <item>@drawable/drum64</item>
+        <item>@drawable/drum64</item>
+        <item>@drawable/flute</item>
+        <item>@drawable/pad</item>
+        <item>@drawable/pad2</item>
+        <item>@drawable/drum64</item>
+        <item>@drawable/drum64</item>
+
+    </string-array>
 </resources>

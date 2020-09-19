@@ -32,6 +32,13 @@
 
                 android:spinnerMode="dropdown"
                 android:textColor="@color/colorBackground" />
+
+            <Button
+                android:id="@+id/btn_selectSound"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/select_sound" />
         </LinearLayout>
 
     </LinearLayout>
