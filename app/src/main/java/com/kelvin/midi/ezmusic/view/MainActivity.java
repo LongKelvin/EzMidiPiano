@@ -187,13 +187,13 @@ public class MainActivity extends Activity {
             public void onMidiNoteOff(@NonNull final MidiInputDevice sender, int cable, int channel, int note, int velocity) {
 
                 try {
-                   // ShortMessage msg = new ShortMessage();
-                    msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
-//                    if (isPedalHolding) {
-//                        msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
-//                    } else {
-//                        msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
-//                    }
+                    ShortMessage msg = new ShortMessage();
+
+                    if (isPedalHolding) {
+                        msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
+                    } else {
+                        msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
+                    }
 
                     recv.send(msg, -1);
                 } catch (InvalidMidiDataException e) {
