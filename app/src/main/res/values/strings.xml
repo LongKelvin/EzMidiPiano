@@ -19,14 +19,14 @@
         <item>Grand Piano"</item>
         <item>Electric Piano</item>
         <item>Organ</item>
-        <item>Clavi Wah</item>
         <item>String</item>
         <item>Acoustic Guitar</item>
+        <item>Rock Guitar</item>
+        <item>Finger Bass</item>
         <item>Brass</item>
         <item>Synth Lead 1</item>
         <item>Synth Lead 2</item>
         <item>Accordion</item>
-        <item>Harmonic</item>
         <item>Flute</item>
         <item>Pad Wave 1 </item>
         <item>Pad Wave 2 </item>
@@ -38,38 +38,38 @@
         <item>GrandPiano"</item>
         <item>ElectricPiano</item>
         <item>Organ</item>
-        <item>ClaviWah</item>
         <item>String</item>
-        <item>AcousticGuitar</item>
-        <item>Brass</item>
+        <item>AccGuitar</item>
+        <item>RockGuitar</item>
+        <item>Studbass</item>
+        <item>brass</item>
         <item>SynthLead1</item>
-        <item>SynthLead2</item>
-        <item>Accordion</item>
-        <item>Harmonic</item>
-        <item>Flute</item>
+        <item>Supersaw</item>
+        <item>accordion</item>
+        <item>Kelflute</item>
         <item>PadWave1</item>
-        <item>PadWave2</item>
+        <item>Balchoir</item>
         <item>StudioKit1</item>
         <item>StudioKit2</item>
     </string-array>
 
     <string-array name="image">
         <item>@drawable/grandpiano</item>
-        <item>@drawable/epiano</item>
-        <item>@drawable/pad</item>
-        <item>@drawable/pad2</item>
+        <item>@drawable/epiano_</item>
+        <item>@drawable/organ</item>
         <item>@drawable/violin</item>
         <item>@drawable/acguitar</item>
-        <item>@drawable/drum64</item>
+        <item>@drawable/eguitar</item>
+        <item>@drawable/bass</item>
+        <item>@drawable/brass</item>
+        <item>@drawable/synthlead1</item>
         <item>@drawable/synthesizer</item>
-        <item>@drawable/synthesizer</item>
-        <item>@drawable/drum64</item>
-        <item>@drawable/drum64</item>
+        <item>@drawable/accordion</item>
         <item>@drawable/flute</item>
         <item>@drawable/pad</item>
         <item>@drawable/pad2</item>
-        <item>@drawable/drum64</item>
-        <item>@drawable/drum64</item>
+        <item>@drawable/drums1</item>
+        <item>@drawable/drum2</item>
 
     </string-array>
 </resources>

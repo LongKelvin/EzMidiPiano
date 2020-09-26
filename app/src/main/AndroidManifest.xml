@@ -17,6 +17,7 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,22 +25,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".view.PianoViewActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
             android:name=".view.MainActivity"
             android:screenOrientation="landscape"
             tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.InstrumentsActivity"
             android:screenOrientation="landscape"
-            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-
-        </activity>
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity" />
     </application>
 
 </manifest>
