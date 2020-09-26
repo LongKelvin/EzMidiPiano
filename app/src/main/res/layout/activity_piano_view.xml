@@ -6,7 +6,11 @@
     tools:context=".view.PianoViewActivity">
 
     <com.kelvin.midi.ezmusic.view.PianoView
+        android:id="@+id/piano_view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="227dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

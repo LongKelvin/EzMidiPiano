@@ -73,10 +73,15 @@
     <ListView
         android:id="@+id/midiOutputEventListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="234dp"
         android:layout_weight="1"
         android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" >
-    </ListView>
+        android:transcriptMode="alwaysScroll" />
+
+    <com.kelvin.midi.ezmusic.view.PianoView
+        android:id="@+id/piano_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        />
 
 </LinearLayout>

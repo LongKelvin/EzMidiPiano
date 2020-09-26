@@ -44,11 +44,14 @@ import jp.kshoji.javax.sound.midi.ShortMessage;
 public class MainActivity extends Activity {
 
     private SoftSynthesizer synth;
-    private Receiver recv;
+    private Receiver receiver;
     private boolean isPedalHolding = false;
-    private  ShortMessage msg = new ShortMessage();
+    private ShortMessage msg = new ShortMessage();
 
     private String DEFAULT_INSTRUMENT = "GrandPiano";
+
+    //custom piano view
+    public PianoView piano;
 
 
     ArrayAdapter<String> midiInputEventAdapter;
@@ -125,10 +128,15 @@ public class MainActivity extends Activity {
             synth.open();
             synth.loadAllInstruments(sf);
             synth.getChannels()[0].programChange(0);
-            recv = synth.getReceiver();
+            receiver = synth.getReceiver();
         } catch (IOException | MidiUnavailableException e) {
             e.printStackTrace();
         }
+
+        //Init PianoView
+        piano = new PianoView(this);
+        piano = findViewById(R.id.piano_view);
+        piano.setReceiverForSynthezer(receiver);
 
 
         usbMidiDriver = new UsbMidiDriver(this) {
@@ -145,16 +153,13 @@ public class MainActivity extends Activity {
 
             @Override
             public void onMidiOutputDeviceAttached(@NonNull final MidiOutputDevice midiOutputDevice) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (connectedDevicesAdapter != null) {
-                            connectedDevicesAdapter.remove(midiOutputDevice.getUsbDevice());
-                            connectedDevicesAdapter.add(midiOutputDevice.getUsbDevice());
-                            connectedDevicesAdapter.notifyDataSetChanged();
-                        }
-                        Toast.makeText(MainActivity.this, "USB MIDI Device " + midiOutputDevice.getUsbDevice().getDeviceName() + " has been attached.", Toast.LENGTH_LONG).show();
+                runOnUiThread(() -> {
+                    if (connectedDevicesAdapter != null) {
+                        connectedDevicesAdapter.remove(midiOutputDevice.getUsbDevice());
+                        connectedDevicesAdapter.add(midiOutputDevice.getUsbDevice());
+                        connectedDevicesAdapter.notifyDataSetChanged();
                     }
+                    Toast.makeText(MainActivity.this, "USB MIDI Device " + midiOutputDevice.getUsbDevice().getDeviceName() + " has been attached.", Toast.LENGTH_LONG).show();
                 });
             }
 
@@ -171,15 +176,12 @@ public class MainActivity extends Activity {
 
             @Override
             public void onMidiOutputDeviceDetached(@NonNull final MidiOutputDevice midiOutputDevice) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (connectedDevicesAdapter != null) {
-                            connectedDevicesAdapter.remove(midiOutputDevice.getUsbDevice());
-                            connectedDevicesAdapter.notifyDataSetChanged();
-                        }
-                        Toast.makeText(MainActivity.this, "USB MIDI Device " + midiOutputDevice.getUsbDevice().getDeviceName() + " has been detached.", Toast.LENGTH_LONG).show();
+                runOnUiThread(() -> {
+                    if (connectedDevicesAdapter != null) {
+                        connectedDevicesAdapter.remove(midiOutputDevice.getUsbDevice());
+                        connectedDevicesAdapter.notifyDataSetChanged();
                     }
+                    Toast.makeText(MainActivity.this, "USB MIDI Device " + midiOutputDevice.getUsbDevice().getDeviceName() + " has been detached.", Toast.LENGTH_LONG).show();
                 });
             }
 
@@ -195,7 +197,12 @@ public class MainActivity extends Activity {
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
                     }
 
-                    recv.send(msg, -1);
+                    receiver.send(msg, -1);
+
+
+                    // make key on in PianoView
+                    piano.setKey(note, false);
+
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
                 }
@@ -210,7 +217,10 @@ public class MainActivity extends Activity {
                 try {
 
                     msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
-                    recv.send(msg, -1);
+                    receiver.send(msg, -1);
+
+                    // make key on in PianoView
+                    piano.setKey(note, true);
 
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
@@ -234,15 +244,13 @@ public class MainActivity extends Activity {
             public void onMidiControlChange(@NonNull final MidiInputDevice sender, int cable, int channel, int function, int value) {
                 if (function == 64 && value == 127) {
                     isPedalHolding = true;
-                } else if(function ==64 && value ==0){
+                } else if (function == 64 && value == 0) {
                     isPedalHolding = false;
-                }
-                else if(function ==1){
-                    try{
-                        msg.setMessage(ShortMessage.CONTROL_CHANGE, 0,  1,value);
-                        recv.send(msg, -1);
-                    }
-                    catch(InvalidMidiDataException e){
+                } else if (function == 1) {
+                    try {
+                        msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, 1, value);
+                        receiver.send(msg, -1);
+                    } catch (InvalidMidiDataException e) {
                         e.printStackTrace();
                     }
                 }
@@ -278,24 +286,21 @@ public class MainActivity extends Activity {
 
             @Override
             public void onMidiPitchWheel(@NonNull final MidiInputDevice sender, int cable, int channel, int amount) {
-                try{
-                    if(amount>8192){
-                        msg.setMessage(0xE0, 64,127);
-                    }
-                    else if(amount<8192){
-                        msg.setMessage(0xE0, 64,0);
-                    }
-                    else {
-                        msg.setMessage(0xE0, 64,64);
+                try {
+                    if (amount > 8192) {
+                        msg.setMessage(0xE0, 64, 127);
+                    } else if (amount < 8192) {
+                        msg.setMessage(0xE0, 64, 0);
+                    } else {
+                        msg.setMessage(0xE0, 64, 64);
                     }
 
-                    recv.send(msg, -1);
-                }
-                catch(InvalidMidiDataException e){
+                    receiver.send(msg, -1);
+                } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
                 }
 
-                recv.send(msg, -1);
+                receiver.send(msg, -1);
                 midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "PitchWheel from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", amount: " + amount));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
@@ -418,7 +423,7 @@ public class MainActivity extends Activity {
 
         deviceSpinner = findViewById(R.id.deviceNameSpinner);
 
-        connectedDevicesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, new ArrayList<UsbDevice>());
+        connectedDevicesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, new ArrayList<>());
         deviceSpinner.setAdapter(connectedDevicesAdapter);
 
 
@@ -433,7 +438,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                startActivityForResult(InstrumentIntent,1);
+                startActivityForResult(InstrumentIntent, 1);
             }
         });
 
@@ -449,24 +454,26 @@ public class MainActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             String instrument_path = data.getStringExtra(InstrumentsActivity.RESULT_INSTRUMENT_PATH);
             Toast.makeText(this, "You selected instrument: " + instrument_path, Toast.LENGTH_LONG).show();
 
             try {
-                if(synth != null)
+                if (synth != null)
                     synth.close();
 
                 synth = new SoftSynthesizer();
-                try{
-                    SF2Soundbank sf = new SF2Soundbank(getAssets().open(instrument_path+".sf2"));
+                try {
+                    SF2Soundbank sf = new SF2Soundbank(getAssets().open(instrument_path + ".sf2"));
                     synth = new SoftSynthesizer();
                     synth.open();
                     synth.loadAllInstruments(sf);
                     synth.getChannels()[0].programChange(0);
-                    recv = synth.getReceiver();
-                }
-                catch(Exception e){
+                    receiver = synth.getReceiver();
+
+                    //set receive for pianoView
+                    piano.setReceiverForSynthezer(receiver);
+                } catch (Exception e) {
                     Log.e("LOAD SOUND: ", "CAN NOT LOAD SOUND!");
                     showMessage("Can not load sound, Please try again!");
                     SF2Soundbank sf = new SF2Soundbank(getAssets().open(DEFAULT_INSTRUMENT + ".sf2"));
@@ -474,7 +481,10 @@ public class MainActivity extends Activity {
                     synth.open();
                     synth.loadAllInstruments(sf);
                     synth.getChannels()[0].programChange(0);
-                    recv = synth.getReceiver();
+                    receiver = synth.getReceiver();
+
+                    //set receive for pianoView
+                    piano.setReceiverForSynthezer(receiver);
                 }
 
 
@@ -484,7 +494,8 @@ public class MainActivity extends Activity {
 
         }
     }
-    private void showMessage(String message){
+
+    private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
