@@ -12,7 +12,7 @@ An Android app provide Midi connection device and javax.sound.midi
 # About EzMidiPiano
 I started this project for my interesting on Music and Midi Technology. Before this project, It take me 2 month to discover where to start with.
 Midi is something popular in Desktop app, but it may be some more diffent with Android device.
-My main porpuse is learing about Midi Techology and apply it to Android device with it is more diffrent from the orginal.
+My main porpuse is learning about Midi Techology and apply it to Android device with it is more diffrent from the orginal.
 By using EzMidiPiano, you can easily to connect your Midi controller to your Android phone and enjoy it.
 
 # Setup
@@ -32,7 +32,7 @@ This project is not completed but you can build a APK full version of it and ins
 You can easily add your favorite sound into app. Just copy and paster it into your Android phone. This app will auto recognize your sound.
 
 # Sf2 Sound
-This project have some good sf2 sound. List all of it:
+This project have some good sf2 sound. Here is some of it
 - Korg Grand Piano
 - Korg Epiano
 - Yamha Organ
@@ -43,7 +43,7 @@ This project have some good sf2 sound. List all of it:
 - Pad (Free SF2 Sound)
 
 # Status
-InProgressing
+In Progressing
 
 # Special Thanks
 + Kshoij for USB Midi Device
