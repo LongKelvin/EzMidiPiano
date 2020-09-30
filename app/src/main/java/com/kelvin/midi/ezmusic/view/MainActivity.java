@@ -129,14 +129,14 @@ public class MainActivity extends Activity {
             synth.loadAllInstruments(sf);
             synth.getChannels()[0].programChange(0);
             receiver = synth.getReceiver();
-        } catch (IOException | MidiUnavailableException e) {
+        } catch (IOException | MidiUnavailableException | IllegalStateException e) {
             e.printStackTrace();
         }
 
         //Init PianoView
         piano = new PianoView(this);
         piano = findViewById(R.id.piano_view);
-        piano.setReceiverForSynthezer(receiver);
+        piano.setReceiverForSynthesizer(receiver);
 
 
         usbMidiDriver = new UsbMidiDriver(this) {
@@ -197,6 +197,7 @@ public class MainActivity extends Activity {
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
                     }
 
+                   // msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
                     receiver.send(msg, -1);
 
 
@@ -472,7 +473,7 @@ public class MainActivity extends Activity {
                     receiver = synth.getReceiver();
 
                     //set receive for pianoView
-                    piano.setReceiverForSynthezer(receiver);
+                    piano.setReceiverForSynthesizer(receiver);
                 } catch (Exception e) {
                     Log.e("LOAD SOUND: ", "CAN NOT LOAD SOUND!");
                     showMessage("Can not load sound, Please try again!");
@@ -484,7 +485,7 @@ public class MainActivity extends Activity {
                     receiver = synth.getReceiver();
 
                     //set receive for pianoView
-                    piano.setReceiverForSynthezer(receiver);
+                    piano.setReceiverForSynthesizer(receiver);
                 }
 
 

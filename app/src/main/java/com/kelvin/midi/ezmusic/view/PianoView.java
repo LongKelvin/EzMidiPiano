@@ -163,13 +163,15 @@ class PianoView extends View {
         }
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        boolean isDownAction = action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE;
+        boolean isDownAction = action == MotionEvent.ACTION_DOWN ;
+        boolean isMoveAction = action == MotionEvent.ACTION_MOVE;
         boolean isUpAction = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_MOVE;
-        boolean isMoveAction = action == MotionEvent.ACTION_HOVER_MOVE;
-        boolean isScrollAction = action == MotionEvent.ACTION_SCROLL;
+        ArrayList<Integer> actionMoveList = new ArrayList<>();
+
 
         for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++) {
             float x = event.getX(touchIndex);
@@ -181,46 +183,147 @@ class PianoView extends View {
                 keyPressed.isNoteOn = isDownAction;
                 keyPressed.isNoteOff = isUpAction;
                 Log.i("ACTION_DOWN: Note ", String.valueOf(keyPressed.note));
-            }
-        }
 
-        ArrayList<Key> tmp = new ArrayList<>(whites_key);
-        tmp.addAll(blacks_key);
 
-        for (Key k : tmp) {
-            if (k.isNoteOn) {
-                try {
-                    ShortMessage msg = new ShortMessage();
-                    msg.setMessage(ShortMessage.NOTE_ON, 0, k.note, 80);
-                    recv.send(msg, -1);
-                } catch (InvalidMidiDataException e) {
-                    e.printStackTrace();
+                //Handle action down
+                if (keyPressed.isNoteOn) {
+                    try {
+                        ShortMessage msg = new ShortMessage();
+                        msg.setMessage(ShortMessage.NOTE_ON, 0, keyPressed.note, 80);
+                        recv.send(msg, -1);
+
+                        //Draw the key buffer to screen
+                        invalidate();
+
+                        releaseKey(keyPressed);
+                        keyPressed.isNoteOff = true;
+
+
+                    } catch (InvalidMidiDataException | NullPointerException e) {
+                        Log.e("PIANO VIEW", e.getMessage());
+                        e.printStackTrace();
+                    }
                 }
 
-                invalidate();
 
+                // handle action up
+                Log.i("ACTION_UP:_check ", String.valueOf(isUpAction));
+                if (keyPressed.isNoteOff && isUpAction) {
 
-            } else if (k.isNoteOff) {
-                try {
-                    ShortMessage msg = new ShortMessage();
-                    msg.setMessage(ShortMessage.NOTE_OFF, 0, k.note, 0);
-                    recv.send(msg, -1);
-                } catch (InvalidMidiDataException e) {
-                    e.printStackTrace();
+                    try {
+
+                        Log.i("__ACTION_UP: ", String.valueOf(isUpAction));
+
+                        ShortMessage msg = new ShortMessage();
+                        msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
+                        recv.send(msg, -1);
+
+                        releaseKey(keyPressed);
+
+                    } catch (InvalidMidiDataException | NullPointerException e) {
+                        Log.e("PIANO VIEW", e.getMessage());
+                        e.printStackTrace();
+                    }
+
                 }
 
-                performClick();
-                releaseKey(k);
-            } else if (isUpAction || isMoveAction) {
-                releaseKey(k);
-            } else if (isScrollAction) {
-                releaseKey(k);
-            }
+//                if (isMoveAction) {
+//                    int flag = 0;
+//                    if (actionMoveList.size() == 0) {
+//                        actionMoveList.add(keyPressed.note);
+//                    } else {
+//                        for (int index = 0; index < actionMoveList.size(); index++) {
+//                            if (actionMoveList.get(index) == keyPressed.note) {
+//                                flag = 1;
+//                            }
+//                        }
+//                        if (flag != 1) {
+//                            actionMoveList.add(keyPressed.note);
+//                            try {
+//                                ShortMessage msg = new ShortMessage();
+//                                msg.setMessage(ShortMessage.NOTE_ON, 0, keyPressed.note, 80);
+//                                recv.send(msg, -1);
+//
+//                                //Draw the key buffer to screen
+//                                invalidate();
+//
+//                                releaseKey(keyPressed);
+//                                keyPressed.isNoteOff = true;
+//
+//                            } catch (InvalidMidiDataException | NullPointerException e) {
+//                                Log.e("PIANO VIEW", e.getMessage());
+//                                e.printStackTrace();
+//                            }
+//
+//                        } else {
+//                            try {
+//
+//                                ShortMessage msg = new ShortMessage();
+//                                msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
+//                                recv.send(msg, -1);
+//
+//                                releaseKey(keyPressed);
+//
+//                            } catch (InvalidMidiDataException | NullPointerException e) {
+//                                Log.e("PIANO VIEW", e.getMessage());
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+
+//            ArrayList<Key> temporary = new ArrayList<>(whites_key);
+//            temporary.addAll(blacks_key);
+//
+//            for (Key k : temporary) {
+//
+//                if (k.isNoteOn) {
+//                    try {
+//                        ShortMessage msg = new ShortMessage();
+//                        msg.setMessage(ShortMessage.NOTE_ON, 0, k.note, 80);
+//                        recv.send(msg, -1);
+//
+//                        //Draw the key buffer to screen
+//                        invalidate();
+//                        releaseKey(k);
+//                        k.isNoteOff = true;
+//
+//                    } catch (InvalidMidiDataException | NullPointerException e) {
+//                        Log.e("PIANO VIEW", e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                Log.i("ACTION_UP:_check ", String.valueOf(isUpAction));
+//                if (k.isNoteOff && isUpAction) {
+//
+//                    try {
+//
+//                        Log.i("__ACTION_UP: ", String.valueOf(isUpAction));
+//
+//                        ShortMessage msg = new ShortMessage();
+//                        msg.setMessage(ShortMessage.NOTE_OFF, 0, k.note, 0);
+//                        recv.send(msg, -1);
+//
+//                        releaseKey(k);
+//
+//                    } catch (InvalidMidiDataException | NullPointerException e) {
+//                        Log.e("PIANO VIEW", e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//
+          }
+
         }
 
 
         return true;
     }
+
 
     private Key getKeyAtPosition(float x, float y) {
         for (Key k : blacks_key) {
@@ -293,10 +396,10 @@ class PianoView extends View {
             int index = indexOfKey.first;
             if (indexOfKey.second == 0) {
                 whites_key.get(index).isNoteOn = isNoteOn;
-                Log.e("SET KEY ON", "WHITE_KEY_ " + noteNumber);
+                Log.i("SET KEY ON", "WHITE_KEY_ " + noteNumber);
             } else {
                 blacks_key.get(index).isNoteOn = isNoteOn;
-                Log.e("SET KEY ON", "BLACK_KEY_ " + noteNumber);
+                Log.i("SET KEY ON", "BLACK_KEY_ " + noteNumber);
             }
         } else {
             Log.e("SET KEY ON", "NOTE NOT FOUND ::  " + noteNumber);
@@ -306,17 +409,18 @@ class PianoView extends View {
             MIDI_KEY = new ArrayList<>(whites_key);
             MIDI_KEY.addAll(blacks_key);
             invalidate();
-            Log.e("SET KEY ON", "INVALIDATE: " + noteNumber);
+            Log.i("SET KEY ON", "INVALIDATE: " + noteNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public void setReceiverForSynthezer(Receiver receiver) {
+    public void setReceiverForSynthesizer(Receiver receiver) {
         try {
             this.recv = receiver;
         } catch (IllegalStateException e) {
+            Log.e("PIANO VIEW ", "RECEIVER NOT FOUND");
             e.printStackTrace();
         }
 

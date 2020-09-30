@@ -25,6 +25,8 @@
 
 package cn.sherlock.com.sun.media.sound;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
@@ -889,7 +891,10 @@ public class SoftSynthesizer implements AudioSynthesizer,
             }
             return;
         }
-        open(null, null);
+
+
+            open(null, null);
+
     }
 
     public void open(SourceDataLine line, Map<String, Object> info) throws MidiUnavailableException {
@@ -930,11 +935,15 @@ public class SoftSynthesizer implements AudioSynthesizer,
                         * (int)(getFormat().getFrameRate() * (latency/1000000f));
                     // can throw LineUnavailableException,
                     // IllegalArgumentException, SecurityException
-                    line.open(getFormat(), bufferSize);
 
-                    // Remember that we opened that line
-                    // so we can close again in SoftSynthesizer.close()
-                    sourceDataLine = line;
+
+                        line.open(getFormat(), bufferSize);
+
+                        // Remember that we opened that line
+                        // so we can close again in SoftSynthesizer.close()
+                        sourceDataLine = line;
+
+
                 }
                 if (!line.isActive())
                     line.start();
