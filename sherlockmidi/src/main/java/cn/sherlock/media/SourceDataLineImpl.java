@@ -2,6 +2,8 @@ package cn.sherlock.media;
 
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.widget.Toast;
+
 import cn.sherlock.javax.sound.sampled.AudioFormat;
 import cn.sherlock.javax.sound.sampled.LineUnavailableException;
 import cn.sherlock.javax.sound.sampled.SourceDataLine;
@@ -35,7 +37,10 @@ public class SourceDataLineImpl implements SourceDataLine {
 	@Override
 	public void start() {
 		if (audioTrack != null) {
-			audioTrack.play();
+
+				audioTrack.play();
+
+
 		}
 	}
 

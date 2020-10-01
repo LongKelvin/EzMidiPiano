@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,36 +14,70 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="70dp"
-            android:layout_weight="1" >
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_back"
+                android:contentDescription="@string/select_sound_"
+                android:text="@string/select_sound" />
 
             <TextView
-                android:textColor="@color/colorBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
                 android:text="@string/midi_device"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorBackground" />
 
             <Spinner
                 android:id="@+id/deviceNameSpinner"
-                android:layout_width="466dp"
-                android:layout_height="50dp"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
-                android:background="@color/colorBackground"
-
+                android:background="@drawable/spinner_background"
                 android:spinnerMode="dropdown"
-                android:textColor="@color/colorBackground" />
+                android:dropDownSelector="@color/colorAccent"
+                android:textColor="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/btn_selectSound"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
+                android:background="@drawable/btn_select_sound"
+                android:contentDescription="@string/select_sound_"
+                android:text="@string/select_sound" />
 
             <Button
-                android:id="@+id/btn_selectSound"
-                android:layout_width="206dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/btn_recording"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/select_sound" />
+                android:background="@drawable/recording_button"
+                android:text="@string/recording" />
+
+            <ImageButton
+                android:id="@+id/btn_touchMode"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="40dp"
+                android:background="@drawable/btn_expand_view"
+                android:contentDescription="@string/select_sound_"
+                android:text="@string/expand_piano_view" />
+
+
         </LinearLayout>
 
     </LinearLayout>
-
 
 
     <TextView
@@ -60,7 +93,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" >
+        android:transcriptMode="alwaysScroll">
+
+
     </ListView>
 
     <TextView
@@ -81,7 +116,6 @@
     <com.kelvin.midi.ezmusic.view.PianoView
         android:id="@+id/piano_view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        />
+        android:layout_height="80dp" />
 
 </LinearLayout>
