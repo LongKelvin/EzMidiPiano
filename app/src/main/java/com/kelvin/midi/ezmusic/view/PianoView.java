@@ -218,7 +218,7 @@ class PianoView extends View {
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
                         recv.send(msg, -1);
 
-                        releaseKey(keyPressed);
+                        //releaseKey(keyPressed);
 
                     } catch (InvalidMidiDataException | NullPointerException e) {
                         Log.e("PIANO VIEW", e.getMessage());

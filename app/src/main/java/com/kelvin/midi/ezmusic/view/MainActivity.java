@@ -2,7 +2,9 @@ package com.kelvin.midi.ezmusic.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.usb.UsbDevice;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -14,8 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,6 +36,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
 import jp.kshoji.driver.midi.device.MidiInputDevice;
@@ -158,6 +165,8 @@ public class MainActivity extends Activity {
                         connectedDevicesAdapter.remove(midiOutputDevice.getUsbDevice());
                         connectedDevicesAdapter.add(midiOutputDevice.getUsbDevice());
                         connectedDevicesAdapter.notifyDataSetChanged();
+                    } else {
+                        connectedDevicesAdapter.add(midiOutputDevice.getUsbDevice());
                     }
                     Toast.makeText(MainActivity.this, "USB MIDI Device " + midiOutputDevice.getUsbDevice().getDeviceName() + " has been attached.", Toast.LENGTH_LONG).show();
                 });
@@ -192,12 +201,12 @@ public class MainActivity extends Activity {
                     ShortMessage msg = new ShortMessage();
 
                     if (isPedalHolding) {
-                        msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
+                        // msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
                     } else {
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
                     }
 
-                   // msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
+                    // msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
                     receiver.send(msg, -1);
 
 
@@ -428,7 +437,8 @@ public class MainActivity extends Activity {
         deviceSpinner.setAdapter(connectedDevicesAdapter);
 
 
-        Button selectedSound = findViewById(R.id.btn_selectSound);
+        final Animation animCycle = AnimationUtils.loadAnimation(this, R.anim.cycle);
+        ImageButton selectedSound = findViewById(R.id.btn_selectSound);
         final Intent InstrumentIntent = new Intent(this, InstrumentsActivity.class);
         selectedSound.setOnClickListener(new View.OnClickListener() {
             /**
@@ -439,11 +449,32 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                selectedSound.startAnimation(animCycle);
                 startActivityForResult(InstrumentIntent, 1);
             }
         });
 
 
+
+        Button btn_recording = findViewById(R.id.btn_recording);
+        btn_recording.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Called when a view has been clicked.
+             *
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+                btn_recording.startAnimation(animCycle);
+                if(btn_recording.getText()=="@string/recording"){
+                    btn_recording.setText(R.string.strop_recording);
+
+                }
+            }
+        });
+
+        ImageButton btn_touch_mode = findViewById(R.id.btn_touchMode);
     }
 
     @Override
@@ -499,4 +530,5 @@ public class MainActivity extends Activity {
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
 }

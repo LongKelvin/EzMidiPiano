@@ -3,7 +3,7 @@
     <color name="colorPrimary">#F1F1F1</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#7CB342</color>
-    <color name="colorBackground">#FFF0F0</color>
+    <color name="colorBackground">#FFFFFF</color>
     <color name="colorTextHighLightRed">#F44336</color>
     <color name="color_pinkForIns">#F8BBD0</color>
     <color name="color_blueForFb">#3F51B5</color>

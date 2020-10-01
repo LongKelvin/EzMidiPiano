@@ -13,6 +13,11 @@
     <string name="file_error">FILE NOT FOUND</string>
     <string name="instruments_name">Instruments Name_</string>
     <string name="icon_for_instruments">icon for instruments_</string>
+    <string name="reScanDevice">RE SCAN</string>
+    <string name="select_sound_">select_sound</string>
+    <string name="recording">Recording</string>
+    <string name="expand_piano_view">Change To Touch Mode</string>
+    <string name="strop_recording">STOP</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">
