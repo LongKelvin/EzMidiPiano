@@ -60,6 +60,7 @@ public class MidiFileCreator {
         try {
             MidiFile midi = new MidiFile(MidiFile.DEFAULT_RESOLUTION, midiTracks);
             midi.writeToFile(fileName);
+            Log.e("EXPORT_FILE_COMPLETE:: ","Export midi file to "+ fileName.toString());
         }
         catch(IOException e)
         {

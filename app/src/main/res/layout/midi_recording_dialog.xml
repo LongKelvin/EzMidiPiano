@@ -53,10 +53,12 @@
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="20dp"
-                android:background="@color/colorBackground"
+                android:background="@drawable/edittext_background"
                 android:spinnerMode="dropdown"
                 android:autofillHints="@string/EnterTimeSignature"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textNoSuggestions"
+                android:hint="@string/EnterTimeSignature"/>
 
         </LinearLayout>
 
@@ -96,12 +98,57 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="70dp"
                 android:layout_marginEnd="10dp"
-                android:background="@color/colorBackground"
+                android:background="@drawable/edittext_background"
                 android:dropDownSelector="@color/colorAccent"
                 android:spinnerMode="dropdown"
                 android:textColor="@color/colorPrimaryDark"
                 android:autofillHints="120"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="@string/EnterTempo"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="@string/SongName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorBackground" />
+
+            <EditText
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/song_name"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/edittext_background"
+                android:spinnerMode="dropdown"
+                android:autofillHints="@string/EnterSongName"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textNoSuggestions"
+                android:hint="@string/EnterSongName"/>
 
         </LinearLayout>
 

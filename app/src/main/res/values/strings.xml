@@ -23,7 +23,10 @@
     <string name="Tempo">Tempo</string>
     <string name="OK">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="EnterTimeSignature">Enter Timesignature</string>
+    <string name="EnterTimeSignature">Tap To Enter Time Signature</string>
+    <string name="EnterTempo">Tap To Enter Song Tempo</string>
+    <string name="SongName">Song Name</string>
+    <string name="EnterSongName">Tap To Enter Song Name</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">
