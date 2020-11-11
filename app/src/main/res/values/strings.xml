@@ -18,6 +18,12 @@
     <string name="recording">Recording</string>
     <string name="expand_piano_view">Change To Touch Mode</string>
     <string name="strop_recording">STOP</string>
+    <string name="recording_dialog">Recording Dialog</string>
+    <string name="TimeSignature">TimeSignature</string>
+    <string name="Tempo">Tempo</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="EnterTimeSignature">Enter Timesignature</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

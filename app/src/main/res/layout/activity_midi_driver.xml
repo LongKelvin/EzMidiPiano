@@ -18,8 +18,8 @@
 
             <ImageButton
                 android:id="@+id/btn_back"
-                android:layout_width="20dp"
-                android:layout_height="25dp"
+                android:layout_width="16dp"
+                android:layout_height="21dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:background="@drawable/btn_back"
@@ -60,6 +60,7 @@
                 android:id="@+id/btn_recording"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/recording_button"
                 android:text="@string/recording" />
@@ -69,7 +70,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="40dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/btn_expand_view"
                 android:contentDescription="@string/select_sound_"
                 android:text="@string/expand_piano_view" />
@@ -95,7 +96,6 @@
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll">
 
-
     </ListView>
 
     <TextView
@@ -117,5 +117,6 @@
         android:id="@+id/piano_view"
         android:layout_width="match_parent"
         android:layout_height="80dp" />
+
 
 </LinearLayout>
