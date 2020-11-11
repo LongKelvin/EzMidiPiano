@@ -1,42 +1,48 @@
 package com.kelvin.midi.ezmusic.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.usb.UsbDevice;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-
-import androidx.annotation.NonNull;
-
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.kelvin.midi.ezmusic.R;
+import com.kelvin.midi.ezmusic.object.MidiFileCreator;
+import com.kelvin.midi.midilib.event.NoteOff;
+import com.kelvin.midi.midilib.event.NoteOn;
+import com.kelvin.midi.midilib.event.meta.TimeSignature;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
 import jp.kshoji.driver.midi.device.MidiInputDevice;
@@ -49,6 +55,11 @@ import jp.kshoji.javax.sound.midi.ShortMessage;
 
 
 public class MainActivity extends Activity {
+    private int tempo_value = -1;
+    private int currentValue = 120;
+    private TimeSignature timeSignature_val;
+    private TimeSignature currentTimeSignature_val;
+
 
     private SoftSynthesizer synth;
     private Receiver receiver;
@@ -67,9 +78,15 @@ public class MainActivity extends Activity {
     Spinner cableIdSpinner;
     Spinner deviceSpinner;
 
+    MidiOutputDevice outputDevice;
+
     ArrayAdapter<UsbDevice> connectedDevicesAdapter;
 
     private UsbMidiDriver usbMidiDriver;
+
+    //Recording Midi File
+    private MidiFileCreator newMidiFile = new MidiFileCreator();
+    private boolean isRecording = false;
 
     // User interface
     final Handler midiInputEventHandler = new Handler(new Callback() {
@@ -109,6 +126,7 @@ public class MainActivity extends Activity {
                 if (midiOutputDevices.size() > 0) {
                     // returns the first one.
                     System.out.println("MIDI_PORT: DEVICE_OUTPUT_PORT_CONNECTED");
+                    outputDevice = (MidiOutputDevice) Objects.requireNonNull(midiOutputDevices.toArray())[0];
                     return (MidiOutputDevice) Objects.requireNonNull(midiOutputDevices.toArray())[0];
                 }
             }
@@ -237,6 +255,7 @@ public class MainActivity extends Activity {
                 }
 
                 midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "NOTE ON from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ",  channel: " + channel + ", note: " + note + ", velocity: " + velocity));
+
 
             }
 
@@ -455,7 +474,6 @@ public class MainActivity extends Activity {
         });
 
 
-
         Button btn_recording = findViewById(R.id.btn_recording);
         btn_recording.setOnClickListener(new View.OnClickListener() {
 
@@ -467,14 +485,30 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 btn_recording.startAnimation(animCycle);
-                if(btn_recording.getText()=="@string/recording"){
+                if (btn_recording.getText() == "@string/recording") {
+                    isRecording = !isRecording;
                     btn_recording.setText(R.string.strop_recording);
 
                 }
+                showRecordingDialog();
             }
         });
 
+
         ImageButton btn_touch_mode = findViewById(R.id.btn_touchMode);
+        btn_touch_mode.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Called when a view has been clicked.
+             *
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
     }
 
     @Override
@@ -527,7 +561,158 @@ public class MainActivity extends Activity {
         }
     }
 
+    /*
+      Recording Midi FIle
+     */
+
     private void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void showRecordingDialog() {
+        // create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("Recording Settings");
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.midi_recording_dialog, null);
+        builder.setView(customLayout);
+        // add a button
+
+        Button button_ok = customLayout.findViewById(R.id.button_ok);
+        Button button_cancel = customLayout.findViewById(R.id.button_cancel);
+        EditText tempo_spinner = customLayout.findViewById(R.id.tempo_spinner);
+        EditText timeSignature_spinner = customLayout.findViewById(R.id.time_signature);
+
+        // create and show the recording dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        button_ok.setOnClickListener(v -> {
+            //if(tempo_spinner.getText() != null && timeSignature_spinner.getText()!=null){
+            sendMessageToUser("Song Property was settings successful");
+            String _time_signature_ = timeSignature_spinner.getText().toString();
+            String[] time_signature_ = _time_signature_.split("/");
+            newMidiFile = new MidiFileCreator(tempo_value, Integer.parseInt(time_signature_[0]), Integer.parseInt(time_signature_[1]));
+            isRecording = true;
+
+            for (int i = 0; i < 5; i++) {
+                int channel = 0, pitch = 60 + i, velocity = 100;
+                NoteOn on = new NoteOn(i * 480, channel, pitch, velocity);
+                NoteOff off = new NoteOff(i * 480 + 120, channel, pitch, 0);
+
+                newMidiFile.insertEvent(on);
+                newMidiFile.insertEvent(off);
+
+                // There is also a utility function for notes that you should use
+                // instead of the above.
+                newMidiFile.insertNote(channel, pitch + 2, velocity, i * 480, 120);
+            }
+
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+            File file_output = new File(path, "/" + "Test_Midi_Creator.mid");
+            newMidiFile.exportMidiFile(file_output);
+
+            // }
+            dialog.cancel();
+        });
+
+        button_cancel.setOnClickListener(v -> {
+            dialog.cancel();
+        });
+
+        tempo_spinner.setOnTouchListener((OnTouchListener) (v, event) -> {
+
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showTempoPicker(tempo_spinner);
+            }
+            return true;
+        });
+
+        timeSignature_spinner.setOnTouchListener((OnTouchListener) (v, event) -> {
+
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showTimeSignature(timeSignature_spinner);
+            }
+            return true;
+        });
+    }
+
+    public void showTempoPicker(EditText tempo_editText) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.tempo_selector, null);
+        builder.setTitle("Tempo");
+        builder.setView(customLayout);
+
+        NumberPicker tempo_picker;
+
+        tempo_picker = customLayout.findViewById(R.id.tempo_value);
+        tempo_picker.setMinValue(50);
+        tempo_picker.setMaxValue(500);
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        tempo_picker.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = tempo_picker.getValue();
+            currentValue = tempo_value;
+            tempo_value = valuePicker1;
+            Log.i("tempo value", String.valueOf(valuePicker1));
+            tempo_editText.setText(Integer.toString(valuePicker1));
+            //tempo_editText.setText(tempo_picker.getValue());
+        });
+
+        tempo_picker.setOnClickListener(v -> {
+            if (tempo_value == -1) {
+                tempo_value = 50;
+                tempo_editText.setText(Integer.toString(tempo_value));
+            } else {
+                dialog.cancel();
+            }
+        });
+    }
+
+    public void showTimeSignature(EditText timeSignature_editText) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.tempo_selector, null);
+        builder.setTitle("Tempo");
+        builder.setView(customLayout);
+
+        NumberPicker timeSignature;
+
+        timeSignature = customLayout.findViewById(R.id.tempo_value);
+        timeSignature.setMinValue(0);
+        timeSignature.setMaxValue(8);
+        String[] timeSignature_;
+        timeSignature_ = new String[]{"2/4", "3/4", "4/4", "5/4", "6/8", "9/8", "12/8", "6/4", "7/8"};
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        timeSignature.setDisplayedValues(timeSignature_);
+        timeSignature.setOnValueChangedListener((numberPicker, i, i1) -> {
+            int valuePicker1 = timeSignature.getValue();
+            Log.i("time_signal", String.valueOf(timeSignature_[valuePicker1]));
+            timeSignature_editText.setText((timeSignature_[valuePicker1]));
+            //tempo_editText.setText(tempo_picker.getValue());
+        });
+
+        timeSignature.setOnClickListener(v -> {
+//            if (tempo_value == -1) {
+//                sendMessageToUser("Please select time signature for song recording");
+//            } else {
+//                dialog.cancel();
+//            }
+            dialog.cancel();
+        });
+    }
+
+    public void sendMessageToUser(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
