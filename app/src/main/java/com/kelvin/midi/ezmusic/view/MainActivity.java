@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,9 +24,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -63,8 +67,18 @@ public class MainActivity extends Activity {
     private String timeSignature_val = "";
     private String songName = "";
 
+    private int ticks = -1;
+
     //Midi Path
     private File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+
+    //Note Letter
+    private String note_letter = "";
+    private TextView NoteLabel;
+    private TextView Note_D;
+    private TextView Note_E;
+    private TextView Note_F;
+    private TextView Note_G;
 
 
     //Synthesizer
@@ -112,6 +126,7 @@ public class MainActivity extends Activity {
         public boolean handleMessage(Message msg) {
             if (midiOutputEventAdapter != null) {
                 midiOutputEventAdapter.add((String) msg.obj);
+
             }
             // message handled successfully
             return true;
@@ -171,11 +186,23 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
+        NoteLabel = findViewById(R.id.note_letter);
+        NoteLabel.setVisibility(View.INVISIBLE);
+        Note_D = findViewById(R.id.note_D);
+        Note_E = findViewById(R.id.note_E);
+        Note_F = findViewById(R.id.note_F);
+        Note_G = findViewById(R.id.note_G);
+        Note_D.setVisibility(View.INVISIBLE);
+        Note_E.setVisibility(View.INVISIBLE);
+        Note_F.setVisibility(View.INVISIBLE);
+        Note_G.setVisibility(View.INVISIBLE);
+
         //Init PianoView
         piano = new PianoView(this);
         piano = findViewById(R.id.piano_view);
         piano.setReceiverForSynthesizer(receiver);
 
+        ticks = -1;
 
         usbMidiDriver = new UsbMidiDriver(this) {
             @Override
@@ -244,6 +271,14 @@ public class MainActivity extends Activity {
                     // make key on in PianoView
                     piano.setKey(note, false);
 
+                    //recording
+                    if (isRecording) {
+                        ticks += 120;
+                        NoteOff noteOff = new NoteOff(ticks, channel, note, velocity);
+                        newMidiFile.insertEvent(noteOff);
+                    }
+
+
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
                 }
@@ -262,6 +297,19 @@ public class MainActivity extends Activity {
 
                     // make key on in PianoView
                     piano.setKey(note, true);
+
+                    //recording
+                    if (isRecording) {
+                        if (ticks == -1) {
+                            ticks = 0;
+                        } else {
+                            ticks += 240;
+                        }
+                        NoteOn noteOn = new NoteOn(ticks, channel, note, velocity);
+                        newMidiFile.insertEvent(noteOn);
+                    }
+
+                    activeNoteToScreen(note);
 
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
@@ -454,6 +502,9 @@ public class MainActivity extends Activity {
 
         usbMidiDriver.open();
 
+        //active note
+        activeNoteToScreen(piano.getNoteIsPlaying());
+
         ListView midiInputEventListView = findViewById(R.id.midiInputEventListView);
         midiInputEventAdapter = new ArrayAdapter<>(this, R.layout.midi_event, R.id.midiEventDescriptionTextView);
         midiInputEventListView.setAdapter(midiInputEventAdapter);
@@ -498,12 +549,20 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 btn_recording.startAnimation(animCycle);
-                if (btn_recording.getText() == "@string/recording") {
-                    isRecording = !isRecording;
+                if (!isRecording) {
+                    //isRecording = true;
                     btn_recording.setText(R.string.strop_recording);
+                    showRecordingDialog();
+
+                } else {
+                    isRecording = false;
+                    btn_recording.setText(R.string.str_recording);
+                    //Create file name
+                    File file_output = new File(path, "/" + songName + ".mid");
+                    newMidiFile.exportMidiFile(file_output);
 
                 }
-                showRecordingDialog();
+
             }
         });
 
@@ -522,6 +581,8 @@ public class MainActivity extends Activity {
 
             }
         });
+
+
     }
 
     @Override
@@ -535,6 +596,8 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             String instrument_path = data.getStringExtra(InstrumentsActivity.RESULT_INSTRUMENT_PATH);
+            String instrument_name = data.getStringExtra(InstrumentsActivity.RESULT_INSTRUMENT_NAME);
+            String instrument_image_path = data.getStringExtra(InstrumentsActivity.RESULT_INSTRUMENT_IMAGE);
             Toast.makeText(this, "You selected instrument: " + instrument_path, Toast.LENGTH_LONG).show();
 
             try {
@@ -552,6 +615,17 @@ public class MainActivity extends Activity {
 
                     //set receive for pianoView
                     piano.setReceiverForSynthesizer(receiver);
+
+                    //set instruments images
+                    ImageView img = findViewById(R.id.instruments_image);
+                    @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getResources().getDrawable(getResources()
+                            .getIdentifier(instrument_image_path, "drawable", getPackageName()));
+                    img.setImageDrawable(drawable);
+
+                    //set instruments name
+                    TextView ins_name = findViewById(R.id.ins_name);
+                    ins_name.setText(instrument_name);
+
                 } catch (Exception e) {
                     Log.e("LOAD SOUND: ", "CAN NOT LOAD SOUND!");
                     showMessage("Can not load sound, Please try again!");
@@ -564,6 +638,16 @@ public class MainActivity extends Activity {
 
                     //set receive for pianoView
                     piano.setReceiverForSynthesizer(receiver);
+
+                    //set instruments images
+                    ImageView img = findViewById(R.id.instruments_image);
+                    @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getResources().getDrawable(getResources()
+                            .getIdentifier("grand_piano", "drawable", getPackageName()));
+                    img.setImageDrawable(drawable);
+
+                    //set instruments name
+                    TextView ins_name = findViewById(R.id.ins_name);
+                    ins_name.setText(R.string.GrandPiano);
                 }
             } catch (IOException | MidiUnavailableException e) {
                 e.printStackTrace();
@@ -610,24 +694,22 @@ public class MainActivity extends Activity {
                 String[] time_signature_ = timeSignature_val.split("/");
                 newMidiFile = new MidiFileCreator(tempo_value, Integer.parseInt(time_signature_[0]), Integer.parseInt(time_signature_[1]));
                 isRecording = true;
+//
+//                for (int i = 0; i < 5; i++) {
+//                    int channel = 0, pitch = 60 + i, velocity = 100;
+//                    NoteOn on = new NoteOn(i * 480, channel, pitch, velocity);
+//                    NoteOff off = new NoteOff(i * 480 + 120, channel, pitch, 0);
+//
+//                    newMidiFile.insertEvent(on);
+//                    newMidiFile.insertEvent(off);
+//
+//
+//                    // There is also a utility function for notes that it should be use
+//                    // instead of the above.
+//                    newMidiFile.insertNote(channel, pitch + 2, velocity, i * 480, 120);
+//                }
 
-                for (int i = 0; i < 5; i++) {
-                    int channel = 0, pitch = 60 + i, velocity = 100;
-                    NoteOn on = new NoteOn(i * 480, channel, pitch, velocity);
-                    NoteOff off = new NoteOff(i * 480 + 120, channel, pitch, 0);
 
-                    newMidiFile.insertEvent(on);
-                    newMidiFile.insertEvent(off);
-
-                    // There is also a utility function for notes that you should use
-                    // instead of the above.
-                    newMidiFile.insertNote(channel, pitch + 2, velocity, i * 480, 120);
-                }
-
-
-                //Create file name
-                File file_output = new File(path, "/" + songName + ".mid");
-                newMidiFile.exportMidiFile(file_output);
                 dialog.cancel();
             }
 
@@ -637,7 +719,7 @@ public class MainActivity extends Activity {
             dialog.cancel();
         });
 
-        tempo_spinner.setOnTouchListener((OnTouchListener) (v, event) -> {
+        tempo_spinner.setOnTouchListener((v, event) -> {
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 showTempoPicker(tempo_spinner);
@@ -645,7 +727,7 @@ public class MainActivity extends Activity {
             return true;
         });
 
-        timeSignature_spinner.setOnTouchListener((OnTouchListener) (v, event) -> {
+        timeSignature_spinner.setOnTouchListener((v, event) -> {
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 showTimeSignature(timeSignature_spinner);
@@ -751,4 +833,127 @@ public class MainActivity extends Activity {
         requestPermissions(permissions, requestCode);
     }
 
+
+    private void deActiveNoteToScreen(int note) {
+
+    }
+
+    public  void activeNoteToScreen(int note) {
+        switch (note) {
+            case 36:
+            case 36 + 12:
+            case 36 + 24:
+            case 36 + 36:
+            case 84: {
+                note_letter = "C";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            case 37:
+            case 37 + 12:
+            case 37 + 24:
+            case 37 + 36:
+            case 37 + 36 + 12: {
+                note_letter = "C#";
+                NoteLabel.setText(note_letter);
+                NoteLabel.setVisibility(View.VISIBLE);
+            }
+            break;
+            case 38:
+            case 38 + 12:
+            case 38 + 24:
+            case 38 + 36:
+            case 38 + 36 + 12: {
+                note_letter = "D";
+                Note_D.setText(note_letter);
+                Note_D.setVisibility(View.VISIBLE);
+            }
+            break;
+            case 39:
+            case 39 + 12:
+            case 39 + 24:
+            case 39 + 36:
+            case 39 + 48: {
+                note_letter = "Eb";
+                Note_E.setText(note_letter);
+                Note_E.setVisibility(View.VISIBLE);
+            }
+            break;
+            case 40:
+            case 40 + 12:
+            case 40 + 24:
+            case 40 + 36:
+            case 40 + 48: {
+                note_letter = "E";
+                Note_E.setText(note_letter);
+                Note_E.setVisibility(View.VISIBLE);
+            }
+            break;
+            case 41:
+            case 41 + 12:
+            case 41 + 24:
+            case 41 + 36:
+            case 41 + 48: {
+                note_letter = "F";
+                Note_F.setText(note_letter);
+            }
+            break;
+            case 42:
+            case 42 + 12:
+            case 42 + 24:
+            case 42 + 36:
+            case 42 + 48: {
+                note_letter = "F#";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            case 43:
+            case 43 + 12:
+            case 43 + 24:
+            case 43 + 36:
+            case 43 + 48: {
+                note_letter = "G";
+                Note_G.setText(note_letter);
+            }
+            break;
+            case 44:
+            case 44 + 12:
+            case 44 + 24:
+            case 44 + 36:
+            case 44 + 48: {
+                note_letter = "G#";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            case 45:
+            case 45 + 12:
+            case 45 + 24:
+            case 45 + 36:
+            case 45 + 48: {
+                note_letter = "A";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            case 46:
+            case 46 + 12:
+            case 46 + 24:
+            case 46 + 36:
+            case 46 + 48: {
+                note_letter = "Bb";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            case 47:
+            case 47 + 12:
+            case 47 + 24:
+            case 47 + 36:
+            case 47 + 48: {
+                note_letter = "B";
+                NoteLabel.setText(note_letter);
+            }
+            break;
+            default:
+                break;
+        }
+    }
 }

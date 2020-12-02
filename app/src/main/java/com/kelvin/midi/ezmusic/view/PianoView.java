@@ -17,6 +17,7 @@ import android.view.View;
 import com.kelvin.midi.ezmusic.object.Key;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.RequiresApi;
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
@@ -46,6 +47,8 @@ class PianoView extends View {
 
     //create instance of receiver from MainActivity
     private Receiver recv;
+
+    private int NoteIsPlaying;
 
 
     public PianoView(Context context, AttributeSet attrs) {
@@ -198,9 +201,10 @@ class PianoView extends View {
                         invalidate();
                         releaseKey(keyPressed);
                         keyPressed.isNoteOff = true;
+                        NoteIsPlaying = keyPressed.note;
 
                     } catch (InvalidMidiDataException | NullPointerException e) {
-                        Log.e("PIANO VIEW", e.getMessage());
+                        Log.e("PIANO VIEW", Objects.requireNonNull(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
@@ -423,7 +427,10 @@ class PianoView extends View {
             Log.e("PIANO VIEW ", "RECEIVER NOT FOUND");
             e.printStackTrace();
         }
+    }
 
-
+    public int getNoteIsPlaying() {
+        //MainActivity.activeNoteToScreen(NoteIsPlaying);
+        return 0;
     }
 }

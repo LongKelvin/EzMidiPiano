@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -39,11 +40,11 @@
                 android:id="@+id/deviceNameSpinner"
                 android:layout_width="300dp"
                 android:layout_height="38dp"
-                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
                 android:background="@drawable/spinner_background"
-                android:spinnerMode="dropdown"
                 android:dropDownSelector="@color/colorAccent"
+                android:spinnerMode="dropdown"
                 android:textColor="@color/colorPrimary" />
 
             <ImageButton
@@ -60,8 +61,8 @@
                 android:id="@+id/btn_recording"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
                 android:background="@drawable/recording_button"
                 android:text="@string/recording" />
 
@@ -88,15 +89,180 @@
         android:text="@string/midi_input"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ListView
-        android:id="@+id/midiInputEventListView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll">
+        android:layout_weight="1">
 
-    </ListView>
+        <ListView
+            android:id="@+id/midiInputEventListView"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/note_letter"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+            android:layout_margin="10dp"
+            android:layerType="software"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:text="@string/note_C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/color_blueForFb"
+            android:textStyle="normal|bold|italic"
+            android:typeface="sans"
+            app:autoSizeTextType="none" />
+        <TextView
+            android:id="@+id/note_D"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+            android:layout_margin="10dp"
+            android:layerType="software"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:text="@string/note_C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/color_blueForFb"
+            android:textStyle="normal|bold|italic"
+            android:typeface="sans"
+            app:autoSizeTextType="none" />
+        <TextView
+            android:id="@+id/note_E"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+            android:layout_margin="10dp"
+            android:layerType="software"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:text="@string/note_C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/color_blueForFb"
+            android:textStyle="normal|bold|italic"
+            android:typeface="sans"
+            app:autoSizeTextType="none" />
+        <TextView
+            android:id="@+id/note_F"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+            android:layout_margin="10dp"
+            android:layerType="software"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:text="@string/note_C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/color_blueForFb"
+            android:textStyle="normal|bold|italic"
+            android:typeface="sans"
+            app:autoSizeTextType="none" />
+        <TextView
+            android:id="@+id/note_G"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+            android:layout_margin="10dp"
+            android:layerType="software"
+            android:requiresFadingEdge="horizontal|vertical"
+            android:text="@string/note_C"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/color_blueForFb"
+            android:textStyle="normal|bold|italic"
+            android:typeface="sans"
+            app:autoSizeTextType="none" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/tv_instruments"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/instruments_name_tv"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorTextHighLightRed"
+                android:textStyle="normal|bold|italic"
+                android:typeface="sans"
+                android:background="@color/colorPrimaryDark"
+                app:autoSizeTextType="none" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/instruments_name"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="@string/name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/colorTextHighLightRed"
+                    android:textStyle="normal|bold|italic"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+
+                <TextView
+                    android:id="@+id/ins_name"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="Grand Piano"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/color_yellow_highlight"
+                    android:textStyle="normal|bold|italic"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="50dp"
+                        android:id="@+id/instruments_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/grand_piano" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
