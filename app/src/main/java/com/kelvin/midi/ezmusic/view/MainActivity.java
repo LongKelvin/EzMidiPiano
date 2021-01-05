@@ -75,11 +75,6 @@ public class MainActivity extends Activity {
     //Note Letter
     private String note_letter = "";
     private TextView NoteLabel;
-    private TextView Note_D;
-    private TextView Note_E;
-    private TextView Note_F;
-    private TextView Note_G;
-
 
     //Synthesizer
     private SoftSynthesizer synth;
@@ -186,16 +181,8 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        NoteLabel = findViewById(R.id.note_letter);
-        NoteLabel.setVisibility(View.INVISIBLE);
-        Note_D = findViewById(R.id.note_D);
-        Note_E = findViewById(R.id.note_E);
-        Note_F = findViewById(R.id.note_F);
-        Note_G = findViewById(R.id.note_G);
-        Note_D.setVisibility(View.INVISIBLE);
-        Note_E.setVisibility(View.INVISIBLE);
-        Note_F.setVisibility(View.INVISIBLE);
-        Note_G.setVisibility(View.INVISIBLE);
+        NoteLabel = findViewById(R.id.noteLetter);
+
 
         //Init PianoView
         piano = new PianoView(this);
@@ -509,9 +496,9 @@ public class MainActivity extends Activity {
         midiInputEventAdapter = new ArrayAdapter<>(this, R.layout.midi_event, R.id.midiEventDescriptionTextView);
         midiInputEventListView.setAdapter(midiInputEventAdapter);
 
-        ListView midiOutputEventListView = findViewById(R.id.midiOutputEventListView);
+
         midiOutputEventAdapter = new ArrayAdapter<>(this, R.layout.midi_event, R.id.midiEventDescriptionTextView);
-        midiOutputEventListView.setAdapter(midiOutputEventAdapter);
+
 
 
         deviceSpinner = findViewById(R.id.deviceNameSpinner);
@@ -856,7 +843,7 @@ public class MainActivity extends Activity {
             case 37 + 36 + 12: {
                 note_letter = "C#";
                 NoteLabel.setText(note_letter);
-                NoteLabel.setVisibility(View.VISIBLE);
+
             }
             break;
             case 38:
@@ -865,8 +852,8 @@ public class MainActivity extends Activity {
             case 38 + 36:
             case 38 + 36 + 12: {
                 note_letter = "D";
-                Note_D.setText(note_letter);
-                Note_D.setVisibility(View.VISIBLE);
+                NoteLabel.setText(note_letter);
+
             }
             break;
             case 39:
@@ -875,8 +862,8 @@ public class MainActivity extends Activity {
             case 39 + 36:
             case 39 + 48: {
                 note_letter = "Eb";
-                Note_E.setText(note_letter);
-                Note_E.setVisibility(View.VISIBLE);
+                NoteLabel.setText(note_letter);
+
             }
             break;
             case 40:
@@ -885,8 +872,7 @@ public class MainActivity extends Activity {
             case 40 + 36:
             case 40 + 48: {
                 note_letter = "E";
-                Note_E.setText(note_letter);
-                Note_E.setVisibility(View.VISIBLE);
+                NoteLabel.setText(note_letter);
             }
             break;
             case 41:
@@ -895,7 +881,7 @@ public class MainActivity extends Activity {
             case 41 + 36:
             case 41 + 48: {
                 note_letter = "F";
-                Note_F.setText(note_letter);
+                NoteLabel.setText(note_letter);
             }
             break;
             case 42:
@@ -913,7 +899,7 @@ public class MainActivity extends Activity {
             case 43 + 36:
             case 43 + 48: {
                 note_letter = "G";
-                Note_G.setText(note_letter);
+                NoteLabel.setText(note_letter);
             }
             break;
             case 44:

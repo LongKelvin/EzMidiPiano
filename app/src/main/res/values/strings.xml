@@ -34,6 +34,10 @@
     <string name="name">Name:</string>
     <string name="Image">Image:</string>
     <string name="GrandPiano">Grand Piano</string>
+    <string name="Display">Display</string>
+    <string name="noteSymbol">Note Playing</string>
+    <string name="Mididata">Midi Data Send</string>
+    <string name="MidiEvent">Midi Event</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

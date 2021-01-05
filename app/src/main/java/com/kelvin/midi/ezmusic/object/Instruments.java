@@ -26,6 +26,7 @@ public class Instruments {
     public Drawable getInstrumentsImage() {
         return instrumentsImage;
     }
+
     public String getInstrumentsImagePath() {
         return instrumentsImagePath;
     }
