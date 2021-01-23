@@ -5,6 +5,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b9e289859bec015e32fcc010038f0cfb/jetified-javax-sound-midi-0.0.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b9e289859bec015e32fcc010038f0cfb/jetified-javax-sound-midi-0.0.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b9e289859bec015e32fcc010038f0cfb/jetified-javax-sound-midi-0.0.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31b57cbb2e5d52d42226670d6ba3eba0/jetified-javax-sound-midi-0.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31b57cbb2e5d52d42226670d6ba3eba0/jetified-javax-sound-midi-0.0.3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/31b57cbb2e5d52d42226670d6ba3eba0/jetified-javax-sound-midi-0.0.3/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

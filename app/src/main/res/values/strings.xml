@@ -28,7 +28,7 @@
     <string name="SongName">Song Name</string>
     <string name="EnterSongName">Tap To Enter Song Name</string>
     <string name="str_recording">RECORDING</string>
-    <string name="note_letter">A B C D E F G</string>
+    <string name="note_letter">" "</string>
     <string name="note_C">C</string>
     <string name="instruments_name_tv">Instruments Information</string>
     <string name="name">Name:</string>

@@ -33,6 +33,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.kelvin.midi.ezmusic.R;
+import com.kelvin.midi.ezmusic.object.KeyMap;
 import com.kelvin.midi.ezmusic.object.MidiFileCreator;
 import com.kelvin.midi.midilib.event.NoteOff;
 import com.kelvin.midi.midilib.event.NoteOn;
@@ -47,6 +48,7 @@ import java.util.Set;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
 import jp.kshoji.driver.midi.device.MidiInputDevice;
@@ -69,11 +71,14 @@ public class MainActivity extends Activity {
 
     private int ticks = -1;
 
+    //Note Name to Screen
+    private KeyMap keyMap;
+
     //Midi Path
     private File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
 
     //Note Letter
-    private String note_letter = "";
+    private String noteName = " ";
     private TextView NoteLabel;
 
     //Synthesizer
@@ -168,7 +173,6 @@ public class MainActivity extends Activity {
             askPermissions();
         }
 
-
         //Setup Synthesizers SF2_Sound
         try {
             SF2Soundbank sf = new SF2Soundbank(getAssets().open(DEFAULT_INSTRUMENT + ".sf2"));
@@ -182,6 +186,9 @@ public class MainActivity extends Activity {
         }
 
         NoteLabel = findViewById(R.id.noteLetter);
+        NoteLabel.setText(" ");
+        keyMap = new KeyMap();
+        keyMap.InitKeyMap();
 
 
         //Init PianoView
@@ -254,9 +261,9 @@ public class MainActivity extends Activity {
                     // msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
                     receiver.send(msg, -1);
 
-
                     // make key on in PianoView
                     piano.setKey(note, false);
+                    removeNoteOnScreen(note);
 
                     //recording
                     if (isRecording) {
@@ -500,7 +507,6 @@ public class MainActivity extends Activity {
         midiOutputEventAdapter = new ArrayAdapter<>(this, R.layout.midi_event, R.id.midiEventDescriptionTextView);
 
 
-
         deviceSpinner = findViewById(R.id.deviceNameSpinner);
 
         connectedDevicesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, new ArrayList<>());
@@ -568,7 +574,6 @@ public class MainActivity extends Activity {
 
             }
         });
-
 
     }
 
@@ -820,126 +825,28 @@ public class MainActivity extends Activity {
         requestPermissions(permissions, requestCode);
     }
 
+    public void activeNoteToScreen(int note) {
 
-    private void deActiveNoteToScreen(int note) {
-
+        if (noteName == null || noteName.isEmpty()) {
+            noteName = "";
+        }
+        String stringNoteName = (keyMap.GetStringNoteName(note));
+        if (noteName != null)
+            noteName += " " + stringNoteName;
+        if (noteName != null)
+            NoteLabel.setText(noteName);
     }
 
-    public  void activeNoteToScreen(int note) {
-        switch (note) {
-            case 36:
-            case 36 + 12:
-            case 36 + 24:
-            case 36 + 36:
-            case 84: {
-                note_letter = "C";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 37:
-            case 37 + 12:
-            case 37 + 24:
-            case 37 + 36:
-            case 37 + 36 + 12: {
-                note_letter = "C#";
-                NoteLabel.setText(note_letter);
+    public void removeNoteOnScreen(int note) {
+        String noteRemove = keyMap.GetStringNoteName(note);
+        if (noteRemove == null)
+            return;
+        noteName = noteName.replace(noteRemove, "");
+        if (noteName != null)
+            NoteLabel.setText(noteName);
 
-            }
-            break;
-            case 38:
-            case 38 + 12:
-            case 38 + 24:
-            case 38 + 36:
-            case 38 + 36 + 12: {
-                note_letter = "D";
-                NoteLabel.setText(note_letter);
 
-            }
-            break;
-            case 39:
-            case 39 + 12:
-            case 39 + 24:
-            case 39 + 36:
-            case 39 + 48: {
-                note_letter = "Eb";
-                NoteLabel.setText(note_letter);
-
-            }
-            break;
-            case 40:
-            case 40 + 12:
-            case 40 + 24:
-            case 40 + 36:
-            case 40 + 48: {
-                note_letter = "E";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 41:
-            case 41 + 12:
-            case 41 + 24:
-            case 41 + 36:
-            case 41 + 48: {
-                note_letter = "F";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 42:
-            case 42 + 12:
-            case 42 + 24:
-            case 42 + 36:
-            case 42 + 48: {
-                note_letter = "F#";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 43:
-            case 43 + 12:
-            case 43 + 24:
-            case 43 + 36:
-            case 43 + 48: {
-                note_letter = "G";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 44:
-            case 44 + 12:
-            case 44 + 24:
-            case 44 + 36:
-            case 44 + 48: {
-                note_letter = "G#";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 45:
-            case 45 + 12:
-            case 45 + 24:
-            case 45 + 36:
-            case 45 + 48: {
-                note_letter = "A";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 46:
-            case 46 + 12:
-            case 46 + 24:
-            case 46 + 36:
-            case 46 + 48: {
-                note_letter = "Bb";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            case 47:
-            case 47 + 12:
-            case 47 + 24:
-            case 47 + 36:
-            case 47 + 48: {
-                note_letter = "B";
-                NoteLabel.setText(note_letter);
-            }
-            break;
-            default:
-                break;
-        }
+        Log.e("NOTE REMOVE ->", noteRemove);
+        Log.e("NOTE NAMe ->", noteName);
     }
 }
