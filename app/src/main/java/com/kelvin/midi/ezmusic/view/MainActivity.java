@@ -832,8 +832,8 @@ public class MainActivity extends Activity {
         }
         String stringNoteName = (keyMap.GetStringNoteName(note));
         if (noteName != null)
-            noteName += " " + stringNoteName;
-        if (noteName != null)
+            noteName += stringNoteName;
+       // noteName = noteName.replaceAll(".", "$0 ");
             NoteLabel.setText(noteName);
     }
 
