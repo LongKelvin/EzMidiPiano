@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
 
     //custom piano view
     public PianoView piano;
+    private int countTimeDisplay = 0;
 
 
     ArrayAdapter<String> midiInputEventAdapter;
@@ -512,7 +513,7 @@ public class MainActivity extends Activity {
         connectedDevicesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, new ArrayList<>());
         deviceSpinner.setAdapter(connectedDevicesAdapter);
 
-
+        midiOutputEventAdapter.clear();
         final Animation animCycle = AnimationUtils.loadAnimation(this, R.anim.cycle);
         ImageButton selectedSound = findViewById(R.id.btn_selectSound);
         final Intent InstrumentIntent = new Intent(this, InstrumentsActivity.class);
@@ -844,10 +845,13 @@ public class MainActivity extends Activity {
     }
 
     public void removeNoteOnScreen(int note) {
+        countTimeDisplay += 1;
         String noteRemove = keyMap.GetStringNoteName(note);
         if (noteRemove == null)
             return;
         noteName = noteName.replace(noteRemove, "");
+        if (noteName.charAt(0) == '#')
+            noteName.replace(String.valueOf(noteName.charAt(0)), "");
         if (noteName != null) {
             try {
                 NoteLabel.setText(noteName);
@@ -856,5 +860,9 @@ public class MainActivity extends Activity {
             }
 
         }
+
+        //reset value of string note name
+        if (countTimeDisplay > 200)
+            noteName = new String("");
     }
 }
