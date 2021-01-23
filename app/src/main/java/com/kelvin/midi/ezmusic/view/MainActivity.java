@@ -277,7 +277,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "NOTE OFF : " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", note: " + note + ", velocity: " + velocity));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Note off :  note: " + note + ", velocity: " + velocity));
 
             }
 
@@ -309,18 +309,18 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "NOTE ON from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ",  channel: " + channel + ", note: " + note + ", velocity: " + velocity));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Note on: " + "note: " + note + " velocity: " + velocity));
 
 
             }
 
             @Override
             public void onMidiPolyphonicAftertouch(@NonNull final MidiInputDevice sender, int cable, int channel, int note, int pressure) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "PolyphonicAftertouch from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", note: " + note + ", pressure: " + pressure));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "PolyphonicAftertouch : " + ", cable: " + cable + ", channel: " + channel + ", note: " + note + ", pressure: " + pressure));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiPolyphonicAftertouch(cable, channel, note, pressure);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "PolyphonicAftertouch from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", note: " + note + ", pressure: " + pressure));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "PolyphonicAftertouch from: " + ", cable: " + cable + ", channel: " + channel + ", note: " + note + ", pressure: " + pressure));
                 }
             }
 
@@ -338,21 +338,21 @@ public class MainActivity extends Activity {
                         e.printStackTrace();
                     }
                 }
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ControlChange from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", function: " + function + ", value: " + value));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ControlChange from: " + ", cable: " + cable + ", channel: " + channel + ", function: " + function + ", value: " + value));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiControlChange(cable, channel, function, value);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ControlChange from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", function: " + function + ", value: " + value));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ControlChange from: " + ", cable: " + cable + ", channel: " + channel + ", function: " + function + ", value: " + value));
                 }
             }
 
             @Override
             public void onMidiProgramChange(@NonNull final MidiInputDevice sender, int cable, int channel, int program) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ProgramChange from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", program: " + program));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ProgramChange from: " + ", cable: " + cable + ", channel: " + channel + ", program: " + program));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiProgramChange(cable, channel, program);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ProgramChange from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", program: " + program));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ProgramChange from: " + ", cable: " + cable + ", channel: " + channel + ", program: " + program));
                 }
 
 
@@ -360,11 +360,11 @@ public class MainActivity extends Activity {
 
             @Override
             public void onMidiChannelAftertouch(@NonNull final MidiInputDevice sender, int cable, int channel, int pressure) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ChannelAftertouch from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", pressure: " + pressure));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ChannelAftertouch from: " + ", cable: " + cable + ", channel: " + channel + ", pressure: " + pressure));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiChannelAftertouch(cable, channel, pressure);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ChannelAftertouch from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", pressure: " + pressure));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "ChannelAftertouch from: " + ", cable: " + cable + ", channel: " + channel + ", pressure: " + pressure));
                 }
             }
 
@@ -385,111 +385,111 @@ public class MainActivity extends Activity {
                 }
 
                 receiver.send(msg, -1);
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "PitchWheel from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", amount: " + amount));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "PitchWheel: amount: " + amount));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiPitchWheel(cable, channel, amount);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "PitchWheel from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", channel: " + channel + ", amount: " + amount));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "PitchWheel : " + "amount: " + amount));
                 }
             }
 
             @Override
             public void onMidiSystemExclusive(@NonNull final MidiInputDevice sender, int cable, final byte[] systemExclusive) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SystemExclusive from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", data:" + Arrays.toString(systemExclusive)));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SystemExclusive from: " + ", cable: " + cable + ", data:" + Arrays.toString(systemExclusive)));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiSystemExclusive(cable, systemExclusive);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SystemExclusive from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", data:" + Arrays.toString(systemExclusive)));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SystemExclusive from: " + ", cable: " + cable + ", data:" + Arrays.toString(systemExclusive)));
                 }
             }
 
             @Override
             public void onMidiSystemCommonMessage(@NonNull final MidiInputDevice sender, int cable, final byte[] bytes) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SystemCommonMessage from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", bytes: " + Arrays.toString(bytes)));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SystemCommonMessage from: " + ", cable: " + cable + ", bytes: " + Arrays.toString(bytes)));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiSystemCommonMessage(cable, bytes);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SystemCommonMessage from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", bytes: " + Arrays.toString(bytes)));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SystemCommonMessage from: " + ", cable: " + cable + ", bytes: " + Arrays.toString(bytes)));
                 }
             }
 
             @Override
             public void onMidiSingleByte(@NonNull final MidiInputDevice sender, int cable, int byte1) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SingleByte from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", data: " + byte1));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SingleByte from: " + ", cable: " + cable + ", data: " + byte1));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiSingleByte(cable, byte1);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SingleByte from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", data: " + byte1));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "SingleByte from: " + ", cable: " + cable + ", data: " + byte1));
                 }
             }
 
             @Override
             public void onMidiTimeCodeQuarterFrame(@NonNull MidiInputDevice sender, int cable, int timing) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TimeCodeQuarterFrame from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", timing: " + timing));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TimeCodeQuarterFrame from: " + ", cable: " + cable + ", timing: " + timing));
             }
 
             @Override
             public void onMidiSongSelect(@NonNull MidiInputDevice sender, int cable, int song) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SongSelect from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", song: " + song));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SongSelect from: " + ", cable: " + cable + ", song: " + song));
             }
 
             @Override
             public void onMidiSongPositionPointer(@NonNull MidiInputDevice sender, int cable, int position) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SongPositionPointer from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", position: " + position));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "SongPositionPointer from: " + ", cable: " + cable + ", position: " + position));
             }
 
             @Override
             public void onMidiTuneRequest(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TuneRequest from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TuneRequest from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiTimingClock(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TimingClock from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "TimingClock from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiStart(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Start from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Start from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiContinue(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Continue from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Continue from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiStop(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Stop from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Stop from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiActiveSensing(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ActiveSensing from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "ActiveSensing from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiReset(@NonNull MidiInputDevice sender, int cable) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Reset from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "Reset from: " + ", cable: " + cable));
             }
 
             @Override
             public void onMidiMiscellaneousFunctionCodes(@NonNull final MidiInputDevice sender, int cable, int byte1, int byte2, int byte3) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "MiscellaneousFunctionCodes from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "MiscellaneousFunctionCodes from: " + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiMiscellaneousFunctionCodes(cable, byte1, byte2, byte3);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "MiscellaneousFunctionCodes from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "MiscellaneousFunctionCodes from: " + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
                 }
             }
 
             @Override
             public void onMidiCableEvents(@NonNull final MidiInputDevice sender, int cable, int byte1, int byte2, int byte3) {
-                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "CableEvents from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
+                midiInputEventHandler.sendMessage(Message.obtain(midiInputEventHandler, 0, "CableEvents from: " + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
 
                 if (thruToggleButton != null && thruToggleButton.isChecked() && getMidiOutputDeviceFromSpinner() != null) {
                     getMidiOutputDeviceFromSpinner().sendMidiCableEvents(cable, byte1, byte2, byte3);
-                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "CableEvents from: " + sender.getUsbDevice().getDeviceName() + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
+                    midiOutputEventHandler.sendMessage(Message.obtain(midiOutputEventHandler, 0, "CableEvents from: " + ", cable: " + cable + ", byte1: " + byte1 + ", byte2: " + byte2 + ", byte3: " + byte3));
                 }
             }
         };
@@ -779,6 +779,7 @@ public class MainActivity extends Activity {
 
         //This is very dirty way for the string arr
         //recommend XML file for the resources
+        //:))
 
         //TIme signature array
         String[] timeSignature_;
@@ -833,8 +834,13 @@ public class MainActivity extends Activity {
         String stringNoteName = (keyMap.GetStringNoteName(note));
         if (noteName != null)
             noteName += stringNoteName;
-       // noteName = noteName.replaceAll(".", "$0 ");
+
+        try {
             NoteLabel.setText(noteName);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
     }
 
     public void removeNoteOnScreen(int note) {
@@ -842,11 +848,13 @@ public class MainActivity extends Activity {
         if (noteRemove == null)
             return;
         noteName = noteName.replace(noteRemove, "");
-        if (noteName != null)
-            NoteLabel.setText(noteName);
+        if (noteName != null) {
+            try {
+                NoteLabel.setText(noteName);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
-
-        Log.e("NOTE REMOVE ->", noteRemove);
-        Log.e("NOTE NAMe ->", noteName);
+        }
     }
 }
