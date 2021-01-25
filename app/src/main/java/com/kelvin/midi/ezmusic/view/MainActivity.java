@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
     private int denominator = -1;
     private String timeSignature_val = "";
     private String songName = "";
+    private boolean recordingDialogStatus = true;
 
     private int ticks = -1;
 
@@ -87,7 +88,7 @@ public class MainActivity extends Activity {
     private boolean isPedalHolding = false;
     private ShortMessage msg = new ShortMessage();
 
-    private String DEFAULT_INSTRUMENT = "GrandPiano";
+    final private String DEFAULT_INSTRUMENT = "GrandPiano";
 
     //custom piano view
     public PianoView piano;
@@ -109,6 +110,7 @@ public class MainActivity extends Activity {
     //Recording Midi File
     private MidiFileCreator newMidiFile = new MidiFileCreator();
     private boolean isRecording = false;
+    private Button  btn_recording;
 
     // User interface
     final Handler midiInputEventHandler = new Handler(new Callback() {
@@ -532,7 +534,7 @@ public class MainActivity extends Activity {
         });
 
 
-        Button btn_recording = findViewById(R.id.btn_recording);
+         btn_recording = findViewById(R.id.btn_recording);
         btn_recording.setOnClickListener(new View.OnClickListener() {
 
             /**
@@ -545,7 +547,7 @@ public class MainActivity extends Activity {
                 btn_recording.startAnimation(animCycle);
                 if (!isRecording) {
                     //isRecording = true;
-                    btn_recording.setText(R.string.strop_recording);
+
                     showRecordingDialog();
 
                 } else {
@@ -555,6 +557,7 @@ public class MainActivity extends Activity {
                     File file_output = new File(path, "/" + songName + ".mid");
                     newMidiFile.exportMidiFile(file_output);
 
+                    sendMessageToUser("File "+ songName+" was save in "+ path);
                 }
 
             }
@@ -704,12 +707,15 @@ public class MainActivity extends Activity {
 
 
                 dialog.cancel();
+                recordingDialogStatus = true;
+                btn_recording.setText(R.string.stop_recording);
             }
 
         });
 
         button_cancel.setOnClickListener(v -> {
             dialog.cancel();
+            recordingDialogStatus = false;
         });
 
         tempo_spinner.setOnTouchListener((v, event) -> {

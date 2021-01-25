@@ -17,7 +17,7 @@
     <string name="select_sound_">select_sound</string>
     <string name="recording">Recording</string>
     <string name="expand_piano_view">Change To Touch Mode</string>
-    <string name="strop_recording">STOP</string>
+    <string name="stop_recording">STOP</string>
     <string name="recording_dialog">Recording Dialog</string>
     <string name="TimeSignature">TimeSignature</string>
     <string name="Tempo">Tempo</string>

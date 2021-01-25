@@ -81,15 +81,17 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#131619">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:background="#191F23">
+            android:background="#191F23"
+            android:text="">
 
         </TextView>
 
@@ -112,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
                 android:layout_margin="0dp"
+                android:background="@color/colorPrimaryDark"
                 android:layerType="software"
                 android:requiresFadingEdge="horizontal|vertical"
                 android:text="@string/Mididata"
@@ -119,12 +122,13 @@
                 android:textColor="@color/colorBackground"
                 android:textStyle="normal|bold|italic"
                 android:typeface="sans"
-                android:background="@color/colorPrimaryDark"
                 app:autoSizeTextType="none" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -169,21 +173,29 @@
                     android:layout_width="260dp"
                     android:layout_height="match_parent">
 
-                    <ListView
-                        android:id="@+id/midiInputEventListView"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:stackFromBottom="true"
-                        android:transcriptMode="alwaysScroll">
+                        android:orientation="vertical">
 
-                    </ListView>
+                        <TextView
+                            android:layout_width="250dp"
+                            android:layout_height="10dp" />
+
+                        <ListView
+                            android:id="@+id/midiInputEventListView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stackFromBottom="true"
+                            android:transcriptMode="alwaysScroll">
+
+                        </ListView>
+                    </LinearLayout>
 
 
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
-
-
 
 
         <FrameLayout
@@ -198,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
                 android:layout_margin="0dp"
+                android:background="@color/colorPrimaryDark"
                 android:layerType="software"
                 android:requiresFadingEdge="horizontal|vertical"
                 android:text="@string/noteSymbol"
@@ -205,12 +218,13 @@
                 android:textColor="@color/colorBackground"
                 android:textStyle="normal|bold|italic"
                 android:typeface="sans"
-                android:background="@color/colorPrimaryDark"
                 app:autoSizeTextType="none" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,6 +277,7 @@
                         android:layout_centerInParent="true"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:inputType="textMultiLine"
                         android:layerType="software"
                         android:paddingStart="30dp"
                         android:text="@string/note_letter"
@@ -271,16 +286,12 @@
                         android:textIsSelectable="false"
                         android:textStyle="normal|bold|italic"
                         android:typeface="sans"
-                        android:inputType="textMultiLine"
                         app:autoSizeTextType="none" />
 
 
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
-
-
-
 
 
         <FrameLayout
@@ -357,12 +368,12 @@
 
                     <ImageView
                         android:id="@+id/instruments_image"
-                        android:layout_gravity="center"
-                        android:layout_centerInParent="true"
-                        android:gravity="center"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
                         android:layout_marginStart="50dp"
+                        android:gravity="center"
                         android:scaleType="centerCrop"
                         android:src="@drawable/grand_piano" />
 
