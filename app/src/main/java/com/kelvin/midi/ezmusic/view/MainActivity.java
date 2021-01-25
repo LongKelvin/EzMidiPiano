@@ -59,6 +59,8 @@ import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 import jp.kshoji.javax.sound.midi.Receiver;
 import jp.kshoji.javax.sound.midi.ShortMessage;
 
+import com.midisheetmusic.*;
+
 
 public class MainActivity extends Activity {
 
@@ -110,7 +112,8 @@ public class MainActivity extends Activity {
     //Recording Midi File
     private MidiFileCreator newMidiFile = new MidiFileCreator();
     private boolean isRecording = false;
-    private Button  btn_recording;
+    private Button btn_recording;
+    private ImageButton btn_midiSheet;
 
     // User interface
     final Handler midiInputEventHandler = new Handler(new Callback() {
@@ -533,8 +536,23 @@ public class MainActivity extends Activity {
             }
         });
 
+        //Midi sheet active button
+        btn_midiSheet = findViewById(R.id.btn_back);
+        final Intent MidiSheetIntent = new Intent(this, ChooseSongActivity.class);
+        btn_midiSheet.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Called when a view has been clicked.
+             *
+             * @param v The view that was clicked.
+             */
+            @Override
+            public void onClick(View v) {
 
-         btn_recording = findViewById(R.id.btn_recording);
+                startActivity(MidiSheetIntent);
+            }
+        });
+
+        btn_recording = findViewById(R.id.btn_recording);
         btn_recording.setOnClickListener(new View.OnClickListener() {
 
             /**
@@ -557,7 +575,7 @@ public class MainActivity extends Activity {
                     File file_output = new File(path, "/" + songName + ".mid");
                     newMidiFile.exportMidiFile(file_output);
 
-                    sendMessageToUser("File "+ songName+" was save in "+ path);
+                    sendMessageToUser("File " + songName + " was save in " + path);
                 }
 
             }

@@ -1,0 +1,110 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.midisheetmusic"
+4    android:versionCode="9"
+5    android:versionName="2.6" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:7:5-81
+11-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:7:22-78
+12
+13    <application
+13-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:9:5-54:19
+14        android:icon="@mipmap/ic_launcher"
+14-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:10:9-43
+15        android:label="@string/app_name"
+15-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:11:9-41
+16        android:theme="@style/AppTheme" >
+16-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:12:9-40
+17        <activity
+17-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:13:9-21:20
+18            android:name="com.midisheetmusic.SplashActivity"
+18-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:14:13-43
+19            android:theme="@style/SplashTheme" >
+19-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:15:13-47
+20            <intent-filter>
+20-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:16:13-20:29
+21                <action android:name="android.intent.action.MAIN" />
+21-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:17:17-69
+21-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:17:25-66
+22
+23                <category android:name="android.intent.category.LAUNCHER" />
+23-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:17-77
+23-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:27-74
+24            </intent-filter>
+25        </activity>
+26        <activity android:name="com.midisheetmusic.ChooseSongActivity" />
+26-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:22:9-56
+26-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:22:19-53
+27        <activity android:name="com.midisheetmusic.FileBrowserActivity" />
+27-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:9-57
+27-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:19-54
+28        <activity android:name="com.midisheetmusic.AllSongsActivity" />
+28-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:24:9-54
+28-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:24:19-51
+29        <activity android:name="com.midisheetmusic.RecentSongsActivity" />
+29-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:25:9-57
+29-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:25:19-54
+30        <activity
+30-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:26:9-35:20
+31            android:name="com.midisheetmusic.SettingsActivity"
+31-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:27:13-45
+32            android:label="@string/title_activity_settings"
+32-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:28:13-60
+33            android:theme="@style/Theme.AppCompat" >
+33-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:29:13-51
+34            <intent-filter>
+34-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:30:13-34:29
+35                <action android:name="android.intent.action.SETTINGS" />
+35-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:31:17-73
+35-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:31:25-70
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:17-77
+37-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:27-74
+38            </intent-filter>
+39        </activity>
+40        <activity android:name="com.midisheetmusic.HelpActivity" />
+40-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:36:9-50
+40-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:36:19-47
+41        <activity
+41-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:37:9-53:20
+42            android:name="com.midisheetmusic.SheetMusicActivity"
+42-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:38:13-47
+43            android:configChanges="orientation"
+43-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:39:13-48
+44            android:screenOrientation="landscape"
+44-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:40:13-50
+45            android:theme="@style/PlayerTheme" >
+45-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:41:13-47
+46            <intent-filter>
+46-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:42:13-52:29
+47                <action android:name="android.intent.action.VIEW" />
+47-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:43:17-69
+47-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:43:25-66
+48
+49                <category android:name="android.intent.category.DEFAULT" />
+49-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:17-76
+49-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:27-73
+50
+51                <data
+51-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:47:17-51:45
+52                    android:host="*"
+52-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:48:21-37
+53                    android:mimeType="*/*"
+53-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:49:21-43
+54                    android:pathPattern=".*\\.mid"
+54-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:50:21-51
+55                    android:scheme="file" />
+55-->C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:51:21-42
+56            </intent-filter>
+57        </activity>
+58    </application>
+59
+60</manifest>
