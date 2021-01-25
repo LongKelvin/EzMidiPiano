@@ -22,6 +22,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TabHost;
 
 import org.json.JSONArray;
@@ -44,6 +46,11 @@ public class ChooseSongActivity extends TabActivity {
     public void onCreate(Bundle state) {
         globalActivity = this;
         super.onCreate(state);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //setContentView(R.layout.activity_midi_driver);
 
 
         Bitmap allFilesIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.allfilesicon);

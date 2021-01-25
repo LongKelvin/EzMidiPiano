@@ -1,118 +1,124 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-56:12
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:1-58:12
 	package
 		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:3:5-33
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:5:5-30
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:6:5-30
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:4:5-51
 	xmlns:android
 		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:4:5-28
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:5:5-28
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
 		INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:7:5-81
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:8:5-81
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:7:22-78
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:8:22-78
 application
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:9:5-54:19
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:10:5-56:19
 	android:label
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:11:9-41
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:12:9-41
 	android:icon
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:10:9-43
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:11:9-43
 	android:theme
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:12:9-40
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:13:9-40
 activity#com.midisheetmusic.SplashActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:13:9-21:20
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:14:9-22:20
 	android:theme
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:15:13-47
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:16:13-47
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:14:13-43
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:16:13-20:29
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:15:13-43
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.DEFAULT
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:17:13-21:29
 action#android.intent.action.MAIN
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:18:17-69
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:17:25-66
-category#android.intent.category.LAUNCHER
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:17-77
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:18:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:20:17-76
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:19:27-74
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:20:27-73
 activity#com.midisheetmusic.ChooseSongActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:22:9-56
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:9-24:80
+	android:screenOrientation
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:54-91
+	tools:ignore
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:24:13-78
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:22:19-53
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:19-53
 activity#com.midisheetmusic.FileBrowserActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:9-57
-	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:23:19-54
-activity#com.midisheetmusic.AllSongsActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:24:9-54
-	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:24:19-51
-activity#com.midisheetmusic.RecentSongsActivity
 ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:25:9-57
 	android:name
 		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:25:19-54
+activity#com.midisheetmusic.AllSongsActivity
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:26:9-54
+	android:name
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:26:19-51
+activity#com.midisheetmusic.RecentSongsActivity
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:27:9-57
+	android:name
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:27:19-54
 activity#com.midisheetmusic.SettingsActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:26:9-35:20
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:28:9-37:20
 	android:label
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:28:13-60
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:30:13-60
 	android:theme
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:29:13-51
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:31:13-51
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:27:13-45
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:29:13-45
 intent-filter#action:name:android.intent.action.SETTINGS+category:name:android.intent.category.LAUNCHER
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:30:13-34:29
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:32:13-36:29
 action#android.intent.action.SETTINGS
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:31:17-73
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:33:17-73
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:31:25-70
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:33:25-70
+category#android.intent.category.LAUNCHER
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:35:17-77
+	android:name
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:35:27-74
 activity#com.midisheetmusic.HelpActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:36:9-50
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:38:9-50
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:36:19-47
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:38:19-47
 activity#com.midisheetmusic.SheetMusicActivity
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:37:9-53:20
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:39:9-55:20
 	android:screenOrientation
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:40:13-50
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:42:13-50
 	android:configChanges
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:39:13-48
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:41:13-48
 	android:theme
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:41:13-47
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:43:13-47
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:38:13-47
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:40:13-47
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.DEFAULT+data:host:*+data:mimeType:*/*+data:pathPattern:.*\\.mid+data:scheme:file
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:42:13-52:29
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:44:13-54:29
 action#android.intent.action.VIEW
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:43:17-69
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:17-69
 	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:43:25-66
-category#android.intent.category.DEFAULT
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:17-76
-	android:name
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:27-73
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:45:25-66
 data
-ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:47:17-51:45
+ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:49:17-53:45
 	android:host
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:48:21-37
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:50:21-37
 	android:scheme
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:51:21-42
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:53:21-42
 	android:pathPattern
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:50:21-51
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:52:21-51
 	android:mimeType
-		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:49:21-43
+		ADDED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml:51:21-43
 uses-sdk
 INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\AndroidManifest.xml

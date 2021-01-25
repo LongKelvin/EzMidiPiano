@@ -542,6 +542,8 @@ public class MainActivity extends Activity {
         btn_midiSheet.setOnClickListener(new View.OnClickListener() {
             /**
              * Called when a view has been clicked.
+             * Active Midi sheet music
+             * The first screen is opening the Choose Song Activity
              *
              * @param v The view that was clicked.
              */

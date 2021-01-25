@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.midisheetmusic"
+    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="9"
     android:versionName="2.6">
 
@@ -16,10 +17,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChooseSongActivity" />
+        <activity android:name=".ChooseSongActivity" android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity"/>
         <activity android:name=".FileBrowserActivity" />
         <activity android:name=".AllSongsActivity" />
         <activity android:name=".RecentSongsActivity" />
