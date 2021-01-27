@@ -38,6 +38,7 @@
     <string name="noteSymbol">Note Playing</string>
     <string name="Mididata">Midi Data Send</string>
     <string name="MidiEvent">Midi Event</string>
+    <string name="StartMidiSheet">Open Midi Sheet Page</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

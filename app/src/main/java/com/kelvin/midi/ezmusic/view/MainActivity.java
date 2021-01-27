@@ -13,6 +13,8 @@ import android.os.Handler.Callback;
 import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Note;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -27,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +51,8 @@ import java.util.Set;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
@@ -62,7 +67,7 @@ import jp.kshoji.javax.sound.midi.ShortMessage;
 import com.midisheetmusic.*;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickListener {
 
     //midi file creator
     private int tempo_value = -1;
@@ -531,14 +536,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                selectedSound.startAnimation(animCycle);
+               // selectedSound.startAnimation(animCycle);
                 startActivityForResult(InstrumentIntent, 1);
             }
         });
 
         //Midi sheet active button
-        btn_midiSheet = findViewById(R.id.btn_back);
-        final Intent MidiSheetIntent = new Intent(this, ChooseSongActivity.class);
+        btn_midiSheet = findViewById(R.id.btn_option);
         btn_midiSheet.setOnClickListener(new View.OnClickListener() {
             /**
              * Called when a view has been clicked.
@@ -549,8 +553,11 @@ public class MainActivity extends Activity {
              */
             @Override
             public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainActivity.this, v);
+                popup.setOnMenuItemClickListener(MainActivity.this);
+                popup.inflate(R.menu.popup);
+                popup.show();
 
-                startActivity(MidiSheetIntent);
             }
         });
 
@@ -564,7 +571,7 @@ public class MainActivity extends Activity {
              */
             @Override
             public void onClick(View v) {
-                btn_recording.startAnimation(animCycle);
+               // btn_recording.startAnimation(animCycle);
                 if (!isRecording) {
                     //isRecording = true;
 
@@ -888,7 +895,19 @@ public class MainActivity extends Activity {
         }
 
         //reset value of string note name
-        if (countTimeDisplay > 200)
+        if (countTimeDisplay > 200) {
             noteName = new String("");
+            NoteLabel.setText("");
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_start_midisheet) {
+            final Intent MidiSheetIntent = new Intent(this, ChooseSongActivity.class);
+            startActivity(MidiSheetIntent);
+            return true;
+        }
+        return false;
     }
 }
