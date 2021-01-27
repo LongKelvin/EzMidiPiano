@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EzMusic</string>
+    <string name="app_name">EzMidiPiano</string>
     <string name="action_settings">Settings</string>
     <string name="thru_off">Thru OFF</string>
     <string name="thru_on">Thru ON</string>

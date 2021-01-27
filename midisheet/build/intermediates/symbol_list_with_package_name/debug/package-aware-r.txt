@@ -1937,6 +1937,7 @@ drawable ic_back
 drawable ic_forward
 drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
+drawable ic_launcher
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_launcher_round
@@ -2535,6 +2536,7 @@ layout test_toolbar_surface
 menu sheet_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_piano_
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description

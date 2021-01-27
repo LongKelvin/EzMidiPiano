@@ -1936,6 +1936,7 @@ int drawable ic_back 0x0
 int drawable ic_forward 0x0
 int drawable ic_keyboard_arrow_left_black_24dp 0x0
 int drawable ic_keyboard_arrow_right_black_24dp 0x0
+int drawable ic_launcher 0x0
 int drawable ic_launcher_background 0x0
 int drawable ic_launcher_foreground 0x0
 int drawable ic_launcher_round 0x0
@@ -2534,6 +2535,7 @@ int layout test_toolbar_surface 0x0
 int menu sheet_menu 0x0
 int mipmap ic_launcher 0x0
 int mipmap ic_launcher_round 0x0
+int mipmap ic_piano_ 0x0
 int plurals mtrl_badge_content_description 0x0
 int string abc_action_bar_home_description 0x0
 int string abc_action_bar_up_description 0x0
