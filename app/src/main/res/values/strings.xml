@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EzMusic</string>
+    <string name="app_name">EzMidiPiano</string>
     <string name="action_settings">Settings</string>
     <string name="thru_off">Thru OFF</string>
     <string name="thru_on">Thru ON</string>
@@ -17,26 +17,47 @@
     <string name="select_sound_">select_sound</string>
     <string name="recording">Recording</string>
     <string name="expand_piano_view">Change To Touch Mode</string>
-    <string name="strop_recording">STOP</string>
+    <string name="stop_recording">STOP</string>
+    <string name="recording_dialog">Recording Dialog</string>
+    <string name="TimeSignature">TimeSignature</string>
+    <string name="Tempo">Tempo</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="EnterTimeSignature">Tap To Enter Time Signature</string>
+    <string name="EnterTempo">Tap To Enter Song Tempo</string>
+    <string name="SongName">Song Name</string>
+    <string name="EnterSongName">Tap To Enter Song Name</string>
+    <string name="str_recording">RECORDING</string>
+    <string name="note_letter"></string>
+    <string name="note_C">C</string>
+    <string name="instruments_name_tv">Instruments Information</string>
+    <string name="name">Name:</string>
+    <string name="Image">Image:</string>
+    <string name="GrandPiano">Grand Piano</string>
+    <string name="Display">Display</string>
+    <string name="noteSymbol">Note Playing</string>
+    <string name="Mididata">Midi Data Send</string>
+    <string name="MidiEvent">Midi Event</string>
+    <string name="StartMidiSheet">Open Midi Sheet Page</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">
         <item>Grand Piano"</item>
         <item>Electric Piano</item>
-        <item>Organ</item>
-        <item>String</item>
+        <item>Jazz Organ</item>
+        <item>Live String</item>
         <item>Acoustic Guitar</item>
         <item>Rock Guitar</item>
         <item>Finger Bass</item>
-        <item>Brass</item>
+        <item>Smooth Brass</item>
         <item>Synth Lead 1</item>
         <item>Synth Lead 2</item>
         <item>Accordion</item>
-        <item>Flute</item>
-        <item>Pad Wave 1 </item>
-        <item>Pad Wave 2 </item>
-        <item>Studio Kit 1 </item>
-        <item>Studio Kit 2 </item>
+        <item>Natural Flute</item>
+        <item>Dream Wave  </item>
+        <item>Pro Pad Wave  </item>
+        <item>Studio Drummer </item>
+        <item>Studio Kit Loop </item>
     </string-array>
 
     <string-array name="instrument_path">
@@ -59,7 +80,7 @@
     </string-array>
 
     <string-array name="image">
-        <item>@drawable/grandpiano</item>
+        <item>@drawable/grand_piano</item>
         <item>@drawable/epiano_</item>
         <item>@drawable/organ</item>
         <item>@drawable/violin</item>
@@ -75,6 +96,26 @@
         <item>@drawable/pad2</item>
         <item>@drawable/drums1</item>
         <item>@drawable/drum2</item>
+
+    </string-array>
+
+    <string-array name="image_path">
+        <item>grand_piano</item>
+        <item>epiano_</item>
+        <item>organ</item>
+        <item>violin</item>
+        <item>acguitar</item>
+        <item>eguitar</item>
+        <item>bass</item>
+        <item>brass</item>
+        <item>synthlead1</item>
+        <item>synthesizer</item>
+        <item>accordion</item>
+        <item>flute</item>
+        <item>pad</item>
+        <item>pad2</item>
+        <item>drums1</item>
+        <item>drum2</item>
 
     </string-array>
 </resources>

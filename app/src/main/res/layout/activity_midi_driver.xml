@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimaryDark"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -17,12 +20,12 @@
             android:layout_weight="1">
 
             <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="20dp"
-                android:layout_height="25dp"
+                android:id="@+id/btn_option"
+                android:layout_width="16dp"
+                android:layout_height="21dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:background="@drawable/btn_back"
+                android:background="@drawable/btn_option"
                 android:contentDescription="@string/select_sound_"
                 android:text="@string/select_sound" />
 
@@ -39,11 +42,11 @@
                 android:id="@+id/deviceNameSpinner"
                 android:layout_width="300dp"
                 android:layout_height="38dp"
-                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
                 android:background="@drawable/spinner_background"
-                android:spinnerMode="dropdown"
                 android:dropDownSelector="@color/colorAccent"
+                android:spinnerMode="dropdown"
                 android:textColor="@color/colorPrimary" />
 
             <ImageButton
@@ -61,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
                 android:background="@drawable/recording_button"
                 android:text="@string/recording" />
 
@@ -69,7 +73,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="40dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/btn_expand_view"
                 android:contentDescription="@string/select_sound_"
                 android:text="@string/expand_piano_view" />
@@ -77,45 +81,332 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#131619">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/midi_input"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#191F23"
+            android:text="">
 
-    <ListView
-        android:id="@+id/midiInputEventListView"
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll">
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/tv_midiData"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@color/colorPrimaryDark"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/Mididata"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold|italic"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/midiEvent"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="@string/MidiEvent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorBackground"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+                    <TextView
+                        android:id="@+id/midiEventData"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="All Event"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/color_yellow_highlight"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
 
 
-    </ListView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="250dp"
+                            android:layout_height="10dp" />
+
+                        <ListView
+                            android:id="@+id/midiInputEventListView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stackFromBottom="true"
+                            android:transcriptMode="alwaysScroll">
+
+                        </ListView>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/tv_noteSymbol"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@color/colorPrimaryDark"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/noteSymbol"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold|italic"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/note_name"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="@string/Display"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorBackground"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+                    <TextView
+                        android:id="@+id/note_display"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="Note Symbol"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/color_yellow_highlight"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/noteLetter"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="89dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:inputType="textMultiLine"
+                        android:layerType="software"
+                        android:paddingStart="30dp"
+                        android:text="@string/note_letter"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@color/colorBackground"
+                        android:textIsSelectable="false"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="275dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/tv_instruments"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@color/colorPrimaryDark"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/instruments_name_tv"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold|italic"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/instruments_name"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="@string/name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/colorBackground"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+                    <TextView
+                        android:id="@+id/ins_name"
+                        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layerType="software"
+                        android:requiresFadingEdge="horizontal|vertical"
+                        android:text="Grand Piano"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/color_yellow_highlight"
+                        android:textStyle="normal|bold|italic"
+                        android:typeface="sans"
+                        app:autoSizeTextType="none" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="450dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="400dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/instruments_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="141dp"
+                            android:layout_marginTop="41dp"
+                            android:layout_marginEnd="209dp"
+                            android:layout_marginBottom="41dp"
+                            android:src="@drawable/grand_piano"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/midi_output"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ListView
-        android:id="@+id/midiOutputEventListView"
         android:layout_width="match_parent"
-        android:layout_height="234dp"
-        android:layout_weight="1"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" />
+        android:layout_height="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@color/cardview_light_background"/>
 
     <com.kelvin.midi.ezmusic.view.PianoView
         android:id="@+id/piano_view"
         android:layout_width="match_parent"
         android:layout_height="80dp" />
+
 
 </LinearLayout>

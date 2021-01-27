@@ -1,19 +1,22 @@
 # EzMidiPiano
 An Android app provide Midi connection device and javax.sound.midi
+
 # Feature
 - Provide midi connection to Android phone base on javax.sound.midi
 - Allow to play synthesizer sound from Midi controller device
-- Support sf2 soundfonts
+- Support sf2 sound fonts
 - Contain many instruments for playing/ testing midi device
 - Support Piano keyboard in both mode and binding Midi data to keyboard
 - Support Midi Sheet Music base on an OpenSource Midi Sheet Music project
-- Recording Midi song in real-time base on midi sequence 
+- Recording Midi song in realtime base on midi sequence 
 
 # About EzMidiPiano
-I started this project for my interesting on Music and Midi Technology. Before this project, it takes me 2 months to discover where to start with.
-Midi is something popular in Desktop app, but it may be some more different with Android device.
-My main purpose is learning about Midi Technology and apply it to Android device with it is more different from the original.
-By using EzMidiPiano, you can easily to connect your Midi controller to your Android phone and enjoy it.
+- I started this project for my interesting on Music and Midi Technology. Before this project, It take me 2 month to discover
+where to start with. Midi is something popular in Desktop app, but it may be some more different with Android device.
+- My main popurse is learning about Midi Technology and apply it to Android device with it is more different from the orginal.
+- By using EzMidiPiano, you can easily to connect your Midi controller to your Android phone and enjoy it.
+
+
 
 # Setup
 If anyone interesting on this project, feel free to clone it into your local repository.
@@ -29,14 +32,15 @@ This project is not completed but you can build a APK full version of it and ins
 - Kshoij USB Midi Driver
 
 # Sf2 Setup
-You can easily add your favorite sound into app. Just copy sf2 file into your Android phone. This app will auto recognize your sound.
+You can easily add your favorite sound into app. Just copy sf2 file into your Android phone. This app will auto recognizes your sound.
 
 # Sf2 Sound
-This project has some good sf2 sound. Here is list of some instruments: 
+This project have some good sf2 sound. Here is list of some instruments: 
 - Korg Grand Piano
 - Korg Epiano
-- Yamaha Organ
-- Montage Live String
+- Yamha Organ
+- Monstate Live String
+
 - Acoustic Guitar
 - Finger Bass
 - Synth Lead (Free SF2)
@@ -47,7 +51,7 @@ In Progressing
 
 # Special Thanks
 + Kshoij for USB Midi Driver
-+ SherLock for Midi Synthesizers 
++ SherLock for Midi Synthesiszer 
 
 # Authors
 + Kelvin Long

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.kelvin.midi.ezmusic.R;
@@ -20,9 +18,12 @@ import androidx.annotation.Nullable;
 
 public class InstrumentsActivity extends ListActivity {
     public static  String RESULT_INSTRUMENT_PATH = "instrument_path";
+    public static  String RESULT_INSTRUMENT_NAME = "instrument_name";
+    public static  String RESULT_INSTRUMENT_IMAGE = "image";
     private String[] instrument_name;
     private String[] instrument_path;
     private TypedArray instrument_image;
+    private String[] instrument_image_path;
 
     private List<Instruments> instrumentList;
 
@@ -55,20 +56,19 @@ public class InstrumentsActivity extends ListActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("Select Instument Sound: SF2 Sound Font:");
+        setTitle("Select Instrument Sound: SF2 Sound Font:");
         populateInstrumentList();
         ArrayAdapter<Instruments> adapter = new InstrumentsAdapter(this, instrumentList);
         setListAdapter(adapter);
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Instruments ins = instrumentList.get(position);
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra(RESULT_INSTRUMENT_PATH, ins.getInstrumentsSoundPath());
-                setResult(RESULT_OK, returnIntent);
-                instrument_image.recycle(); //recycle images
-                finish();
-            }
+        getListView().setOnItemClickListener((parent, view, position, id) -> {
+            Instruments ins = instrumentList.get(position);
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra(RESULT_INSTRUMENT_PATH, ins.getInstrumentsSoundPath());
+            returnIntent.putExtra(RESULT_INSTRUMENT_NAME, ins.getInstrumentsName());
+            returnIntent.putExtra(RESULT_INSTRUMENT_IMAGE,ins.getInstrumentsImagePath());
+            setResult(RESULT_OK, returnIntent);
+            instrument_image.recycle(); //recycle images
+            finish();
         });
 
     }
@@ -78,9 +78,11 @@ public class InstrumentsActivity extends ListActivity {
         instrumentList = new ArrayList<>();
         instrument_name = getResources().getStringArray(R.array.instrument_name);
         instrument_path = getResources().getStringArray(R.array.instrument_path);
+        instrument_image_path = getResources().getStringArray(R.array.image_path);
+
         instrument_image = getResources().obtainTypedArray(R.array.image);
         for(int i = 0; i < instrument_path.length; i++){
-            instrumentList.add(new Instruments(instrument_name[i], instrument_path[i], instrument_image.getDrawable(i)));
+            instrumentList.add(new Instruments(instrument_name[i], instrument_path[i], instrument_image.getDrawable(i),instrument_image_path[i]));
         }
     }
 

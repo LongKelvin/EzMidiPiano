@@ -13,6 +13,8 @@ import com.kelvin.midi.ezmusic.object.Instruments;
 
 import java.util.List;
 
+
+
 public class InstrumentsAdapter extends ArrayAdapter<Instruments> {
     private final List<Instruments>  list;
     private final Activity context;
@@ -29,16 +31,17 @@ public class InstrumentsAdapter extends ArrayAdapter<Instruments> {
     }
 
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        View view;
 
         if (convertView == null) {
-            LayoutInflater inflator = context.getLayoutInflater();
-            view = inflator.inflate(R.layout.activity_instruments_adapter, null);
+            LayoutInflater inflater = context.getLayoutInflater();
+            view = inflater.inflate(R.layout.activity_instruments_adapter, null);
             final ViewHolder viewHolder = new ViewHolder();
-            viewHolder.instrumentName = (TextView) view.findViewById(R.id.name);
-            viewHolder.instrumentImage = (ImageView) view.findViewById(R.id.image);
+            viewHolder.instrumentName = view.findViewById(R.id.name);
+            viewHolder.instrumentImage = view.findViewById(R.id.image);
             view.setTag(viewHolder);
         } else {
             view = convertView;

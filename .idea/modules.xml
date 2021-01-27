@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EzMusic.iml" filepath="$PROJECT_DIR$/.idea/modules/EzMusic.iml" group="EzMusic" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="EzMusic/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sherlockmidi/sherlockmidi.iml" filepath="$PROJECT_DIR$/.idea/modules/sherlockmidi/sherlockmidi.iml" group="EzMusic/sherlockmidi" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EzMusic.iml" filepath="$PROJECT_DIR$/.idea/modules/EzMusic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EzMusic.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EzMusic.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/midisheet/EzMusic.midisheet.iml" filepath="$PROJECT_DIR$/.idea/modules/midisheet/EzMusic.midisheet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sherlockmidi/EzMusic.sherlockmidi.iml" filepath="$PROJECT_DIR$/.idea/modules/sherlockmidi/EzMusic.sherlockmidi.iml" />
     </modules>
   </component>
 </project>

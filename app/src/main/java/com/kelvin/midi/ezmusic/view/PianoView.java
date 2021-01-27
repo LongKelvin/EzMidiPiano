@@ -17,6 +17,7 @@ import android.view.View;
 import com.kelvin.midi.ezmusic.object.Key;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.RequiresApi;
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
@@ -46,6 +47,8 @@ class PianoView extends View {
 
     //create instance of receiver from MainActivity
     private Receiver recv;
+
+    private int NoteIsPlaying;
 
 
     public PianoView(Context context, AttributeSet attrs) {
@@ -167,7 +170,7 @@ class PianoView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        boolean isDownAction = action == MotionEvent.ACTION_DOWN ;
+        boolean isDownAction = action == MotionEvent.ACTION_DOWN ; //|| action == MotionEvent.ACTION_MOVE;
         boolean isMoveAction = action == MotionEvent.ACTION_MOVE;
         boolean isUpAction = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_MOVE;
         ArrayList<Integer> actionMoveList = new ArrayList<>();
@@ -180,6 +183,8 @@ class PianoView extends View {
             Key keyPressed = getKeyAtPosition(x, y);
 
             if (keyPressed != null) {
+
+                actionMoveList.add(keyPressed.note);
                 keyPressed.isNoteOn = isDownAction;
                 keyPressed.isNoteOff = isUpAction;
                 Log.i("ACTION_DOWN: Note ", String.valueOf(keyPressed.note));
@@ -194,17 +199,15 @@ class PianoView extends View {
 
                         //Draw the key buffer to screen
                         invalidate();
-
                         releaseKey(keyPressed);
                         keyPressed.isNoteOff = true;
-
+                        NoteIsPlaying = keyPressed.note;
 
                     } catch (InvalidMidiDataException | NullPointerException e) {
-                        Log.e("PIANO VIEW", e.getMessage());
+                        Log.e("PIANO VIEW", Objects.requireNonNull(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
-
 
                 // handle action up
                 Log.i("ACTION_UP:_check ", String.valueOf(isUpAction));
@@ -316,7 +319,7 @@ class PianoView extends View {
 //
 //                }
 //
-          }
+            }
 
         }
 
@@ -418,12 +421,16 @@ class PianoView extends View {
 
     public void setReceiverForSynthesizer(Receiver receiver) {
         try {
+
             this.recv = receiver;
         } catch (IllegalStateException e) {
             Log.e("PIANO VIEW ", "RECEIVER NOT FOUND");
             e.printStackTrace();
         }
+    }
 
-
+    public int getNoteIsPlaying() {
+        //MainActivity.activeNoteToScreen(NoteIsPlaying);
+        return 0;
     }
 }
