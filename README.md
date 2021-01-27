@@ -16,6 +16,8 @@ where to start with. Midi is something popular in Desktop app, but it may be som
 - My main popurse is learning about Midi Technology and apply it to Android device with it is more different from the orginal.
 - By using EzMidiPiano, you can easily to connect your Midi controller to your Android phone and enjoy it.
 
+
+
 # Setup
 If anyone interesting on this project, feel free to clone it into your local repository.
 For setup, it is better to use Android Studio with the lastest version (or maybe some ide that support Android project) to open.
@@ -38,6 +40,7 @@ This project have some good sf2 sound. Here is list of some instruments:
 - Korg Epiano
 - Yamha Organ
 - Monstate Live String
+
 - Acoustic Guitar
 - Finger Bass
 - Synth Lead (Free SF2)
