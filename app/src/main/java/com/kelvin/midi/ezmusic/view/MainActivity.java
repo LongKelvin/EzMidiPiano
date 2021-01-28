@@ -883,8 +883,8 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         if (noteRemove == null)
             return;
         noteName = noteName.replace(noteRemove, "");
-        if (noteName.charAt(0) == '#')
-            noteName.replace(String.valueOf(noteName.charAt(0)), "");
+//        if (noteName.charAt(0) == '#')
+//            noteName.replace(String.valueOf(noteName.charAt(0)), "");
         if (noteName != null) {
             try {
                 NoteLabel.setText(noteName);
@@ -894,9 +894,12 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
         }
 
+        Log.e("COUNT_TIME: ",String.valueOf(countTimeDisplay));
+        Log.e("NOTENAME: ",String.valueOf(noteName));
         //reset value of string note name
-        if (countTimeDisplay > 200) {
-            noteName = new String("");
+        if (countTimeDisplay > 30) {
+            countTimeDisplay = 0;
+            noteName = "";
             NoteLabel.setText("");
         }
     }
