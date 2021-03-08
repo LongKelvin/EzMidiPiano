@@ -31,32 +31,6 @@
     <list default="true" id="692b391d-a569-4ee8-839f-8dec776c8e50" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/ezmusic/view/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/ezmusic/view/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ChannelAftertouch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ChannelAftertouch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ChannelEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ChannelEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/MidiEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/MidiEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteAftertouch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteAftertouch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteOff.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteOff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteOn.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/NoteOn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/PitchBend.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/PitchBend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ProgramChange.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/midilib/event/ProgramChange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/AllSongsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/AllSongsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ColorPreference.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ColorPreference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/FileBrowserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/FileBrowserActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/FileUri.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/FileUri.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/HelpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/HelpActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/KeySignature.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/KeySignature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ListInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ListInt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFileException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiFileReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiNote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/MidiPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/NoteData.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/NoteData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/NoteDuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/NoteDuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/Piano.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/Piano.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ScrollAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/src/main/java/com/midisheetmusic/ScrollAnimation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +84,7 @@
     <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/Piano.java_SELECTED" value="Piano" />
     <property name="com.developerphil.adbidea.selecteddevices" value="11528410" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/midisheet/src/main/res/drawable-xhdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/midisheet/src/main/res/drawable-xhdpi" />
+    <property name="last_opened_file_path" value="D:/MY_WORKLOAD/CHORD_LIBRARY/chordec-master/chordec-master/Chordec" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/MidiPlayer.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/Piano.java_selected" value="Custom views" />
@@ -255,10 +229,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="806" y="292" key="AndroidCreateXmlResourceDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611725663507" />
-    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1611730676819">
+    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1611912984640">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611730676819" />
+    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611912984640" />
     <state width="1876" height="235" key="GridCell.Tab.0.bottom" timestamp="1611797702009">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
