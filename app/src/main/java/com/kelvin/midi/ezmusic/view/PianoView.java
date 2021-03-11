@@ -14,12 +14,13 @@ import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
+
 import com.kelvin.midi.ezmusic.object.Key;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import androidx.annotation.RequiresApi;
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.Receiver;
 import jp.kshoji.javax.sound.midi.ShortMessage;
@@ -67,6 +68,7 @@ class PianoView extends View {
         black.setStyle(Paint.Style.FILL);
         white.setStyle(Paint.Style.FILL);
         blue.setStyle(Paint.Style.FILL);
+
 
     }
 
@@ -170,7 +172,7 @@ class PianoView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        boolean isDownAction = action == MotionEvent.ACTION_DOWN ; //|| action == MotionEvent.ACTION_MOVE;
+        boolean isDownAction = action == MotionEvent.ACTION_DOWN; //|| action == MotionEvent.ACTION_MOVE;
         boolean isMoveAction = action == MotionEvent.ACTION_MOVE;
         boolean isUpAction = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_MOVE;
         ArrayList<Integer> actionMoveList = new ArrayList<>();
@@ -322,8 +324,6 @@ class PianoView extends View {
             }
 
         }
-
-
         return true;
     }
 
