@@ -9,14 +9,26 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kelvin.midi.ezmusic.R;
+import com.kelvin.midi.ezmusic.object.KeyMap;
+
+import java.io.IOException;
+
+import cn.sherlock.com.sun.media.sound.SF2Soundbank;
+import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
+import jp.kshoji.javax.sound.midi.MidiUnavailableException;
+import jp.kshoji.javax.sound.midi.Receiver;
+import jp.kshoji.javax.sound.midi.ShortMessage;
 
 public class PianoLargeViewActivity extends AppCompatActivity {
+    private ShortMessage msg = new ShortMessage();
 
+    final private String DEFAULT_INSTRUMENT = "GrandPiano";
+    private SoftSynthesizer synth;
     PianoLargeView pianoLargeView;
     int piano_size_on_change = 7;
     int _noteOn = 0;
     int _noteOff = 0;
-
+    private Receiver receiver;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -63,5 +75,19 @@ public class PianoLargeViewActivity extends AppCompatActivity {
                 Log.e("PianoView_noteOff:: ", String.valueOf(_noteOff));
             }
         });
+
+        //Setup Synthesizers SF2_Sound
+        try {
+            SF2Soundbank sf = new SF2Soundbank(getAssets().open(DEFAULT_INSTRUMENT + ".sf2"));
+            synth = new SoftSynthesizer();
+            synth.open();
+            synth.loadAllInstruments(sf);
+            synth.getChannels()[0].programChange(0);
+            receiver = synth.getReceiver();
+        } catch (IOException | MidiUnavailableException | IllegalStateException e) {
+            e.printStackTrace();
+        }
+
+        pianoLargeView.setReceiverForSynthesizer(receiver);
     }
 }

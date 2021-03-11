@@ -7,6 +7,7 @@ public class Key {
     public RectF rect;
     public boolean isNoteOn;
     public boolean isNoteOff;
+    public boolean isKeyDown;
 
     public long start_tick;
     public long end_tick;
@@ -42,5 +43,11 @@ public class Key {
         this.duration = duration;
     }
 
+    public boolean isKeyDown() {
+        return isKeyDown;
+    }
 
+    public void setKeyDown(boolean keyDown) {
+        isKeyDown = keyDown;
+    }
 }

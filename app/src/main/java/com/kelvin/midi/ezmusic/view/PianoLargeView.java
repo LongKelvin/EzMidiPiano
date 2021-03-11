@@ -33,6 +33,7 @@ public class PianoLargeView extends View {
     //define custom interface
     public interface PianoViewListener {
         void onNoteOnListener(int noteOn);
+
         void onNoteOffListener(int noteOff);
     }
 
@@ -96,6 +97,7 @@ public class PianoLargeView extends View {
     public void setPianoSize(int SIZE_CHANGE_VALUE) {
         this.piano_size = SIZE_CHANGE_VALUE;
     }
+
 
     public PianoLargeView(Context context) {
         super(context);
@@ -245,15 +247,80 @@ public class PianoLargeView extends View {
     }
 
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        int action = event.getAction();
+//        boolean isDownAction = action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE;
+//       // boolean isMoveAction = action == MotionEvent.ACTION_MOVE;
+//       // boolean isUpAction = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_MOVE;
+//       // ArrayList<Integer> actionMoveList = new ArrayList<>();
+//
+//
+//        for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++) {
+//            float x = event.getX(touchIndex);
+//            float y = event.getY(touchIndex);
+//
+//            Key keyPressed = getKeyAtPosition(x, y);
+//
+//            if (keyPressed != null) {
+//
+//               // actionMoveList.add(keyPressed.note);
+//                keyPressed.isKeyDown = isDownAction;
+//               // keyPressed.isNoteOff = isUpAction;
+//               // Log.i("ACTION_DOWN: Note ", String.valueOf(keyPressed.note));
+//
+//
+//                //Handle action down
+//                if (keyPressed.isNoteOn) {
+//                    try {
+////                        ShortMessage msg = new ShortMessage();
+////                        msg.setMessage(ShortMessage.NOTE_ON, 0, keyPressed.note, 80);
+////                        recv.send(msg, -1);
+//
+//                        //Draw the key buffer to screen
+//                        invalidate();
+//                        releaseKey(keyPressed);
+//                        keyPressed.isNoteOff = true;
+//                        pianoViewListener.onNoteOnListener(keyPressed.note);
+//
+//                    } catch (/*InvalidMidiDataException |*/ NullPointerException e) {
+//                        Log.e("PIANO VIEW", Objects.requireNonNull(e.getMessage()));
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                // handle action up
+//                Log.i("ACTION_UP:_check ", String.valueOf(isUpAction));
+//                if (keyPressed.isNoteOff && isUpAction) {
+//
+//                    try {
+//
+//                        Log.i("__ACTION_UP: ", String.valueOf(isUpAction));
+//
+////                        ShortMessage msg = new ShortMessage();
+////                        msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
+////                        recv.send(msg, -1);
+//
+//                        //releaseKey(keyPressed);
+//                        pianoViewListener.onNoteOffListener(keyPressed.note);
+//
+//                    } catch (/*InvalidMidiDataException |*/ NullPointerException e) {
+//                        Log.e("PIANO VIEW", e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
+//        return true;
+//    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        boolean isDownAction = action == MotionEvent.ACTION_DOWN; //|| action == MotionEvent.ACTION_MOVE;
-        boolean isMoveAction = action == MotionEvent.ACTION_MOVE;
-        boolean isUpAction = action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_MOVE;
-        ArrayList<Integer> actionMoveList = new ArrayList<>();
-
-
+        boolean isDownAction = action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE;
         for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++) {
             float x = event.getX(touchIndex);
             float y = event.getY(touchIndex);
@@ -261,56 +328,46 @@ public class PianoLargeView extends View {
             Key keyPressed = getKeyAtPosition(x, y);
 
             if (keyPressed != null) {
+                keyPressed.isKeyDown = isDownAction;
+            }
 
-                actionMoveList.add(keyPressed.note);
-                keyPressed.isNoteOn = isDownAction;
-                keyPressed.isNoteOff = isUpAction;
-                Log.i("ACTION_DOWN: Note ", String.valueOf(keyPressed.note));
+            ArrayList<Key> pianoKey = new ArrayList<>(whites_key);
+            pianoKey.addAll(blacks_key);
 
+            for (Key k : pianoKey) {
+                if (k.isKeyDown) {
+                    if (!k.isNoteOn) {
+                        try {
+                            ShortMessage msg = new ShortMessage();
+                            msg.setMessage(ShortMessage.NOTE_ON, 0, keyPressed.note, 110);
+                            recv.send(msg, -1);
+                            pianoViewListener.onNoteOnListener(keyPressed.note);
+                            int index = pianoKey.indexOf(k);
+                            pianoKey.get(index).isNoteOn = true;
+                            Handler handler = new Handler();
+                            handler.postDelayed(() -> {
+                                //releaseKey(keyPressed);
 
-                //Handle action down
-                if (keyPressed.isNoteOn) {
-                    try {
-//                        ShortMessage msg = new ShortMessage();
-//                        msg.setMessage(ShortMessage.NOTE_ON, 0, keyPressed.note, 80);
-//                        recv.send(msg, -1);
+                                pianoViewListener.onNoteOffListener(keyPressed.note);
+                                try {
+                                    pianoKey.get(index).isNoteOn = false;
+                                    ShortMessage msg1 = new ShortMessage();
+                                    msg1.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
+                                    recv.send(msg1, -1);
+                                } catch (InvalidMidiDataException | NullPointerException e) {
+                                    e.printStackTrace();
+                                }
+                            }, 1500); //1500 = 1.5 seconds, time in milli before it happens.
 
-                        //Draw the key buffer to screen
-                        invalidate();
-                        releaseKey(keyPressed);
-                        keyPressed.isNoteOff = true;
-                        pianoViewListener.onNoteOnListener(keyPressed.note);
+                        } catch (InvalidMidiDataException | NullPointerException e) {
+                            e.printStackTrace();
+                        }
 
-                    } catch (/*InvalidMidiDataException |*/ NullPointerException e) {
-                        Log.e("PIANO VIEW", Objects.requireNonNull(e.getMessage()));
-                        e.printStackTrace();
-                    }
-                }
-
-                // handle action up
-                Log.i("ACTION_UP:_check ", String.valueOf(isUpAction));
-                if (keyPressed.isNoteOff && isUpAction) {
-
-                    try {
-
-                        Log.i("__ACTION_UP: ", String.valueOf(isUpAction));
-
-//                        ShortMessage msg = new ShortMessage();
-//                        msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
-//                        recv.send(msg, -1);
-
-                        //releaseKey(keyPressed);
-                        pianoViewListener.onNoteOffListener(keyPressed.note);
-
-                    } catch (/*InvalidMidiDataException |*/ NullPointerException e) {
-                        Log.e("PIANO VIEW", e.getMessage());
-                        e.printStackTrace();
                     }
 
                 }
 
             }
-
         }
         return true;
     }
