@@ -37,6 +37,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.kelvin.midi.ezmusic.R;
+import com.kelvin.midi.ezmusic.customview.PianoView;
 import com.kelvin.midi.ezmusic.object.KeyMap;
 import com.kelvin.midi.ezmusic.object.MidiFileCreator;
 import com.kelvin.midi.midilib.event.NoteOff;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.PianoLargeViewActivity">
 
-    <com.kelvin.midi.ezmusic.view.PianoLargeView
+    <com.kelvin.midi.ezmusic.customview.PianoLargeView
         android:id="@+id/piano_large_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.kelvin.midi.ezmusic.view.PianoLargeView>
+    </com.kelvin.midi.ezmusic.customview.PianoLargeView>
 
     <Button
         android:id="@+id/btn_decrease_piano_size"

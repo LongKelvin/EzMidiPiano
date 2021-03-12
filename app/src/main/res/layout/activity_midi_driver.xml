@@ -403,7 +403,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="@color/cardview_light_background"/>
 
-    <com.kelvin.midi.ezmusic.view.PianoView
+    <com.kelvin.midi.ezmusic.customview.PianoView
         android:id="@+id/piano_view"
         android:layout_width="match_parent"
         android:layout_height="80dp" />

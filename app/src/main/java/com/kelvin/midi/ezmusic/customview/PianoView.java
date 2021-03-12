@@ -1,4 +1,4 @@
-package com.kelvin.midi.ezmusic.view;
+package com.kelvin.midi.ezmusic.customview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -25,7 +25,7 @@ import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.Receiver;
 import jp.kshoji.javax.sound.midi.ShortMessage;
 
-class PianoView extends View {
+public class PianoView extends View {
 
 
     private static int keyWidth;

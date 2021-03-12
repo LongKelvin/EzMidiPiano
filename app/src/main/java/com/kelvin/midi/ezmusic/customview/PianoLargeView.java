@@ -1,4 +1,4 @@
-package com.kelvin.midi.ezmusic.view;
+package com.kelvin.midi.ezmusic.customview;
 
 import android.content.Context;
 import android.graphics.Canvas;

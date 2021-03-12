@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kelvin.midi.ezmusic.R;
-import com.kelvin.midi.ezmusic.object.KeyMap;
+import com.kelvin.midi.ezmusic.customview.PianoLargeView;
 
 import java.io.IOException;
 
