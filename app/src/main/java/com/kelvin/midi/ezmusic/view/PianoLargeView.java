@@ -349,6 +349,7 @@ public class PianoLargeView extends View {
                                 //releaseKey(keyPressed);
 
                                 pianoViewListener.onNoteOffListener(keyPressed.note);
+
                                 try {
                                     pianoKey.get(index).isNoteOn = false;
                                     ShortMessage msg1 = new ShortMessage();
@@ -388,7 +389,6 @@ public class PianoLargeView extends View {
 
         return null;
     }
-
 
     private void releaseKey(final Key k) {
         handler.postDelayed(() -> {

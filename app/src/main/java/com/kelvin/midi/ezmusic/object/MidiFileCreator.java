@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /*
-* This is a midi class to provide MidiFileCreator, It's base on midi lib
-* */
+ * This is a midi class to provide MidiFileCreator, It's base on midi lib
+ * */
 
 public class MidiFileCreator {
-    private boolean isRecording ;
+    private boolean isRecording;
     private MidiTrack tempoTrack;
     private MidiTrack noteTrack;
     private Tempo tempo;
-    private ArrayList<MidiTrack> midiTracks ;
+    private ArrayList<MidiTrack> midiTracks;
     private MidiFile midiFile;
     private TimeSignature timeSignature;
 
@@ -33,7 +33,7 @@ public class MidiFileCreator {
         tempoTrack = new MidiTrack();
         noteTrack = new MidiTrack();
         timeSignature = new TimeSignature();
-        timeSignature.setTimeSignature(numerator,denominator,TimeSignature.DEFAULT_METER,TimeSignature.DEFAULT_DIVISION);
+        timeSignature.setTimeSignature(numerator, denominator, TimeSignature.DEFAULT_METER, TimeSignature.DEFAULT_DIVISION);
         this.tempo = new Tempo();
         tempo.setBpm(tempo_);
 
@@ -51,7 +51,6 @@ public class MidiFileCreator {
     }
 
 
-
     public void exportMidiFile(File fileName) {
 
         midiTracks.add(tempoTrack);
@@ -60,19 +59,17 @@ public class MidiFileCreator {
         try {
             MidiFile midi = new MidiFile(MidiFile.DEFAULT_RESOLUTION, midiTracks);
             midi.writeToFile(fileName);
-            Log.e("EXPORT_FILE_COMPLETE:: ","Export midi file to "+ fileName.toString());
-        }
-        catch(IOException e)
-        {
+            Log.e("EXPORT_FILE_COMPLETE:: ", "Export midi file to " + fileName.toString());
+        } catch (IOException e) {
             Log.e("EXPORT_FILE_ERROR:: ", Objects.requireNonNull(e.getMessage()));
         }
     }
 
-    public void insertNote(int channel, int note, int velocity, int tick, int duration){
-        noteTrack.insertNote(channel, note , velocity, tick, duration);
+    public void insertNote(int channel, int note, int velocity, int tick, int duration) {
+        noteTrack.insertNote(channel, note, velocity, tick, duration);
     }
 
-    public void insertEvent(MidiEvent midiEvent){
+    public void insertEvent(MidiEvent midiEvent) {
         noteTrack.insertEvent(midiEvent);
     }
 
@@ -91,8 +88,9 @@ public class MidiFileCreator {
     public void setTempo(Tempo tempo) {
         this.tempo = tempo;
     }
-    public void setTempo(int tempo){
-        this.tempo.setBpm((float)tempo);
+
+    public void setTempo(int tempo) {
+        this.tempo.setBpm((float) tempo);
     }
 
 
@@ -107,9 +105,9 @@ public class MidiFileCreator {
     public void setTimeSignature(TimeSignature timeSignature) {
         this.timeSignature = timeSignature;
     }
-    public void setTimeSignature(int numerator,int denominator )
-    {
-        timeSignature.setTimeSignature(numerator,denominator,TimeSignature.DEFAULT_METER,TimeSignature.DEFAULT_DIVISION);
+
+    public void setTimeSignature(int numerator, int denominator) {
+        timeSignature.setTimeSignature(numerator, denominator, TimeSignature.DEFAULT_METER, TimeSignature.DEFAULT_DIVISION);
     }
 
 }

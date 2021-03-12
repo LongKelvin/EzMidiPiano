@@ -530,7 +530,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             @Override
             public void onClick(View v) {
 
-               // selectedSound.startAnimation(animCycle);
+                // selectedSound.startAnimation(animCycle);
                 startActivityForResult(InstrumentIntent, 1);
             }
         });
@@ -565,7 +565,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
              */
             @Override
             public void onClick(View v) {
-               // btn_recording.startAnimation(animCycle);
+                // btn_recording.startAnimation(animCycle);
                 if (!isRecording) {
                     //isRecording = true;
 
@@ -888,8 +888,8 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
         }
 
-        Log.e("COUNT_TIME: ",String.valueOf(countTimeDisplay));
-        Log.e("NOTENAME: ",String.valueOf(noteName));
+        Log.e("COUNT_TIME: ", String.valueOf(countTimeDisplay));
+        Log.e("NOTENAME: ", String.valueOf(noteName));
         //reset value of string note name
         if (countTimeDisplay > 30) {
             countTimeDisplay = 0;

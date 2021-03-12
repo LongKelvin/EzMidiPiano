@@ -17,9 +17,9 @@ import java.util.List;
 import androidx.annotation.Nullable;
 
 public class InstrumentsActivity extends ListActivity {
-    public static  String RESULT_INSTRUMENT_PATH = "instrument_path";
-    public static  String RESULT_INSTRUMENT_NAME = "instrument_name";
-    public static  String RESULT_INSTRUMENT_IMAGE = "image";
+    public static String RESULT_INSTRUMENT_PATH = "instrument_path";
+    public static String RESULT_INSTRUMENT_NAME = "instrument_name";
+    public static String RESULT_INSTRUMENT_IMAGE = "image";
     private String[] instrument_name;
     private String[] instrument_path;
     private TypedArray instrument_image;
@@ -65,7 +65,7 @@ public class InstrumentsActivity extends ListActivity {
             Intent returnIntent = new Intent();
             returnIntent.putExtra(RESULT_INSTRUMENT_PATH, ins.getInstrumentsSoundPath());
             returnIntent.putExtra(RESULT_INSTRUMENT_NAME, ins.getInstrumentsName());
-            returnIntent.putExtra(RESULT_INSTRUMENT_IMAGE,ins.getInstrumentsImagePath());
+            returnIntent.putExtra(RESULT_INSTRUMENT_IMAGE, ins.getInstrumentsImagePath());
             setResult(RESULT_OK, returnIntent);
             instrument_image.recycle(); //recycle images
             finish();
@@ -81,8 +81,8 @@ public class InstrumentsActivity extends ListActivity {
         instrument_image_path = getResources().getStringArray(R.array.image_path);
 
         instrument_image = getResources().obtainTypedArray(R.array.image);
-        for(int i = 0; i < instrument_path.length; i++){
-            instrumentList.add(new Instruments(instrument_name[i], instrument_path[i], instrument_image.getDrawable(i),instrument_image_path[i]));
+        for (int i = 0; i < instrument_path.length; i++) {
+            instrumentList.add(new Instruments(instrument_name[i], instrument_path[i], instrument_image.getDrawable(i), instrument_image_path[i]));
         }
     }
 
