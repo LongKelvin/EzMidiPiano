@@ -38,6 +38,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.kelvin.midi.ezmusic.R;
 import com.kelvin.midi.ezmusic.customview.PianoView;
+import com.kelvin.midi.ezmusic.object.ChordType;
 import com.kelvin.midi.ezmusic.object.KeyMap;
 import com.kelvin.midi.ezmusic.object.MidiFileCreator;
 import com.kelvin.midi.midilib.event.NoteOff;
@@ -48,8 +49,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
+
 import java.util.Set;
+
 
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
@@ -95,6 +99,11 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     //custom piano view
     public PianoView piano;
     private int countTimeDisplay = 0;
+
+    //Chord detect
+    public ArrayList<Integer> chord_input_note = new ArrayList<>();
+    public ArrayList<ChordType> List_Chord = new ArrayList<>();
+    public boolean chord_detect_status = true;
 
 
     ArrayAdapter<String> midiInputEventAdapter;
@@ -254,7 +263,12 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
             @Override
             public void onMidiNoteOff(@NonNull final MidiInputDevice sender, int cable, int channel, int note, int velocity) {
-
+                try {
+                    chord_input_note.remove(chord_input_note.indexOf(note));
+                    Log.e("Chord Detect remove ", String.valueOf(note));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 try {
                     ShortMessage msg = new ShortMessage();
 
@@ -270,15 +284,12 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                     // make key on in PianoView
                     piano.setKey(note, false);
                     removeNoteOnScreen(note);
-
                     //recording
                     if (isRecording) {
                         ticks += 120;
                         NoteOff noteOff = new NoteOff(ticks, channel, note, velocity);
                         newMidiFile.insertEvent(noteOff);
                     }
-
-
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
                 }
@@ -289,8 +300,15 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
             @Override
             public void onMidiNoteOn(@NonNull final MidiInputDevice sender, int cable, int channel, int note, int velocity) {
-
                 try {
+                    chord_input_note.add(note);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if(chord_input_note.size() >=3)
+                        DetectChordFromMidiNote();
 
                     msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
                     receiver.send(msg, -1);
@@ -601,6 +619,10 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             }
         });
 
+        //START_REGION_CHORD_DETECT
+        InitChordDetectFunction();
+        //END_REGION
+
     }
 
     @Override
@@ -732,7 +754,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                 recordingDialogStatus = true;
                 btn_recording.setText(R.string.stop_recording);
             }
-
         });
 
         button_cancel.setOnClickListener(v -> {
@@ -769,7 +790,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         tempo_picker = customLayout.findViewById(R.id.tempo_value);
         tempo_picker.setMinValue(50);
         tempo_picker.setMaxValue(500);
-
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -878,8 +898,6 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         if (noteRemove == null)
             return;
         noteName = noteName.replace(noteRemove, "");
-//        if (noteName.charAt(0) == '#')
-//            noteName.replace(String.valueOf(noteName.charAt(0)), "");
         if (noteName != null) {
             try {
                 NoteLabel.setText(noteName);
@@ -907,5 +925,88 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             return true;
         }
         return false;
+    }
+
+    public void InitChordDetectFunction() {
+        //CHORD_ANALYZE_REGION
+        System.out.print("__Start chord analyze__");
+        chord_input_note = new ArrayList<>();
+        for (int index = 0; index < 7; index++) {
+            String type = "";
+            if (index == 0)
+                type = "major";
+            if (index == 1)
+                type = "minor";
+            if (index == 2)
+                type = "sus4";
+            if (index == 3)
+                type = "dim";
+            if (index == 4)
+                type = "major7";
+            if (index == 5)
+                type = "minor7";
+            if (index == 6)
+                type = "7";
+
+            new ChordType();
+            ChordType chord;
+            chord = ChordType.GenerateChordType(type);
+            List_Chord.add(chord);
+        }
+        System.out.println(List_Chord);
+        System.out.println("\n\n");
+
+    }
+
+    public void DetectChordFromMidiNote() {
+
+        ArrayList<Integer> temp_list = new ArrayList<>();
+        Collections.sort(chord_input_note);
+        //chord_input_note = ChordType.ConvertMidiNoteToChordType(chord_input_note);
+        int root_note = chord_input_note.get(0);
+        for (int index = 0; index < chord_input_note.size(); index++) {
+            temp_list.add(chord_input_note.get(index) - root_note);
+        }
+        print(String.valueOf(temp_list));
+        System.out.println("chord_input_ "+ chord_input_note);
+
+        Log.i("Chord Note: ", String.valueOf(chord_input_note));
+        if (temp_list.size() > 5) {
+            temp_list.clear();
+            chord_input_note.clear();
+        }
+        int type = -1;
+        if (temp_list.size() > 2)
+            type = ChordType.FindChordType(temp_list);
+
+        System.out.println("Chord Type: " + type);
+
+        String chord_extension = "";
+        for (ChordType chord : List_Chord) {
+            if (chord.type == type) {
+                if (chord.chord_note.equals(temp_list)) {
+                    chord_extension = chord.name;
+                    Log.i("Chord: ", chord.name + " Detect");
+                    break;
+                }
+            }
+        }
+        try {
+            String chord_key = keyMap.GetStringNoteName(chord_input_note.get(0));
+            print_("CHORD DETECT ", chord_key + " "+ chord_extension);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    void print(String info, String msg ){
+        Log.i(info,msg);
+    }
+    void print(String msg ){
+        Log.i("",msg);
+    }
+    void print_(String info, String msg ){
+        Log.e(info,msg);
     }
 }
