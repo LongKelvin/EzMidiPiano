@@ -10,6 +10,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/184dc6449f8ce88bd68985cce758d7bf/jetified-midi-driver-0.1.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/184dc6449f8ce88bd68985cce758d7bf/jetified-midi-driver-0.1.4/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/184dc6449f8ce88bd68985cce758d7bf/jetified-midi-driver-0.1.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ad891d191465d0d403160d071194abcc/jetified-midi-driver-0.1.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ad891d191465d0d403160d071194abcc/jetified-midi-driver-0.1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ad891d191465d0d403160d071194abcc/jetified-midi-driver-0.1.4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

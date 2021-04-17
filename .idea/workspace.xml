@@ -29,15 +29,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="692b391d-a569-4ee8-839f-8dec776c8e50" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_kshoji_javax_sound_midi_0_0_3_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_kshoji_javax_sound_midi_0_0_3_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_kshoji_midi_driver_0_1_4_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_kshoji_midi_driver_0_1_4_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/midisheet/EzMusic.midisheet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/midisheet/EzMusic.midisheet.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/ezmusic/view/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/ezmusic/view/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/.transforms/de61b0e45365db47fa2aa651d68c2257/classes/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/.transforms/de61b0e45365db47fa2aa651d68c2257/classes/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/generated/source/buildConfig/debug/com/midisheetmusic/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/generated/source/buildConfig/debug/com/midisheetmusic/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/aapt_friendly_merged_manifests/debug/aapt/output-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/compile_library_classes_jar/debug/classes.jar" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/compile_library_classes_jar/debug/classes.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/compile_symbol_list/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/compile_symbol_list/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/mergeDebugShaders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugAssets/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/AllSongsActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/AllSongsActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ColorPreference.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ColorPreference.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/FileBrowserActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/FileBrowserActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/FileUri.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/FileUri.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/HelpActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/HelpActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/KeySignature.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/KeySignature.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ListInt.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ListInt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFileException.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFileException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiFileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiNote.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiNote.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/MidiPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/NoteData.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/NoteData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/NoteDuration.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/NoteDuration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/PairInt.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/PairInt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/Piano.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/Piano.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScanMidiFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScanMidiFiles.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScrollAnimation$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScrollAnimation$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScrollAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/javac/debug/classes/com/midisheetmusic/ScrollAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/library_java_res/debug/res.jar" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/library_java_res/debug/res.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/library_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/library_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/local_only_symbol_list/debug/R-def.txt" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/local_only_symbol_list/debug/R-def.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/packaged_manifests/debug/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/packaged_manifests/debug/output-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/packaged_res/debug/values/values.xml" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/packaged_res/debug/values/values.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/runtime_library_classes_jar/debug/classes.jar" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/runtime_library_classes_jar/debug/classes.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/midisheet/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/midisheet/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[192.168.1.120:5555]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -77,6 +123,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/customview/PianoLargeView.java_SELECTED" value="PianoLargeView" />
+    <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/customview/PianoView.java_SELECTED" value="PianoView" />
+    <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoLargeView.java_SELECTED" value="PianoLargeView" />
     <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoView.java_PianoView_WRAP_CONTENT_H" value="true" />
     <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoView.java_PianoView_WRAP_CONTENT_W" value="true" />
     <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoView.java_SELECTED" value="PianoView" />
@@ -84,25 +133,31 @@
     <property name="android-custom-viewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/Piano.java_SELECTED" value="Piano" />
     <property name="com.developerphil.adbidea.selecteddevices" value="11528410" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/midisheet/src/main/res/drawable-xhdpi" />
-    <property name="last_opened_file_path" value="D:/MY_WORKLOAD/CHORD_LIBRARY/chordec-master/chordec-master/Chordec" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/kelvin/midi/ezmusic/object" />
+    <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/customview/PianoLargeView.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/customview/PianoView.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoLargeView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/app/src/main/java/com/kelvin/midi/ezmusic/view/PianoView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/MidiPlayer.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/MY_WORKLOAD/MY_WORK/ANDROID PROJECT/MEDIA PROJECT/EZ_MIDI/EzMidiPiano/midisheet/src/main/java/com/midisheetmusic/Piano.java_selected" value="Custom views" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.-1961973652">
+      <recent name="com.kelvin.midi.ezmusic.view" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\java\com\kelvin\midi\ezmusic\object" />
+      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\res\raw" />
+      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\java\com\kelvin\midi\metronome" />
+      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\java\com\kelvin\midi\metronome\object" />
       <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\res\drawable-xhdpi" />
-      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\res\drawable-v24" />
-      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\app\src\main\res" />
-      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\res" />
-      <recent name="C:\MY_WORKLOAD\MY_WORK\ANDROID PROJECT\MEDIA PROJECT\EZ_MIDI\EzMidiPiano\midisheet\src\main\res\mipmap-anydpi-v26" />
     </key>
   </component>
   <component name="RunManager">
@@ -197,18 +252,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="847" y="356" key="#Notifications" timestamp="1609864107286">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="847" y="356" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1609864107286" />
-    <state x="477" y="266" key="#PSD" timestamp="1609387353282">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="477" y="266" key="#PSD/0.0.1920.1040@0.0.1920.1040" timestamp="1609387353282" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609866559315">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609866559315" />
     <state x="716" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1611805440855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -217,10 +260,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="223" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1611727358015" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609862234526">
+    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1618627905510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609862234526" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1618627905510" />
+    <state x="540" y="275" key="AndroidCreateResourceDirectoryDialog" timestamp="1615532309907">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="275" key="AndroidCreateResourceDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615532309907" />
     <state x="868" y="295" key="AndroidCreateResourceFileDialog" timestamp="1611726637652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -229,26 +276,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="806" y="292" key="AndroidCreateXmlResourceDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611725663507" />
-    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1611912984640">
+    <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1615515477066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611912984640" />
-    <state width="1876" height="235" key="GridCell.Tab.0.bottom" timestamp="1611797702009">
+    <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1615515477066" />
+    <state width="1876" height="529" key="GridCell.Tab.0.bottom" timestamp="1618636856603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1611797702009" />
-    <state width="1876" height="235" key="GridCell.Tab.0.center" timestamp="1611797702009">
+    <state width="1876" height="529" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618636856603" />
+    <state width="1876" height="529" key="GridCell.Tab.0.center" timestamp="1618636856603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="235" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1611797702009" />
-    <state width="1876" height="235" key="GridCell.Tab.0.left" timestamp="1611797702009">
+    <state width="1876" height="529" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618636856603" />
+    <state width="1876" height="529" key="GridCell.Tab.0.left" timestamp="1618636856603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="235" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1611797702009" />
-    <state width="1876" height="235" key="GridCell.Tab.0.right" timestamp="1611797702009">
+    <state width="1876" height="529" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618636856603" />
+    <state width="1876" height="529" key="GridCell.Tab.0.right" timestamp="1618636856603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="235" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1611797702009" />
+    <state width="1876" height="529" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618636856603" />
     <state width="1876" height="274" key="GridCell.Tab.1.bottom" timestamp="1611396394414">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -265,18 +312,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1876" height="274" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1611396394414" />
-    <state x="510" y="193" width="998" height="708" key="SettingsEditor" timestamp="1611567237362">
+    <state x="510" y="193" width="998" height="708" key="SettingsEditor" timestamp="1618627279553">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="510" y="193" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1611567237362" />
+    <state x="510" y="193" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618627279553" />
     <state x="776" y="298" key="chooseDestDirectoryDialog" timestamp="1611731183558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="776" y="298" key="chooseDestDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611731183558" />
-    <state x="715" y="352" key="com.developerphil.adbidea.ui.DeviceChooserDialog" timestamp="1609864806744">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="715" y="352" key="com.developerphil.adbidea.ui.DeviceChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609864806744" />
     <state x="683" y="161" key="com.intellij.javaee.MapExternalResourceDialog" timestamp="1611565585919">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
