@@ -24,7 +24,6 @@ public class KeyMap {
             }
         }
         return keyMap;
-
     }
 
     public String GenerateNoteName(int note) {
@@ -69,7 +68,6 @@ public class KeyMap {
             default:
                 noteName = " ";
                 break;
-
         }
         return noteName;
     }

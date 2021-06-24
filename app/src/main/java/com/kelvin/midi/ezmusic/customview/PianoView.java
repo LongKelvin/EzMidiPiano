@@ -51,7 +51,20 @@ public class PianoView extends View {
 
     private int NoteIsPlaying;
 
+    //BEGIN_PATTERN
+    //define custom interface
+    public interface PianoViewListener {
+        void onNoteOnListener(int noteOn);
 
+        void onNoteOffListener(int noteOff);
+    }
+
+    private PianoLargeView.PianoViewListener pianoViewListener;
+
+    // Assign the listener implementing events interface that will receive the events (passed in by the owner)
+    public void setPianoViewListener(PianoLargeView.PianoViewListener listener) {
+        this.pianoViewListener = listener;
+    }
     public PianoView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -69,7 +82,7 @@ public class PianoView extends View {
         white.setStyle(Paint.Style.FILL);
         blue.setStyle(Paint.Style.FILL);
 
-
+        this.pianoViewListener = null;
     }
 
     public PianoView(Context context) {
@@ -87,7 +100,7 @@ public class PianoView extends View {
         black.setStyle(Paint.Style.FILL);
         white.setStyle(Paint.Style.FILL);
         blue.setStyle(Paint.Style.FILL);
-
+        this.pianoViewListener = null;
     }
 
     /**
@@ -204,6 +217,7 @@ public class PianoView extends View {
                         releaseKey(keyPressed);
                         keyPressed.isNoteOff = true;
                         NoteIsPlaying = keyPressed.note;
+                        pianoViewListener.onNoteOnListener(keyPressed.note);
 
                     } catch (InvalidMidiDataException | NullPointerException e) {
                         Log.e("PIANO VIEW", Objects.requireNonNull(e.getMessage()));
@@ -222,6 +236,7 @@ public class PianoView extends View {
                         ShortMessage msg = new ShortMessage();
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, keyPressed.note, 0);
                         recv.send(msg, -1);
+                        pianoViewListener.onNoteOffListener(keyPressed.note);
 
                         //releaseKey(keyPressed);
 
