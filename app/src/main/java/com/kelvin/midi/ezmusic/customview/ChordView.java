@@ -17,7 +17,9 @@ import com.kelvin.midi.ezmusic.object.Key;
 
 import java.util.ArrayList;
 
+import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.Receiver;
+import jp.kshoji.javax.sound.midi.ShortMessage;
 
 public class ChordView extends View {
     private static int keyWidth;
@@ -290,4 +292,33 @@ public class ChordView extends View {
         invalidate();
         requestLayout();
     }
+
+    public void StartPlayingChord(ArrayList<Integer> chordLíst){
+        for (int note:chordLíst
+             ) {
+            try {
+                ShortMessage msg = new ShortMessage();
+                msg.setMessage(ShortMessage.NOTE_ON, 0, note, 127);
+                recv.send(msg, -1);
+            } catch (InvalidMidiDataException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void StopPlayingChord(ArrayList<Integer> chordLíst){
+        for (int note:chordLíst
+        ) {
+            try {
+                ShortMessage msg = new ShortMessage();
+                msg.setMessage(ShortMessage.NOTE_OFF, note, 0);
+                recv.send(msg, -1);
+            } catch (InvalidMidiDataException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }

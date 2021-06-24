@@ -62,10 +62,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="125dp"
+        android:layout_marginBottom="164dp"
         android:text="Play Chord"
         app:layout_constraintBottom_toTopOf="@+id/piano_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toEndOf="@+id/chord_view" />
 
     <TextView
@@ -97,6 +98,18 @@
         app:layout_constraintBottom_toTopOf="@+id/btnSetKey"
         app:layout_constraintEnd_toStartOf="@+id/staff_view"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="11dp"
+        android:text="Select Sound"
+        app:layout_constraintBottom_toTopOf="@+id/chord_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toEndOf="@+id/staff_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
