@@ -162,10 +162,13 @@ public class MidiChordActivity extends AppCompatActivity {
 
         Button btnPlayChord = findViewById(R.id.btnPlayChord);
         btnPlayChord.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action = motionEvent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
+                    if(chordList.size() ==0)
+                        return false;
                     if(chordList.get(0) + 12<72){
                         for(int index = 0;index<chordList.size();index++)
                         {
