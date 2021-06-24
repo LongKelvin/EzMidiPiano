@@ -107,7 +107,7 @@ public class ChordView extends View {
         keyWidth = w / ((25*35)/61);
         keyHeight = h;
 
-        Log.i("GOTO ON SIZE CHANGE", " OK ");
+        //Log.i("GOTO ON SIZE CHANGE", " OK ");
 
         int blacks_key_length = blacks_key_list.length;
         int whites_key_length = whites_key_list.length;
@@ -154,8 +154,8 @@ public class ChordView extends View {
         // Init MIDI_KEY note number and index of key
         MIDI_KEY = new ArrayList<>(whites_key);
         MIDI_KEY.addAll(blacks_key);
-        Log.i("CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
-        Log.i("CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
+//        Log.i("CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
+//        Log.i("CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
     }
 
     @Override
@@ -182,8 +182,8 @@ public class ChordView extends View {
             canvas.drawRect(k.rect, k.isNoteOn ? blue : black);
         }
 
-        Log.i("D_CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
-        Log.i("D_CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
+//        Log.i("D_CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
+//        Log.i("D_CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
     }
 
     private void releaseKey(final Key k) {
@@ -262,7 +262,7 @@ public class ChordView extends View {
             MIDI_KEY = new ArrayList<>(whites_key);
             MIDI_KEY.addAll(blacks_key);
             invalidate();
-            Log.i("SET KEY ON", "INVALIDATE: " + noteNumber);
+            //Log.i("SET KEY ON", "INVALIDATE: " + noteNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
