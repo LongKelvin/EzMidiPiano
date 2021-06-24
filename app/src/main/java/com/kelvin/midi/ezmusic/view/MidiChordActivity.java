@@ -11,6 +11,9 @@ import com.kelvin.midi.ezmusic.customview.ChordView;
 import com.kelvin.midi.ezmusic.customview.PianoView;
 import com.kelvin.midi.ezmusic.customview.Staff;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MidiChordActivity extends AppCompatActivity {
     public ChordView chordView;
     public Staff staffView;
@@ -39,6 +42,22 @@ public class MidiChordActivity extends AppCompatActivity {
         Button btnClearChord = findViewById(R.id.btnDeleteKey);
         btnClearChord.setOnClickListener(v->{
             chordView.releaseChordKey();
+            staffView.releaseNote();
+        });
+
+        Button btnSetStaffNote = findViewById(R.id.btnSetStaffNote);
+        btnSetStaffNote.setOnClickListener(v->{
+            ArrayList<Integer> noteList = new ArrayList<>();
+//            for(int index = 0;index<3;index++){
+//                int random = new Random().nextInt(41) + 35;
+//                noteList.add(random);
+//            }
+            noteList.add(48);
+            noteList.add(52);
+            noteList.add(55);
+
+
+            staffView.setNoteToStaff(noteList);
         });
     }
 }

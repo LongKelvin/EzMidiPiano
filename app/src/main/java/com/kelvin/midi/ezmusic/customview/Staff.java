@@ -17,16 +17,15 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class Staff extends View
-{
+public class Staff extends View {
     private static final String TAG = "Staff";
 
     private static final int OCTAVE = 12;
 
     private static final int NATURAL = 0;
-    private static final int SHARP   = 1;
-    private static final int FLAT    = 2;
-    private  int MIDI_NOTE = 60;
+    private static final int SHARP = 1;
+    private static final int FLAT = 2;
+    private ArrayList<Integer> MIDI_NOTE = new ArrayList<>();
 
     private int width;
     private int height;
@@ -36,7 +35,7 @@ public class Staff extends View
 
 
     // Treble clef
-    private static final float tc[][]=
+    private static final float tc[][] =
             {
                     {-6, 16}, {-8, 13},
                     {-14, 19}, {-10, 35}, {2, 35},
@@ -67,22 +66,22 @@ public class Staff extends View
     // Bass clef
     private static final float bc[][] =
             {
-                    {-2.3f,3},
-                    {6,7}, {10.5f,12}, {10.5f,16},
-                    {10.5f,20.5f}, {8.5f,23.5f}, {6.2f,23.3f},
-                    {5.2f,23.5f}, {2,23.5f}, {0.5f,19.5f},
-                    {2,20}, {4,19.5f}, {4,18},
-                    {4,17}, {3.5f,16}, {2,16},
-                    {1,16}, {0,16.9f}, {0,18.5f},
-                    {0,21}, {2.1f,24}, {6,24},
-                    {10,24}, {13.5f,21.5f}, {13.5f,16.5f},
-                    {13.5f,11}, {7,5.5f}, {-2.0f,2.8f},
-                    {14.9f,21},
-                    {14.9f,22.5f}, {16.9f,22.5f}, {16.9f,21},
-                    {16.9f,19.5f}, {14.9f,19.5f}, {14.9f,21},
-                    {14.9f,15},
-                    {14.9f,16.5f}, {16.9f,16.5f}, {16.9f,15},
-                    {16.9f,13.5f}, {14.9f,13.5f}, {14.9f,15}
+                    {-2.3f, 3},
+                    {6, 7}, {10.5f, 12}, {10.5f, 16},
+                    {10.5f, 20.5f}, {8.5f, 23.5f}, {6.2f, 23.3f},
+                    {5.2f, 23.5f}, {2, 23.5f}, {0.5f, 19.5f},
+                    {2, 20}, {4, 19.5f}, {4, 18},
+                    {4, 17}, {3.5f, 16}, {2, 16},
+                    {1, 16}, {0, 16.9f}, {0, 18.5f},
+                    {0, 21}, {2.1f, 24}, {6, 24},
+                    {10, 24}, {13.5f, 21.5f}, {13.5f, 16.5f},
+                    {13.5f, 11}, {7, 5.5f}, {-2.0f, 2.8f},
+                    {14.9f, 21},
+                    {14.9f, 22.5f}, {16.9f, 22.5f}, {16.9f, 21},
+                    {16.9f, 19.5f}, {14.9f, 19.5f}, {14.9f, 21},
+                    {14.9f, 15},
+                    {14.9f, 16.5f}, {16.9f, 16.5f}, {16.9f, 15},
+                    {16.9f, 13.5f}, {14.9f, 13.5f}, {14.9f, 15}
             };
 
     // Note head
@@ -180,8 +179,7 @@ public class Staff extends View
     private int margin;
 
     // Constructor
-    public Staff(Context context, AttributeSet attrs)
-    {
+    public Staff(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
     }
@@ -194,8 +192,7 @@ public class Staff extends View
 
     // On size changed
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh)
-    {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
         height = h;
@@ -271,7 +268,6 @@ public class Staff extends View
         flat.lineTo(ft[38][0], ft[38][1]);
 
 
-
         // Scale treble clef
         tclef.computeBounds(bounds, false);
         matrix = new Matrix();
@@ -280,7 +276,7 @@ public class Staff extends View
         tclef.transform(matrix);
         float scale = (height / 2) / (bounds.top - bounds.bottom);
         matrix.setScale(-scale, scale);
-        matrix.postTranslate(margin + lineWidth / 2, - lineHeight * 3);
+        matrix.postTranslate(margin + lineWidth / 2, -lineHeight * 3);
         tclef.transform(matrix);
 
         // Scale bass clef
@@ -322,10 +318,9 @@ public class Staff extends View
 
     // On draw
     @Override
-    protected void onDraw(Canvas canvas)
-    {
+    protected void onDraw(Canvas canvas) {
 
-         //Set up paint
+        //Set up paint
         paint.setStrokeWidth(2);
         paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL);
@@ -334,8 +329,7 @@ public class Staff extends View
 
         // Draw staff
         canvas.translate(0, height / 2f);
-        for (int i = 1; i < 6; i++)
-        {
+        for (int i = 1; i < 6; i++) {
             canvas.drawLine(margin, i * lineHeight,
                     width - margin, i * lineHeight, paint);
             canvas.drawLine(margin, i * -lineHeight,
@@ -361,61 +355,86 @@ public class Staff extends View
         canvas.drawPath(bclef, paint);
 
         // Calculate transform for note
-        //float xBase = lineWidth * 14;
-        float xBase = lineWidth*14;
+        float xBase = lineWidth / 3;
         float yBase = lineHeight * 14;
-        int note = MIDI_NOTE;
-        int index = (note + OCTAVE) % OCTAVE;
-        int octave = note / OCTAVE;
+        canvas.translate(300, 0);
 
-        // Wrap top two octaves
-        if (octave >= 6)
-            octave -= 2;
+        for (int midiNote : MIDI_NOTE) {
 
-            // Wrap C0
-        else if (octave == 0 && index <= 1)
-            octave += 4;
+            int index = (midiNote + OCTAVE) % OCTAVE;
+            int octave = midiNote / OCTAVE;
 
-            // Wrap bottom two octaves
-        else if (octave <= 1 || octave == 2 && index <= 1)
-            octave += 2;
 
-        float dx = (octave * lineWidth * 3.5f) +
-                (offset[index] * (lineWidth / 2));
-        float dy = (octave * lineHeight * 3.5f) +
-                (offset[index] * (lineHeight / 2));
+            // Wrap top two octaves
+            if (octave >= 6)
+                octave -= 2;
 
-        // Translate canvas
-        //canvas.translate((width / 2) - xBase + dx, yBase - dy);
-        canvas.translate((width / 2) - xBase + dx, yBase - dy);
+                // Wrap C0
+            else if (octave == 0 && index <= 1)
+                octave += 4;
 
-        // Draw note and accidental
-        canvas.drawPath(hnote, paint);
+                // Wrap bottom two octaves
+            else if (octave <= 1 || octave == 2 && index <= 1)
+                octave += 2;
 
-        switch (sharps[index])
-        {
-            // Natural
-            case NATURAL:
-                // Do nothing
-                break;
 
-            // Sharp
-            case SHARP:
-                canvas.drawPath(sharp, paint);
-                break;
+//            float dx = (octave * lineWidth * 3.5f) +
+//                    (offset[index] * (lineWidth / 2));
 
-            // Flat
-            case FLAT:
-                canvas.drawPath(flat, paint);
-                break;
+
+            float dy = (octave * lineHeight * 3.5f) +
+                    (offset[index] * (lineHeight / 2));
+
+            // Translate canvas
+            //canvas.translate((width / 2) - xBase + dx, yBase - dy);
+            //canvas.translate((width / 6) - xBase + dx, yBase - dy);
+            // canvas.translate((300) -xBase+ dx, yBase - dy);
+
+            /*
+            The temp_dy is create for holding the temp value of dy
+            because when canvas transform to y_base - dy THEN the next time it will start at y_base - dy position
+            the thing we should do here is update the dy to the ordinal value (the default position before the loop is start)
+            * */
+
+            float temp_dy = yBase - dy;
+            canvas.translate(0, yBase - dy);
+            canvas.drawPath(hnote, paint);
+            canvas.translate(0, -temp_dy);
+
+
+            switch (sharps[index]) {
+                // Natural
+                case NATURAL:
+                    // Do nothing
+                    break;
+
+                // Sharp
+                case SHARP:
+                    canvas.drawPath(sharp, paint);
+                    break;
+
+                // Flat
+                case FLAT:
+                    canvas.drawPath(flat, paint);
+                    break;
+            }
         }
     }
 
-    public void setNoteToStaff(int noteNumber) {
-        MIDI_NOTE = noteNumber;
+    public void setNoteToStaff(ArrayList<Integer> midiNote) {
+        MIDI_NOTE.clear();
+        MIDI_NOTE.addAll(midiNote);
+        invalidate();
+
     }
 
-    public void setMultiNoteToStaff(int[] noteArr){
+    public void setMultiNoteToStaff(int[] noteArr) {
 
+    }
+
+    public void releaseNote() {
+        MIDI_NOTE.clear();
+        invalidate();
+        requestLayout();
     }
 }
