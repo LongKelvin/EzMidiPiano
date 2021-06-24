@@ -300,7 +300,7 @@ public class Staff extends View {
         matrix.setTranslate(-(bounds.left + bounds.right) / 2,
                 -(bounds.top + bounds.bottom) / 2);
         sharp.transform(matrix);
-        scale = (lineHeight * 3) / (bounds.top - bounds.bottom);
+        scale = (lineHeight * 2) / (bounds.top - bounds.bottom);
         matrix.setScale(-scale, scale);
         matrix.postTranslate(-lineWidth / 2, 0);
         sharp.transform(matrix);
@@ -310,7 +310,7 @@ public class Staff extends View {
         matrix.setTranslate(-(bounds.left + bounds.right) / 2,
                 -(bounds.top + bounds.bottom) / 2);
         flat.transform(matrix);
-        scale = (lineHeight * 3) / (bounds.top - bounds.bottom);
+        scale = (lineHeight * 2) / (bounds.top - bounds.bottom);
         matrix.setScale(-scale, scale);
         matrix.postTranslate(-lineWidth / 2, -lineHeight / 2);
         flat.transform(matrix);
@@ -319,7 +319,7 @@ public class Staff extends View {
     // On draw
     @Override
     protected void onDraw(Canvas canvas) {
-
+        float DEFAULT_POSITION = 300;
         //Set up paint
         paint.setStrokeWidth(2);
         paint.setColor(Color.BLACK);
@@ -337,13 +337,18 @@ public class Staff extends View {
         }
 
         // Draw leger lines
-        canvas.drawLine((width / 2) - (lineWidth * 0.5f), 0,
-                (width / 2) + (lineWidth * 0.5f), 0, paint);
+//        canvas.drawLine((width / 2) - (lineWidth * 0.5f), 0,
+//                (width / 2) + (lineWidth * 0.5f), 0, paint);
+
+        canvas.drawLine((DEFAULT_POSITION-50), 0,
+                (DEFAULT_POSITION+10) + (lineWidth * 0.5f), 0, paint);
 
         canvas.drawLine((width / 2) + (lineWidth * 5.5f),
                 -lineHeight * 6,
                 (width / 2) + (lineWidth * 6.5f),
                 -lineHeight * 6, paint);
+
+
 
         canvas.drawLine((width / 2) - (lineWidth * 5.5f),
                 lineHeight * 6,
@@ -357,7 +362,9 @@ public class Staff extends View {
         // Calculate transform for note
         float xBase = lineWidth / 3;
         float yBase = lineHeight * 14;
-        canvas.translate(300, 0);
+
+        //default position of chord
+        canvas.translate(DEFAULT_POSITION, 0);
 
         for (int midiNote : MIDI_NOTE) {
 
@@ -399,7 +406,7 @@ public class Staff extends View {
             float temp_dy = yBase - dy;
             canvas.translate(0, yBase - dy);
             canvas.drawPath(hnote, paint);
-            canvas.translate(0, -temp_dy);
+
 
 
             switch (sharps[index]) {
@@ -418,6 +425,8 @@ public class Staff extends View {
                     canvas.drawPath(flat, paint);
                     break;
             }
+            //reset position
+            canvas.translate(0, -temp_dy);
         }
     }
 

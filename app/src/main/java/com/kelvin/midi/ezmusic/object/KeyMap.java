@@ -28,6 +28,8 @@ public class KeyMap {
 
 
     public String GenerateNoteName(int note) {
+        if(note>47)
+            note -=12;
         String noteName = "";
         switch (note) {
             case 36:

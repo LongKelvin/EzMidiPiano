@@ -221,10 +221,10 @@ public class ChordView extends View {
     }
 
     public Pair<Integer, Integer> getKeyByNoteNumber(int noteNumber) {
-        Log.i("G_CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
-        Log.i("G_CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
+//        Log.i("G_CHORDVIEW: ","WHITE_KEYS LENTH "+ whites_key.size());
+//        Log.i("G_CHORDVIEW: ","BLACK_KEYS LENTH "+ blacks_key.size());
         Pair<Integer, Integer> temp;
-        Log.i("CHORDVIEW_ WHITEK_L: ", String.valueOf(whites_key.size()));
+//        Log.i("CHORDVIEW_ WHITEK_L: ", String.valueOf(whites_key.size()));
         int index = getKeyIndexByNoteNumber_(noteNumber, whites_key);
         temp = new Pair<>(index, 0);
         if (index == -1) {
