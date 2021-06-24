@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="false">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:text="@string/recording_dialog"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="@color/colorBackground" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="@string/TimeSignature"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorBackground" />
+
+            <EditText
+                android:id="@+id/time_signature"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
+                android:background="@drawable/edittext_background"
+                android:spinnerMode="dropdown"
+                android:autofillHints="@string/EnterTimeSignature"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textNoSuggestions"
+                android:hint="@string/EnterTimeSignature"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="true">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="@string/Tempo"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorBackground" />
+
+
+            <EditText
+                android:id="@+id/tempo_spinner"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edittext_background"
+                android:dropDownSelector="@color/colorAccent"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/colorPrimaryDark"
+                android:autofillHints="120"
+                android:inputType="number"
+                android:hint="@string/EnterTempo"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="@string/SongName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorBackground" />
+
+            <EditText
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/song_name"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/edittext_background"
+                android:spinnerMode="dropdown"
+                android:autofillHints="@string/EnterSongName"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textNoSuggestions"
+                android:hint="@string/EnterSongName"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_marginStart="70dp"
+                android:id="@+id/button_cancel"
+                android:text="@string/cancel"
+                android:background="@drawable/custom_button"
+                android:layout_width="100dp"
+                android:layout_height="40dp"/>
+
+            <Button
+                android:layout_margin="20dp"
+                android:id="@+id/button_ok"
+                android:text="@string/OK"
+                android:background="@drawable/custom_button"
+                android:layout_width="100dp"
+                android:layout_height="40dp"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+
