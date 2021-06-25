@@ -1,30 +1,32 @@
 package com.kelvin.midi.ezmusic.view;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelvin.midi.ezmusic.R;
 import com.kelvin.midi.ezmusic.customview.ChordView;
-import com.kelvin.midi.ezmusic.customview.Staff;
+import com.kelvin.midi.ezmusic.customview.StaffView;
 import com.kelvin.midi.ezmusic.object.ChordType;
 import com.kelvin.midi.ezmusic.object.KeyMap;
+import com.kelvin.midi.ezmusic.object.Note;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,18 +35,28 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
-import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 import jp.kshoji.javax.sound.midi.Receiver;
 import jp.kshoji.javax.sound.midi.ShortMessage;
 
 public class MidiChordActivity extends AppCompatActivity {
     public ChordView chordView;
-    public Staff staffView;
+    public StaffView staffView;
     public ArrayList<Integer> currentChordList;
+
+    //Button array
+    ArrayList<Button> ChordArrayButton;
+    ArrayList<Button> RootNoteArrayButton;
 
     //ChordName
     TextView txt_chordName;
+
+    //ChordList
+    ArrayList<ChordType> ChordNoteMidi;
+    List<Integer> chordList;
+    public int RootNote = 60;
+
+    ArrayList<Note> ListOfRootNote;
 
     //Chord Detect
     final Handler chordDetectEventHandler = new Handler(new Handler.Callback() {
@@ -63,6 +75,10 @@ public class MidiChordActivity extends AppCompatActivity {
     private final ShortMessage msg = new ShortMessage();
 
     final private String DEFAULT_INSTRUMENT = "GrandPiano";
+
+    // Chord Dialog
+    AlertDialog.Builder chord_dialog_builder;
+    AlertDialog chord_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +103,10 @@ public class MidiChordActivity extends AppCompatActivity {
         chordView.setReceiverForSynthesizer(receiver);
 
         //Init StaffView
-        staffView = new Staff(this);
+        staffView = new StaffView(this);
         staffView = findViewById(R.id.staff_view);
         staffView.setVisibility(View.VISIBLE);
+        staffView.enableChordMode(true);
 
         //Init ChordName TextView
         txt_chordName = findViewById(R.id.txt_chordName);
@@ -97,7 +114,10 @@ public class MidiChordActivity extends AppCompatActivity {
 
         //Init chord list
         currentChordList = new ArrayList<Integer>();
-        List<Integer> chordList ;
+
+        //Init RootNote List
+        Note rootNote = new Note();
+        ListOfRootNote = rootNote.createRootNoteForChord();
 
 
         Button btnSetKey = findViewById(R.id.btnSetKey);
@@ -115,20 +135,10 @@ public class MidiChordActivity extends AppCompatActivity {
         });
 
 
-        int rootKey = 57; //key C
-        ArrayList<ChordType> ChordNoteMidi = new ArrayList<>();
+
+        ChordNoteMidi = new ArrayList<>();
         ChordType chordType = new ChordType();
-        ArrayList<ChordType> chordLoop = chordType.GenerateBasicChord();
-        for (ChordType chord : chordLoop
-        ) {
-            ChordType temp = new ChordType();
-            for (int chordNote : chord.chord_note
-            ) {
-                temp.AddChordNote(rootKey + chordNote);
-                temp.name = chord.name;
-            }
-            ChordNoteMidi.add(temp);
-        }
+        ChordNoteMidi = chordType.GenerateBasicChord();
 
         chordList = new ArrayList<>();
         AtomicInteger selected = new AtomicInteger();
@@ -141,7 +151,7 @@ public class MidiChordActivity extends AppCompatActivity {
             chordList.clear();
             for (int note : ChordNoteMidi.get(selected.get()).chord_note
             ) {
-                chordList.add(note);
+                chordList.add(RootNote + note);
             }
 
             staffView.setNoteToStaff((ArrayList<Integer>) chordList);
@@ -152,13 +162,18 @@ public class MidiChordActivity extends AppCompatActivity {
                 chordView.setKey(note, true);
             }
             KeyMap k = new KeyMap();
-            String root = k.GenerateNoteName(rootKey);
+            String root = k.GenerateNoteName(RootNote);
             String extension = ChordNoteMidi.get(selected.get()).name;
 
             txt_chordName.setText(root + " " + extension);
 
             selected.set(selected.get() + 1);
         });
+
+
+        //Init Chord Dialog
+        showChordTable(ChordNoteMidi, ListOfRootNote);
+        chord_dialog.hide();
 
         Button btnPlayChord = findViewById(R.id.btnPlayChord);
         btnPlayChord.setOnTouchListener(new View.OnTouchListener() {
@@ -167,17 +182,16 @@ public class MidiChordActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action = motionEvent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
-                    if(chordList.size() ==0)
+                    if (chordList.size() == 0)
                         return false;
-                    if(chordList.get(0) + 12<72){
-                        for(int index = 0;index<chordList.size();index++)
-                        {
-                            chordList.set(index, chordList.get(index)+ 12) ;
+                    if (chordList.get(0) + 12 < 72) {
+                        for (int index = 0; index < chordList.size(); index++) {
+                            chordList.set(index, chordList.get(index) + 12);
                         }
                     }
-                   chordView.StartPlayingChord((ArrayList<Integer>) chordList);
+                    chordView.StartPlayingChord((ArrayList<Integer>) chordList);
                 } else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-                   chordView.StopPlayingChord((ArrayList<Integer>) chordList);
+                    chordView.StopPlayingChord((ArrayList<Integer>) chordList);
                 }
                 return true;
             }
@@ -197,6 +211,11 @@ public class MidiChordActivity extends AppCompatActivity {
                 // selectedSound.startAnimation(animCycle);
                 startActivityForResult(InstrumentIntent, 1);
             }
+        });
+
+        Button btnSelectChord = findViewById(R.id.btnSelectChord);
+        btnSelectChord.setOnClickListener(v -> {
+            chord_dialog.show();
         });
     }
 
@@ -247,5 +266,196 @@ public class MidiChordActivity extends AppCompatActivity {
 
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void showChordTable(ArrayList<ChordType> listChordData, ArrayList<Note> listRootNote) {
+        // create an alert builder
+        chord_dialog_builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.midi_chord_dialog, null);
+        chord_dialog_builder.setView(customLayout);
+        // add a button
+
+        Button button_ok = customLayout.findViewById(R.id.button_ok);
+        Button button_cancel = customLayout.findViewById(R.id.button_cancel);
+        TableLayout table_chord = customLayout.findViewById(R.id.table_chord);
+        TableLayout table_rootNote = customLayout.findViewById(R.id.table_rootNote);
+
+        //create selected val
+        AtomicInteger selectedChordIndex = new AtomicInteger();
+        AtomicInteger selectedRootNoteIndex = new AtomicInteger();
+        //Init the button array
+        ChordArrayButton = new ArrayList<>();
+        RootNoteArrayButton = new ArrayList<>();
+        // temp val for checking button is clicked or not
+        final int[] pressed_btn = {0};
+        final int[] pressed_btn_rootNote = {0};
+
+        //Init RootNote
+        for (int index = 0; index < listRootNote.size(); index++) {
+            TableRow tableRow = new TableRow(this);
+            TableRow.LayoutParams param = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
+            tableRow.setLayoutParams(param);
+            tableRow.setGravity(Gravity.CENTER_VERTICAL);
+
+            for (int horizon_btn = 0; horizon_btn < 5 && index < listRootNote.size(); horizon_btn++) {
+                Button rootNote = new Button(this);
+                rootNote.setId(index);
+                rootNote.setText(listRootNote.get(index).getNoteName());
+                rootNote.setTag(index);
+                rootNote.setBackgroundColor(Color.WHITE);
+                rootNote.setVisibility(View.VISIBLE);
+                rootNote.setAllCaps(false);
+
+                RootNoteArrayButton.add(rootNote);
+                rootNote.setOnClickListener(v -> {
+                    if (pressed_btn_rootNote[0] != 0) {
+                        ResetBackgroundColor(selectedRootNoteIndex.get(), RootNoteArrayButton);
+                    }
+
+                    String btnIndexTag = rootNote.getTag().toString();
+                    selectedRootNoteIndex.set(Integer.parseInt(btnIndexTag));
+                    rootNote.setBackgroundColor(Color.GREEN);
+                    pressed_btn_rootNote[0] = 1;
+                });
+
+                TableRow.LayoutParams par = new TableRow.LayoutParams(horizon_btn);
+                rootNote.setLayoutParams(par);
+                tableRow.addView(rootNote);
+                index++;
+            }
+
+            table_rootNote.addView(tableRow);
+        }
+
+
+        //Init Chord Extension
+        for (int index = 0; index < listChordData.size(); index++) {
+            TableRow tableRow = new TableRow(this);
+            TableRow.LayoutParams param = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
+            tableRow.setLayoutParams(param);
+            tableRow.setGravity(Gravity.CENTER_VERTICAL);
+
+            for (int horizon_btn = 0; horizon_btn < 5 && index < listChordData.size(); horizon_btn++) {
+                Button btnChord = new Button(this);
+                btnChord.setId(index);
+                btnChord.setText(listChordData.get(index).name);
+                btnChord.setTag(index);
+                btnChord.setBackgroundColor(Color.WHITE);
+                btnChord.setVisibility(View.VISIBLE);
+                btnChord.setAllCaps(false);
+
+                ChordArrayButton.add(btnChord);
+
+                btnChord.setOnClickListener(v -> {
+                    if (pressed_btn[0] != 0) {
+                        ResetBackgroundColor(selectedChordIndex.get(), ChordArrayButton);
+                    }
+
+                    System.out.println("Button " + btnChord.getTag().toString());
+                    String btnIndexTag = btnChord.getTag().toString();
+                    selectedChordIndex.set(Integer.parseInt(btnIndexTag));
+                    btnChord.setBackgroundColor(Color.GREEN);
+                    pressed_btn[0] = 1;
+                });
+
+                TableRow.LayoutParams par = new TableRow.LayoutParams(horizon_btn);
+                btnChord.setLayoutParams(par);
+                tableRow.addView(btnChord);
+                index++;
+            }
+
+            table_chord.addView(tableRow);
+        }
+
+
+        // create and show the recording dialog
+        chord_dialog = chord_dialog_builder.create();
+        chord_dialog.show();
+        button_ok.setOnClickListener(v -> {
+            //SOMETHING HERE
+            setChord(selectedRootNoteIndex.get(), selectedChordIndex.get());
+            chord_dialog.hide();
+        });
+
+        button_cancel.setOnClickListener(v -> {
+            chord_dialog.hide();
+
+        });
+
+    }
+
+    public void setChord(int rootNoteIndex, int chord_extensionIndex) {
+        int rootNote = ListOfRootNote.get(rootNoteIndex).getNoteNumber();
+        ChordType chord = ChordNoteMidi.get(chord_extensionIndex);
+        if (chord == null)
+            return;
+        //Check If RootNote is too high
+        //System.out.println("LASTNOTE: " + chord.chord_note.get(2));
+        if ((chord.chord_note.get(chord.chord_note.size() - 1) + rootNote) + 4 >= 72) {
+            rootNote -= 12;
+        }
+
+        RootNote = rootNote;
+        chordList.clear();
+        chordView.releaseChordKey();
+
+        for (int note : chord.chord_note
+        ) {
+            chordView.setKey(rootNote + note, true);
+            chordList.add(rootNote + note);
+        }
+
+        staffView.setNoteToStaff((ArrayList<Integer>) chordList);
+
+        String root = ListOfRootNote.get(rootNoteIndex).getNoteName();
+        System.out.println("ROOT NAME " + root);
+        System.out.println("ROOT NOTE " + rootNote);
+        String extension = chord.name;
+
+        txt_chordName.setText(root + " " + extension);
+    }
+
+    public void ResetBackgroundColor(int buttonId, ArrayList<Button> buttons) {
+        for (int i = 0; i < buttons.size(); i++) {
+            if (buttons.get(i).getId() == buttonId) {
+                buttons.get(i).setBackgroundColor(Color.WHITE);
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (synth != null) {
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (synth != null) {
+            synth.close();
+        }
     }
 }

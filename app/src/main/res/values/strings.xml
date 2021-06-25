@@ -41,6 +41,9 @@
     <string name="StartMidiSheet">Open Midi Sheet Page</string>
     <string name="start_metronome">Start</string>
     <string name="stop_metronome">Stop</string>
+    <string name="Select_Chord">Select Chord</string>
+    <string name="Chord_Extension">Chord Extension</string>
+    <string name="Chord_Root">Chord_Root</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

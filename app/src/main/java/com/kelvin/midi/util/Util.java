@@ -1,5 +1,6 @@
 package com.kelvin.midi.util;
 
+import android.graphics.Color;
 import android.util.Log;
 
 public class Util {
@@ -15,4 +16,6 @@ public class Util {
     public static void print_(String info, String msg) {
         Log.e(info, msg);
     }
+
+
 }

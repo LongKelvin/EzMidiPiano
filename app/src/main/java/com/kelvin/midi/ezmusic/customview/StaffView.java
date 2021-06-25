@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class Staff extends View {
+public class StaffView extends View {
     private static final String TAG = "Staff";
 
     private static final int OCTAVE = 12;
@@ -32,6 +32,9 @@ public class Staff extends View {
 
 
     private Paint paint;
+
+    //Staff Mode
+    public boolean isChordMode = true;
 
 
     // Treble clef
@@ -179,13 +182,13 @@ public class Staff extends View {
     private int margin;
 
     // Constructor
-    public Staff(Context context, AttributeSet attrs) {
+    public StaffView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
     }
 
 
-    public Staff(Context context) {
+    public StaffView(Context context) {
         super(context);
         paint = new Paint();
     }
@@ -337,17 +340,20 @@ public class Staff extends View {
         }
 
         // Draw leger lines
-//        canvas.drawLine((width / 2) - (lineWidth * 0.5f), 0,
-//                (width / 2) + (lineWidth * 0.5f), 0, paint);
-
-        canvas.drawLine((DEFAULT_POSITION-50), 0,
-                (DEFAULT_POSITION+10) + (lineWidth * 0.5f), 0, paint);
+        if(isChordMode)
+        {
+            canvas.drawLine((DEFAULT_POSITION - 50), 0,
+                    (DEFAULT_POSITION + 10) + (lineWidth * 0.5f), 0, paint);
+        }
+        else {
+            canvas.drawLine((width / 2) - (lineWidth * 0.5f), 0,
+                    (width / 2) + (lineWidth * 0.5f), 0, paint);
+        }
 
         canvas.drawLine((width / 2) + (lineWidth * 5.5f),
                 -lineHeight * 6,
                 (width / 2) + (lineWidth * 6.5f),
                 -lineHeight * 6, paint);
-
 
 
         canvas.drawLine((width / 2) - (lineWidth * 5.5f),
@@ -360,11 +366,12 @@ public class Staff extends View {
         canvas.drawPath(bclef, paint);
 
         // Calculate transform for note
-        float xBase = lineWidth / 3;
+        float xBase = lineWidth * 14;
         float yBase = lineHeight * 14;
 
         //default position of chord
-        canvas.translate(DEFAULT_POSITION, 0);
+        if(isChordMode)
+            canvas.translate(DEFAULT_POSITION, 0);
 
         for (int midiNote : MIDI_NOTE) {
 
@@ -385,48 +392,72 @@ public class Staff extends View {
                 octave += 2;
 
 
-//            float dx = (octave * lineWidth * 3.5f) +
-//                    (offset[index] * (lineWidth / 2));
+            if (isChordMode) {
 
-
-            float dy = (octave * lineHeight * 3.5f) +
-                    (offset[index] * (lineHeight / 2));
-
-            // Translate canvas
-            //canvas.translate((width / 2) - xBase + dx, yBase - dy);
-            //canvas.translate((width / 6) - xBase + dx, yBase - dy);
-            // canvas.translate((300) -xBase+ dx, yBase - dy);
-
-            /*
+                  /*
             The temp_dy is create for holding the temp value of dy
             because when canvas transform to y_base - dy THEN the next time it will start at y_base - dy position
             the thing we should do here is update the dy to the ordinal value (the default position before the loop is start)
             * */
 
-            float temp_dy = yBase - dy;
-            canvas.translate(0, yBase - dy);
-            canvas.drawPath(hnote, paint);
+                float dy = (octave * lineHeight * 3.5f) +
+                        (offset[index] * (lineHeight / 2));
 
 
+                float temp_dy = yBase - dy;
+                canvas.translate(0, yBase - dy);
+                canvas.drawPath(hnote, paint);
 
-            switch (sharps[index]) {
-                // Natural
-                case NATURAL:
-                    // Do nothing
-                    break;
 
-                // Sharp
-                case SHARP:
-                    canvas.drawPath(sharp, paint);
-                    break;
+                switch (sharps[index]) {
+                    // Natural
+                    case NATURAL:
+                        // Do nothing
+                        break;
 
-                // Flat
-                case FLAT:
-                    canvas.drawPath(flat, paint);
-                    break;
+                    // Sharp
+                    case SHARP:
+                        canvas.drawPath(sharp, paint);
+                        break;
+
+                    // Flat
+                    case FLAT:
+                        canvas.drawPath(flat, paint);
+                        break;
+                }
+                //reset position
+                canvas.translate(0, -temp_dy);
+            } else {
+
+                float dx = (octave * lineWidth * 3.5f) +
+                        (offset[index] * (lineWidth / 2));
+                float dy = (octave * lineHeight * 3.5f) +
+                        (offset[index] * (lineHeight / 2));
+
+                // Translate canvas
+
+                canvas.translate((width / 2) - xBase + dx, yBase - dy);
+                canvas.drawPath(hnote,paint);
+
+                switch (sharps[index]) {
+                    // Natural
+                    case NATURAL:
+                        // Do nothing
+                        break;
+
+                    // Sharp
+                    case SHARP:
+                        canvas.drawPath(sharp, paint);
+                        break;
+
+                    // Flat
+                    case FLAT:
+                        canvas.drawPath(flat, paint);
+                        break;
+                }
+
             }
-            //reset position
-            canvas.translate(0, -temp_dy);
+
         }
     }
 
@@ -444,6 +475,10 @@ public class Staff extends View {
     public void releaseNote() {
         MIDI_NOTE.clear();
         invalidate();
-        requestLayout();
+        //requestLayout();
+    }
+
+    public void enableChordMode(boolean val) {
+        this.isChordMode = val;
     }
 }

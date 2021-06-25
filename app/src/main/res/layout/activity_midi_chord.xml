@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.MidiChordActivity">
 
-    <com.kelvin.midi.ezmusic.customview.Staff
+    <com.kelvin.midi.ezmusic.customview.StaffView
         android:id="@+id/staff_view"
         android:layout_width="551dp"
         android:layout_height="160dp"
@@ -110,6 +110,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toEndOf="@+id/staff_view" />
+
+    <Button
+        android:id="@+id/btnSelectChord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:text="Chord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chord_view"
+        app:layout_constraintTop_toBottomOf="@+id/staff_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

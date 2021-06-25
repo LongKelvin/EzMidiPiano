@@ -239,12 +239,6 @@ public class ChordView extends View {
 
 
     public void setKey(int noteNumber, boolean isNoteOn) {
-//        if(noteNumber<48){
-//            noteNumber += 12;
-//        }
-//        if(noteNumber>72)
-//            noteNumber -=12;
-
         Pair<Integer, Integer> indexOfKey = getKeyByNoteNumber(noteNumber);
 
         if (indexOfKey.first != -1) {
