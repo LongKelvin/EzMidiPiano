@@ -44,6 +44,7 @@
     <string name="Select_Chord">Select Chord</string>
     <string name="Chord_Extension">Chord Extension</string>
     <string name="Chord_Root">Chord_Root</string>
+    <string name="StaffNote">Musical Note</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

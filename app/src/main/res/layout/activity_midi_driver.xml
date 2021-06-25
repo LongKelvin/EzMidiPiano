@@ -145,7 +145,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:layerType="software"
                         android:requiresFadingEdge="horizontal|vertical"
-                        android:text="@string/MidiEvent"
+                        android:text="@string/StaffNote"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/colorBackground"
                         android:textStyle="normal|bold|italic"
@@ -161,7 +161,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:layerType="software"
                         android:requiresFadingEdge="horizontal|vertical"
-                        android:text="All Event"
+                        android:text="PlayingNote"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/color_yellow_highlight"
                         android:textStyle="normal|bold|italic"
@@ -178,6 +178,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:background="@color/colorBackground"
                         android:orientation="vertical">
 
                         <TextView
@@ -186,12 +187,24 @@
 
                         <ListView
                             android:id="@+id/midiInputEventListView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:stackFromBottom="true"
                             android:transcriptMode="alwaysScroll">
 
                         </ListView>
+
+                        <com.kelvin.midi.ezmusic.customview.StaffView
+                            android:id="@+id/staff_view"
+                            android:layout_width="250dp"
+                            android:layout_height="160dp"
+                            android:layout_marginBottom="124dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.016"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+
                     </LinearLayout>
 
 

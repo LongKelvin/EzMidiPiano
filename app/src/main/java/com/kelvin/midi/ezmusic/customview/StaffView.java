@@ -479,6 +479,13 @@ public class StaffView extends View {
 
     }
 
+    public void setNoteToStaff(int midiNote) {
+        MIDI_NOTE.clear();
+        MIDI_NOTE.add(midiNote-12);
+        invalidate();
+
+    }
+
     public void setMultiNoteToStaff(int[] noteArr) {
 
     }

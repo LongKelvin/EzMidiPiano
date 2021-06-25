@@ -37,9 +37,12 @@ import androidx.appcompat.app.AlertDialog;
 import com.kelvin.midi.ezmusic.R;
 import com.kelvin.midi.ezmusic.customview.PianoLargeView;
 import com.kelvin.midi.ezmusic.customview.PianoView;
+import com.kelvin.midi.ezmusic.customview.StaffView;
 import com.kelvin.midi.ezmusic.object.ChordType;
 import com.kelvin.midi.ezmusic.object.KeyMap;
 import com.kelvin.midi.ezmusic.object.MidiFileCreator;
+import com.kelvin.midi.midilib.event.NoteOff;
+import com.kelvin.midi.midilib.event.NoteOn;
 import com.midisheetmusic.ChooseSongActivity;
 
 import java.io.File;
@@ -97,6 +100,9 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     //custom piano view
     public PianoView piano;
     private int countTimeDisplay = 0;
+
+    //Staff View
+    public StaffView staffView;
 
     //Chord detect
     public ArrayList<Integer> chord_input_note = new ArrayList<>();
@@ -218,6 +224,12 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         txtChordDetect = findViewById(R.id.chordSymbol);
         txtChordDetect.setText("");
 
+        //Init StaffView
+        staffView = new StaffView(this);
+        staffView = findViewById(R.id.staff_view);
+        staffView.setVisibility(View.VISIBLE);
+        staffView.enableChordMode(false);
+
 
         //Init PianoView
         piano = new PianoView(this);
@@ -232,6 +244,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                 Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
                 print(String.valueOf(chord_input_note));
                 DetectChordFromMidiNote();
+                staffView.setNoteToStaff(noteOn);
             }
 
             @Override
@@ -241,6 +254,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                 print("remove note " + noteOff);
                 Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
                 print(String.valueOf(chord_input_note));
+                staffView.releaseNote();
             }
         });
 
@@ -324,18 +338,19 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                         msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
                     }
 
-                    // msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
+                    //msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
                     receiver.send(msg, -1);
 
                     // make key on in PianoView
-                    //piano.setKey(note, false);
-                    //removeNoteOnScreen(note);
+                    piano.setKey(note, false);
+                    removeNoteOnScreen(note);
                     //recording
-//                    if (isRecording) {
-//                        ticks += 120;
-//                        NoteOff noteOff = new NoteOff(ticks, channel, note, velocity);
-//                        newMidiFile.insertEvent(noteOff);
-//                    }
+                    if (isRecording) {
+                        ticks += 120;
+                        NoteOff noteOff = new NoteOff(ticks, channel, note, velocity);
+                        newMidiFile.insertEvent(noteOff);
+                    }
+                    staffView.releaseNote();
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
                 }
@@ -352,18 +367,18 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                     receiver.send(msg, -1);
 
                     // make key on in PianoView
-//                    piano.setKey(note, true);
-//
-//                    //recording
-//                    if (isRecording) {
-//                        if (ticks == -1) {
-//                            ticks = 0;
-//                        } else {
-//                            ticks += 240;
-//                        }
-//                        NoteOn noteOn = new NoteOn(ticks, channel, note, velocity);
-//                        newMidiFile.insertEvent(noteOn);
-                    //                   }
+                    piano.setKey(note, true);
+
+                    //recording
+                    if (isRecording) {
+                        if (ticks == -1) {
+                            ticks = 0;
+                        } else {
+                            ticks += 240;
+                        }
+                        NoteOn noteOn = new NoteOn(ticks, channel, note, velocity);
+                        newMidiFile.insertEvent(noteOn);
+                    }
 
                     try {
                         chord_input_note.add(note);
@@ -374,6 +389,8 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                     if (chord_input_note.size() >= 3)
                         DetectChordFromMidiNote();
                     // activeNoteToScreen(note);
+
+                    staffView.setNoteToStaff(note);
 
                 } catch (InvalidMidiDataException e) {
                     e.printStackTrace();
