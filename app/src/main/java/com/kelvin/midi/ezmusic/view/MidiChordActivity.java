@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -83,6 +85,10 @@ public class MidiChordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //request full screen for login activity
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_midi_chord);
 
         //Setup Synthesizers SF2_Sound
@@ -119,22 +125,12 @@ public class MidiChordActivity extends AppCompatActivity {
         Note rootNote = new Note();
         ListOfRootNote = rootNote.createRootNoteForChord();
 
-
-        Button btnSetKey = findViewById(R.id.btnSetKey);
-        btnSetKey.setOnClickListener(v -> {
-            chordView.setKey(53, true);
-            chordView.setKey(57, true);
-            chordView.setKey(60, true);
-        });
-
-        Button btnClearChord = findViewById(R.id.btnDeleteKey);
-        btnClearChord.setOnClickListener(v -> {
+        Button btnReset = findViewById(R.id.btnReset);
+        btnReset.setOnClickListener(v -> {
             chordView.releaseChordKey();
             staffView.releaseNote();
             txt_chordName.setText("");
         });
-
-
 
         ChordNoteMidi = new ArrayList<>();
         ChordType chordType = new ChordType();
@@ -142,8 +138,8 @@ public class MidiChordActivity extends AppCompatActivity {
 
         chordList = new ArrayList<>();
         AtomicInteger selected = new AtomicInteger();
-        Button btnSetStaffNote = findViewById(R.id.btnSetStaffNote);
-        btnSetStaffNote.setOnClickListener(v -> {
+        Button btnNextChord = findViewById(R.id.btnNextChord);
+        btnNextChord.setOnClickListener(v -> {
             if (selected.get() >= ChordNoteMidi.size()) {
                 selected.set(0);
             }
@@ -170,7 +166,41 @@ public class MidiChordActivity extends AppCompatActivity {
             selected.set(selected.get() + 1);
         });
 
+        Button btnPreviousChord = findViewById(R.id.btnSPreviousChord);
+        btnPreviousChord.setOnClickListener(v -> {
+            if (selected.get() <0) {
+                selected.set(ChordNoteMidi.size()-1);
+            }
 
+            chordList.clear();
+            for (int note : ChordNoteMidi.get(selected.get()).chord_note
+            ) {
+                chordList.add(RootNote + note);
+            }
+
+            staffView.setNoteToStaff((ArrayList<Integer>) chordList);
+
+            chordView.releaseChordKey();
+            for (int note : chordList
+            ) {
+                chordView.setKey(note, true);
+            }
+            KeyMap k = new KeyMap();
+            String root = k.GenerateNoteName(RootNote);
+            String extension = ChordNoteMidi.get(selected.get()).name;
+
+            txt_chordName.setText(root + " " + extension);
+
+            if(selected.get()<=0){
+                selected.set(ChordNoteMidi.size()-1);
+                Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
+            }
+            else{
+                selected.set(selected.get() - 1);
+                Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
+            }
+
+        });
         //Init Chord Dialog
         showChordTable(ChordNoteMidi, ListOfRootNote);
         chord_dialog.hide();

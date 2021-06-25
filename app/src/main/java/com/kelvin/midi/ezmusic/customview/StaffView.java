@@ -185,12 +185,14 @@ public class StaffView extends View {
     public StaffView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
+        this.isChordMode = isChordMode;
     }
 
 
     public StaffView(Context context) {
         super(context);
         paint = new Paint();
+
     }
 
     // On size changed
@@ -283,14 +285,18 @@ public class StaffView extends View {
         tclef.transform(matrix);
 
         // Scale bass clef
-        bclef.computeBounds(bounds, false);
-        matrix.setTranslate(-(bounds.left + bounds.right) / 2,
-                -(bounds.top + bounds.bottom) / 2);
-        bclef.transform(matrix);
-        scale = (lineHeight * 4) / (bounds.top - bounds.bottom);
-        matrix.setScale(-scale, scale);
-        matrix.postTranslate(margin + lineWidth / 2, lineHeight * 3);
-        bclef.transform(matrix);
+        if(!isChordMode)
+        {
+            bclef.computeBounds(bounds, false);
+            matrix.setTranslate(-(bounds.left + bounds.right) / 2,
+                    -(bounds.top + bounds.bottom) / 2);
+            bclef.transform(matrix);
+            scale = (lineHeight * 4) / (bounds.top - bounds.bottom);
+            matrix.setScale(-scale, scale);
+            matrix.postTranslate(margin + lineWidth / 2, lineHeight * 3);
+            bclef.transform(matrix);
+        }
+
 
         // Scale note head
         hnote.computeBounds(bounds, false);
@@ -331,7 +337,7 @@ public class StaffView extends View {
         paint.setTextAlign(Paint.Align.LEFT);
 
         // Draw staff
-        canvas.translate(0, height / 2f);
+        canvas.translate(50, height / 2f);
         for (int i = 1; i < 6; i++) {
             canvas.drawLine(margin, i * lineHeight,
                     width - margin, i * lineHeight, paint);
@@ -362,8 +368,13 @@ public class StaffView extends View {
                 lineHeight * 6, paint);
 
         // Draw treble and bass clef
-        canvas.drawPath(tclef, paint);
-        canvas.drawPath(bclef, paint);
+        if(isChordMode){
+            canvas.drawPath(tclef, paint);
+        }
+        else {
+            canvas.drawPath(tclef, paint);
+            canvas.drawPath(bclef, paint);
+        }
 
         // Calculate transform for note
         float xBase = lineWidth * 14;
