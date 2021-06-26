@@ -1,3 +1,4 @@
+include ':chordetect'
 include ':midisheet'
 include ':sherlockmidi'
 include ':app'

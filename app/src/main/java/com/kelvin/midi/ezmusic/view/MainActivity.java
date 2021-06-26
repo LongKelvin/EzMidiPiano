@@ -1006,7 +1006,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         }
 
         if (menuItem.getItemId() == R.id.menu_start_note_detection) {
-            final Intent MidiSheetIntent = new Intent(this, MetronomeActivity.class);
+            final Intent MidiSheetIntent = new Intent(this, com.example.chordec.chordec.MainActivity.class);
             startActivity(MidiSheetIntent);
             return true;
         }
