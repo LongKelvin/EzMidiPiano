@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -301,7 +302,7 @@ public class MidiChordActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void showChordTable(ArrayList<ChordType> listChordData, ArrayList<Note> listRootNote) {
         // create an alert builder
-        chord_dialog_builder = new AlertDialog.Builder(this);
+        chord_dialog_builder = new AlertDialog.Builder(this,R.style.MyDialogTheme);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.midi_chord_dialog, null);
         chord_dialog_builder.setView(customLayout);
@@ -407,6 +408,21 @@ public class MidiChordActivity extends AppCompatActivity {
         // create and show the recording dialog
         chord_dialog = chord_dialog_builder.create();
         chord_dialog.show();
+
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int displayWidth = displayMetrics.widthPixels;
+        int displayHeight = displayMetrics.heightPixels;
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(chord_dialog.getWindow().getAttributes());
+        int dialogWindowWidth = (int) (displayWidth * 0.6f);
+        int dialogWindowHeight = (int) (displayHeight * 1.03f);
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+        chord_dialog.getWindow().setAttributes(layoutParams);
+
+        //Button handle
         button_ok.setOnClickListener(v -> {
             //SOMETHING HERE
             setChord(selectedRootNoteIndex.get(), selectedChordIndex.get());

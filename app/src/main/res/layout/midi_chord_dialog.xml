@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp"
     android:layout_gravity="center"
-    android:gravity="center">
+    android:background="@color/colorPrimaryDark"
+    android:gravity="top">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -27,7 +29,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="0dp"
             android:text="@string/Select_Chord"
-            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorBackground" />
     </LinearLayout>
 
@@ -116,13 +118,23 @@
             android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
             android:textColor="@color/colorBackground" />
 
-        <TableLayout
-            android:id="@+id/table_chord"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:stretchColumns="*" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+                <TableLayout
+                    android:id="@+id/table_chord"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:stretchColumns="*" />
+
+
+
+        </ScrollView>
+
+
 
 
     </LinearLayout>
@@ -134,36 +146,26 @@
         android:background="@color/colorPrimaryDark"
         android:baselineAligned="false"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord_area_view">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center">
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/cancel" />
 
-            <Button
-                android:id="@+id/button_cancel"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="70dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/button_ok"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/OK" />
-
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/OK" />
 
 
     </LinearLayout>
