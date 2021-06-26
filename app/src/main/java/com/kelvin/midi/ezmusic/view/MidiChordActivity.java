@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -90,7 +91,7 @@ public class MidiChordActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_midi_chord);
+        setContentView(R.layout.activity_midi_chord2);
 
         //Setup Synthesizers SF2_Sound
         try {
@@ -139,7 +140,7 @@ public class MidiChordActivity extends AppCompatActivity {
 
         chordList = new ArrayList<>();
         AtomicInteger selected = new AtomicInteger();
-        Button btnNextChord = findViewById(R.id.btnNextChord);
+        ImageButton btnNextChord = findViewById(R.id.btnNextChord);
         btnNextChord.setOnClickListener(v -> {
             if (selected.get() >= ChordNoteMidi.size()) {
                 selected.set(0);
@@ -167,7 +168,7 @@ public class MidiChordActivity extends AppCompatActivity {
             selected.set(selected.get() + 1);
         });
 
-        Button btnPreviousChord = findViewById(R.id.btnSPreviousChord);
+        ImageButton btnPreviousChord = findViewById(R.id.btnSPreviousChord);
         btnPreviousChord.setOnClickListener(v -> {
             if (selected.get() <0) {
                 selected.set(ChordNoteMidi.size()-1);
@@ -202,11 +203,13 @@ public class MidiChordActivity extends AppCompatActivity {
             }
 
         });
+
+
         //Init Chord Dialog
         showChordTable(ChordNoteMidi, ListOfRootNote);
         chord_dialog.hide();
 
-        Button btnPlayChord = findViewById(R.id.btnPlayChord);
+        ImageButton btnPlayChord = findViewById(R.id.btnPlayChord);
         btnPlayChord.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override

@@ -7,7 +7,6 @@ import android.net.*;
 import android.app.*;
 import android.os.*;
 import android.widget.*;
-import android.util.Log;
 import android.view.*;
 import android.content.*;
 import android.content.res.*;
@@ -155,7 +154,7 @@ public class AllSongsActivity extends ListActivity implements TextWatcher {
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        setContentView(R.layout.choose_song);
+        setContentView(R.layout.choose_song2);
         setTitle("MidiSheetMusic: Choose Song");
         
         /* If we're restarting from an orientation change,
