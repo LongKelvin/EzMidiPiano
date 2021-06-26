@@ -196,7 +196,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_midi_driver);
+        setContentView(R.layout.activity_midi_driver_2);
 
         if (shouldAskPermissions()) {
             askPermissions();
@@ -777,7 +777,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         // create an alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // set the custom layout
-        final View customLayout = getLayoutInflater().inflate(R.layout.midi_recording_dialog, null);
+        final View customLayout = getLayoutInflater().inflate(R.layout.midi_recording_dialog2, null);
         builder.setView(customLayout);
         // add a button
 
@@ -989,6 +989,24 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     public boolean onMenuItemClick(MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.menu_start_midisheet) {
             final Intent MidiSheetIntent = new Intent(this, ChooseSongActivity.class);
+            startActivity(MidiSheetIntent);
+            return true;
+        }
+
+        if (menuItem.getItemId() == R.id.menu_start_chord_activity) {
+            final Intent MidiSheetIntent = new Intent(this, MidiChordActivity.class);
+            startActivity(MidiSheetIntent);
+            return true;
+        }
+
+        if (menuItem.getItemId() == R.id.menu_start_pianoLargeView) {
+            final Intent MidiSheetIntent = new Intent(this, PianoLargeViewActivity.class);
+            startActivity(MidiSheetIntent);
+            return true;
+        }
+
+        if (menuItem.getItemId() == R.id.menu_start_note_detection) {
+            final Intent MidiSheetIntent = new Intent(this, MetronomeActivity.class);
             startActivity(MidiSheetIntent);
             return true;
         }

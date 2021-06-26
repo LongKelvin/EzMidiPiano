@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:weightSum="20"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_option"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:src ="@drawable/btn_option"
+            android:contentDescription="@string/select_sound_"
+            android:text="@string/select_sound" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_margin="5dp"
+            android:layout_weight="3"
+            android:maxLines="2"
+            android:layout_gravity="center_vertical"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeStepGranularity="1sp"
+            android:text="@string/midi_device"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#E4DFDF" />
+
+        <Spinner
+            android:id="@+id/deviceNameSpinner"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:layout_weight="9"
+            android:background="@drawable/spinner_background"
+            android:dropDownSelector="@color/colorAccent"
+            android:outlineSpotShadowColor="#F5100F0F"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/colorPrimary" />
+
+        <ImageButton
+            android:id="@+id/btn_selectSound"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_select_sound"
+            android:contentDescription="@string/select_sound_"
+            android:text="@string/select_sound" />
+
+        <Button
+            android:id="@+id/btn_recording"
+            android:layout_width="0dp"
+            android:padding="4dp"
+            android:layout_weight="3.6"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="1sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/recording_button"
+            android:text="@string/recording" />
+
+        <ImageButton
+            android:id="@+id/btn_touchMode"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1.2"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:background="#00000000"
+            android:src="@drawable/btn_expand_view"
+            android:contentDescription="@string/select_sound_"
+            android:text="@string/expand_piano_view" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="193dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:maxWidth="300dp"
+        android:maxHeight="200dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_instruments"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@drawable/custiom_textview"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/instruments_name_tv"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/instruments_name"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/custiom_textview"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="@string/name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/colorBackground"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+
+                <TextView
+                    android:id="@+id/ins_name"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/custiom_textview"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="Grand Piano"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/color_yellow_highlight"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/instruments_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/grand_piano" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="193dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:maxWidth="300dp"
+        android:maxHeight="200dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_noteSymbol"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@drawable/custiom_textview"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/noteSymbol"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                android:id="@+id/note_name"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custiom_textview"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/Display"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+
+                <TextView
+                    android:id="@+id/note_display"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/custiom_textview"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="Note Symbol"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/color_yellow_highlight"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/chordSymbol"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:layerType="software"
+                android:text="@string/note_letter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textIsSelectable="false"
+                android:textStyle="normal|bold"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+
+                <TextView
+                    android:id="@+id/noteLetter"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="textMultiLine"
+                    android:layerType="software"
+                    android:text="@string/note_letter"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textIsSelectable="false"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_reset_chord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/recording_button"
+                android:text="Reset" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="193dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:maxWidth="300dp"
+        android:maxHeight="200dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_midiData"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal|fill|fill_horizontal|center_vertical"
+                android:layout_margin="0dp"
+                android:background="@drawable/custiom_textview"
+                android:layerType="software"
+                android:requiresFadingEdge="horizontal|vertical"
+                android:text="@string/Mididata"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorBackground"
+                android:textStyle="normal|bold"
+                android:typeface="sans"
+                app:autoSizeTextType="none" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/midiEvent"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/custiom_textview"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="@string/MidiEvent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/colorBackground"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+
+                <TextView
+                    android:id="@+id/midiEventData"
+                    style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/custiom_textview"
+                    android:layerType="software"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:text="All Event"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/color_yellow_highlight"
+                    android:textStyle="normal|bold"
+                    android:typeface="sans"
+                    app:autoSizeTextType="none" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="13dp" />
+            <ListView
+                android:id="@+id/midiInputEventListView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:stackFromBottom="true"
+                android:transcriptMode="alwaysScroll">
+            </ListView>
+            <com.kelvin.midi.ezmusic.customview.StaffView
+                android:id="@+id/staff_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.kelvin.midi.ezmusic.customview.PianoView
+        android:id="@+id/piano_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
