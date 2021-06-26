@@ -83,7 +83,7 @@ public class PianoLargeView extends View {
 
     //Size of piano view
     //default by 7 -> 1 octave
-    int piano_size = 7;
+    int piano_size = 36;
 
     // get view width
     private int W;

@@ -4,6 +4,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,10 +28,16 @@ public class PianoLargeViewActivity extends AppCompatActivity {
     final private String DEFAULT_INSTRUMENT = "GrandPiano";
     private SoftSynthesizer synth;
     PianoLargeView pianoLargeView;
-    int piano_size_on_change = 7;
+    int piano_size_on_change = 36;
     int _noteOn = 0;
     int _noteOff = 0;
     private Receiver receiver;
+
+    //View
+    HorizontalScrollView horizontalScrollView;
+    int pianoViewWidth = 3200;
+    SeekBar pianoViewSeekBar;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -36,31 +45,49 @@ public class PianoLargeViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piano_large_view);
 
+        horizontalScrollView = findViewById(R.id.scrollView);
+        horizontalScrollView.setScrollBarSize(300);
+        horizontalScrollView.setHorizontalScrollBarEnabled(true);
+
         //Init PianoView
         pianoLargeView = new PianoLargeView(this);
         pianoLargeView = findViewById(R.id.piano_large_view);
+        pianoViewWidth = pianoLargeView.getWidth();
 
 
-        Button btn_increase_piano_size = findViewById(R.id.btn_increase_piano_size);
-        Button btn_decrease_piano_size = findViewById(R.id.btn_decrease_piano_size);
-        Button btn_reset_piano_size = findViewById(R.id.btn_reset_piano_size);
+        //Set PianoView to Center
+        SetPianoViewToCenter();
 
-        btn_increase_piano_size.setOnClickListener(view -> {
-            if (piano_size_on_change < 36)
-                piano_size_on_change += 1;
-            pianoLargeView.setPianoViewWidth(piano_size_on_change);
+        //Seek bar
+        pianoViewSeekBar = findViewById(R.id.pianoViewSeekBar);
+        pianoViewSeekBar.setMax(36);
+        pianoViewSeekBar.setProgress(36);
+        this.pianoViewSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 36;
+
+            // When Progress value changed.
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                if(progressValue<20)
+                    progressValue = 20;
+
+                progress = progressValue;
+                pianoLargeView.setPianoViewWidth(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+            }
         });
 
-        btn_decrease_piano_size.setOnClickListener(view -> {
-            if (piano_size_on_change == 0)
-                piano_size_on_change = 2;
-            piano_size_on_change -= 1;
-            pianoLargeView.setPianoViewWidth(piano_size_on_change);
-        });
-
-        btn_reset_piano_size.setOnClickListener(view -> {
-            pianoLargeView.resetPianoSize();
-        });
 
         pianoLargeView.setPianoViewListener(new PianoLargeView.PianoViewListener() {
             @Override
@@ -89,5 +116,13 @@ public class PianoLargeViewActivity extends AppCompatActivity {
         }
 
         pianoLargeView.setReceiverForSynthesizer(receiver);
+    }
+
+    private void SetPianoViewToCenter() {
+        int hsvWidth = horizontalScrollView.getWidth();
+        int offset = pianoViewWidth/2;
+
+        // Horizontal smooth scroll offset
+        horizontalScrollView.smoothScrollBy(500, 0);
     }
 }
