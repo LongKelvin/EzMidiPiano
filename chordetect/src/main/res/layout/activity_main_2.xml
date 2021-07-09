@@ -20,11 +20,12 @@
         android:background="@color/colorPrimaryDark">
 
         <Button
-            android:id="@+id/recordButton"
+            android:id="@+id/recordButton1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Start Detection"
             android:layout_marginRight="10dp"
+            android:visibility="invisible"
             android:background="@color/colorBackground"/>
         <Button
             android:id="@+id/enableChordMode"
@@ -33,6 +34,7 @@
             android:text="Detect Chord"
             android:layout_marginRight="10dp"
             android:background="@color/colorBackground"/>
+
         <Button
             android:id="@+id/enableNoteMode"
             android:layout_width="wrap_content"
@@ -193,6 +195,7 @@
             android:layout_height="@dimen/record_layout_button_height"
             android:layout_marginStart="25dp"
             android:layout_marginLeft="25dp"
+            android:layout_centerVertical="true"
             android:background="@android:color/white" />
 
 <!--        <ImageButton-->
@@ -206,6 +209,34 @@
 <!--            android:layout_marginLeft="@+id/pauseButton" />-->
 
         <ImageButton
+            android:id="@+id/recordButton"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/microphone"
+            android:background="@color/main_titlebar"
+            android:scaleType="fitCenter" />
+
+        <com.skyfishjy.library.RippleBackground
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content"
+            app:rb_color="@color/colorRecording"
+            app:rb_radius="32dp"
+            app:rb_rippleAmount="4"
+            app:rb_duration="3000"
+            app:rb_scale="6">
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/centerImage"
+                android:src="@drawable/microphone"/>
+        </com.skyfishjy.library.RippleBackground>
+
+        <ImageButton
             android:id="@+id/stopButton"
             android:layout_width="@dimen/record_layout_button_width"
             android:layout_height="@dimen/record_layout_button_height"
@@ -214,6 +245,8 @@
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
             android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
             android:src="@drawable/stop" />
     </RelativeLayout>
 

@@ -50,6 +50,7 @@ import com.example.chordec.chordec.TarsosDSP.AudioDispatcherFactory;
 import com.example.chordec.chordec.TarsosDSP.SpectralInfo;
 import com.example.chordec.chordec.TarsosDSP.SpectralPeakProcessor;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.skyfishjy.library.RippleBackground;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity
             {61.735, 65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.826, 110, 116.541, 123.471, 130.813}; // actual frequency of bass note in kHz
 
     // widgets in activity_main.xml
-    private Button recordButton;
+    private ImageButton recordButton;
     private ImageButton pauseButton;
     private ImageButton stopButton;
     private ImageButton recordingImage;
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity
 
         initializeLayout();
 
-        initializePositioning();
+        //initializePositioning();
 
         //Init ChordView
         chordView = new ChordView(this);
@@ -302,12 +303,12 @@ public class MainActivity extends AppCompatActivity
                                     Constants.getDurationFormat(duration));
                         }
                     });
-                    recordingImage.post(new Runnable() {
-                        public void run() {
-                            new BounceAnimation(recordingImage).setNumOfBounces(1)
-                                    .setDuration(PULSE_DURATION).animate();
-                        }
-                    });
+//                    recordingImage.post(new Runnable() {
+//                        public void run() {
+//                            new BounceAnimation(recordingImage).setNumOfBounces(1)
+//                                    .setDuration(PULSE_DURATION).animate();
+//                        }
+//                    });
                 }
             }
         };
@@ -320,7 +321,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeWidgets() {
-        recordButton = (Button) findViewById(R.id.recordButton);
+        recordButton =  findViewById(R.id.recordButton);
         recordButton.setOnClickListener(this);
 
         pauseButton = (ImageButton) findViewById(R.id.pauseButton);
@@ -330,6 +331,7 @@ public class MainActivity extends AppCompatActivity
 
         stopButton = (ImageButton) findViewById(R.id.stopButton);
         stopButton.setOnClickListener(this);
+        pauseButton.setVisibility(View.INVISIBLE);
 
         timerTextView = (TextView) findViewById(R.id.timerTextView);
 
@@ -374,19 +376,19 @@ public class MainActivity extends AppCompatActivity
         initializeSpectralPeakDetector();
     }
 
-    private void initializePositioning() {
-
-        Point size = getScreenDimension();
-
-        screenHeight = size.y;
-
-        translateY = (int) (screenHeight - (
-                getResources().getDimension(R.dimen.record_layout_height) * 5 / 6.0 +
-                        getResources().getDimension(R.dimen.record_button_height) +
-                        getResources().getDimension(R.dimen.record_button_margin_top)));
-
-        Log.d(TAG, "translateY = " + translateY);
-    }
+//    private void initializePositioning() {
+//
+//        Point size = getScreenDimension();
+//
+//        screenHeight = size.y;
+//
+//        translateY = (int) (screenHeight - (
+//                getResources().getDimension(R.dimen.record_layout_height) * 5 / 6.0 +
+//                        getResources().getDimension(R.dimen.record_button_height) +
+//                        getResources().getDimension(R.dimen.record_button_margin_top)));
+//
+//        Log.d(TAG, "translateY = " + translateY);
+//    }
 
     private void initializeFile() {
 //        String nextCardID = database.getStringNextChordId();
@@ -516,20 +518,35 @@ public class MainActivity extends AppCompatActivity
 
     public void onClick(View v) {
         int id = v.getId();
+        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
         if (id == R.id.recordButton) {
             if (!isRecordLayoutVisible) {
                 //animateRecordButton();
                 initializeBeforeRecording();
+                RelativeLayout recordLayout = findViewById(R.id.recordLayout);
+//                recordLayout.setBackgroundColor(getResources().getColor(R.color.colorTextHighLightRed));
+//                recordButton.setBackgroundColor(getResources().getColor(R.color.colorTextHighLightRed));
                 Log.d(TAG, "after pressing record button");
+                pauseButton.setVisibility(View.VISIBLE);
+                stopButton.setVisibility(View.VISIBLE);
+
+                rippleBackground.startRippleAnimation();
             }
             isRecordLayoutVisible = true;
         } else if (id == R.id.pauseButton) {
             if (isRecordLayoutVisible) {
                 changePauseButtonSrc();
+
             }
         } else if (id == R.id.stopButton) {
             if (isRecordLayoutVisible) {
                 stopRecording();
+                pauseButton.setVisibility(View.INVISIBLE);
+                stopButton.setVisibility(View.INVISIBLE);
+//                RelativeLayout recordLayout = findViewById(R.id.recordLayout);
+//                recordLayout.setBackgroundColor(getResources().getColor(R.color.main_titlebar));
+//                recordButton.setBackgroundColor(getResources().getColor(R.color.main_titlebar));
+                rippleBackground.stopRippleAnimation();
             }
         } else {
             Log.e(TAG, "Widget is not recognized");
@@ -555,7 +572,7 @@ public class MainActivity extends AppCompatActivity
      * */
 
     private void animateRecordButton() {
-        bounceAnimation();
+       // bounceAnimation();
     }
 
     private void bounceAnimation() {
@@ -627,8 +644,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-        recordButton.startAnimation(animation);
-        recordButton.bringToFront();
+//        recordButton.startAnimation(animation);
+//        recordButton.bringToFront();
     }
 
 //    private void changeLayoutsVisibility() {
@@ -647,34 +664,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    private void setLayoutsVisible() {
-//        new FadeInAnimation(recordLayout).setDuration(FADE_DURATION).animate();
-//        new FadeInAnimation(timerLayout).setDuration(FADE_DURATION).animate();
-//    }
 
-//    private void setLayoutsInvisible() {
-//        new FadeOutAnimation(recordLayout).setDuration(FADE_DURATION).animate();
-//        new FadeOutAnimation(timerLayout).setDuration(FADE_DURATION).animate();
-//    }
+
 
     private void setWidgetsVisible() {
-//        new FadeOutAnimation(hintText).setDuration(FADE_DURATION).animate();
-//        new FadeOutAnimation(hintImage).setDuration(FADE_DURATION).animate();
-//        new FadeOutAnimation(hintText2).setDuration(FADE_DURATION).animate();
-
-        // new FadeInAnimation(recordingImage).setDuration(FADE_DURATION).animate();
-        // new FadeInAnimation(hintChordText).setDuration(FADE_DURATION).animate();
         new FadeInAnimation(chordText).setDuration(FADE_DURATION).animate();
         new FadeInAnimation(pitchText).setDuration(FADE_DURATION).animate();
     }
 
     private void setWidgetsInvisible() {
-//        new FadeInAnimation(hintText).setDuration(FADE_DURATION).animate();
-//        new FadeInAnimation(hintImage).setDuration(FADE_DURATION).animate();
-//        new FadeInAnimation(hintText2).setDuration(FADE_DURATION).animate();
-
-        //   new FadeOutAnimation(recordingImage).setDuration(FADE_DURATION).animate();
-//        new FadeOutAnimation(hintChordText).setDuration(FADE_DURATION).animate();
         new FadeOutAnimation(chordText).setDuration(FADE_DURATION).animate();
         new FadeOutAnimation(pitchText).setDuration(FADE_DURATION).animate();
     }
@@ -686,11 +684,17 @@ public class MainActivity extends AppCompatActivity
 
     private void changePauseButtonSrc() {
         isPause = !isPause;
+        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
         if (isPause) {
             pauseButton.setBackgroundResource(R.drawable.play);
+            rippleBackground.stopRippleAnimation();
+            //stopRecording();
         } else {
             pauseButton.setBackgroundResource(R.drawable.pause);
+            rippleBackground.startRippleAnimation();
+            //initializeBeforeRecording();
         }
+
     }
 
     /*
@@ -698,7 +702,14 @@ public class MainActivity extends AppCompatActivity
      * */
 
     private void stopRecording() {
-        saveChord();
+        releaseDispatcher();
+        if(detectChordMode)
+            saveChord();
+        else {
+            isRecordLayoutVisible = false;
+            pauseTimer();
+            resetAfterRecording();
+        }
     }
 
     private void saveChord() {
@@ -911,6 +922,16 @@ public class MainActivity extends AppCompatActivity
 
         chordList = new ArrayList<>();
 
+    }
+
+    public void releaseDispatcher()
+    {
+        if(dispatcher != null)
+        {
+            if(!dispatcher.isStopped())
+                dispatcher.stop();
+            dispatcher = null;
+        }
     }
 }
 

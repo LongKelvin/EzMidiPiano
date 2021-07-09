@@ -378,26 +378,27 @@ public class StaffView extends View {
         if(isChordMode)
             canvas.translate(DEFAULT_POSITION, 0);
 
-        for (int midiNote : MIDI_NOTE) {
+        try {
+            for (int midiNote : MIDI_NOTE) {
 
-            int index = (midiNote + OCTAVE) % OCTAVE;
-            int octave = midiNote / OCTAVE;
-
-
-            // Wrap top two octaves
-            if (octave >= 6)
-                octave -= 2;
-
-                // Wrap C0
-            else if (octave == 0 && index <= 1)
-                octave += 4;
-
-                // Wrap bottom two octaves
-            else if (octave <= 1 || octave == 2 && index <= 1)
-                octave += 2;
+                int index = (midiNote + OCTAVE) % OCTAVE;
+                int octave = midiNote / OCTAVE;
 
 
-            if (isChordMode) {
+                // Wrap top two octaves
+                if (octave >= 6)
+                    octave -= 2;
+
+                    // Wrap C0
+                else if (octave == 0 && index <= 1)
+                    octave += 4;
+
+                    // Wrap bottom two octaves
+                else if (octave <= 1 || octave == 2 && index <= 1)
+                    octave += 2;
+
+
+                if (isChordMode) {
 
                   /*
             The temp_dy is create for holding the temp value of dy
@@ -405,65 +406,71 @@ public class StaffView extends View {
             the thing we should do here is update the dy to the ordinal value (the default position before the loop is start)
             * */
 
-                float dy = (octave * lineHeight * 3.5f) +
-                        (offset[index] * (lineHeight / 2));
+                    float dy = (octave * lineHeight * 3.5f) +
+                            (offset[index] * (lineHeight / 2));
 
 
-                float temp_dy = yBase - dy;
-                canvas.translate(0, yBase - dy);
-                canvas.drawPath(hnote, paint);
+                    float temp_dy = yBase - dy;
+                    canvas.translate(0, yBase - dy);
+                    canvas.drawPath(hnote, paint);
 
 
-                switch (sharps[index]) {
-                    // Natural
-                    case NATURAL:
-                        // Do nothing
-                        break;
+                    switch (sharps[index]) {
+                        // Natural
+                        case NATURAL:
+                            // Do nothing
+                            break;
 
-                    // Sharp
-                    case SHARP:
-                        canvas.drawPath(sharp, paint);
-                        break;
+                        // Sharp
+                        case SHARP:
+                            canvas.drawPath(sharp, paint);
+                            break;
 
-                    // Flat
-                    case FLAT:
-                        canvas.drawPath(flat, paint);
-                        break;
-                }
-                //reset position
-                canvas.translate(0, -temp_dy);
-            } else {
+                        // Flat
+                        case FLAT:
+                            canvas.drawPath(flat, paint);
+                            break;
+                    }
+                    //reset position
+                    canvas.translate(0, -temp_dy);
+                } else {
 
-                float dx = (octave * lineWidth * 3.5f) +
-                        (offset[index] * (lineWidth / 2));
-                float dy = (octave * lineHeight * 3.5f) +
-                        (offset[index] * (lineHeight / 2));
+                    float dx = (octave * lineWidth * 3.5f) +
+                            (offset[index] * (lineWidth / 2));
+                    float dy = (octave * lineHeight * 3.5f) +
+                            (offset[index] * (lineHeight / 2));
 
-                // Translate canvas
+                    // Translate canvas
 
-                canvas.translate((width / 2) - xBase + dx, yBase - dy);
-                canvas.drawPath(hnote,paint);
+                    canvas.translate((width / 2) - xBase + dx, yBase - dy);
+                    canvas.drawPath(hnote,paint);
 
-                switch (sharps[index]) {
-                    // Natural
-                    case NATURAL:
-                        // Do nothing
-                        break;
+                    switch (sharps[index]) {
+                        // Natural
+                        case NATURAL:
+                            // Do nothing
+                            break;
 
-                    // Sharp
-                    case SHARP:
-                        canvas.drawPath(sharp, paint);
-                        break;
+                        // Sharp
+                        case SHARP:
+                            canvas.drawPath(sharp, paint);
+                            break;
 
-                    // Flat
-                    case FLAT:
-                        canvas.drawPath(flat, paint);
-                        break;
+                        // Flat
+                        case FLAT:
+                            canvas.drawPath(flat, paint);
+                            break;
+                    }
+
                 }
 
             }
 
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public void setNoteToStaff(ArrayList<Integer> midiNote) {

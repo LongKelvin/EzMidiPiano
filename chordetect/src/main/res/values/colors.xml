@@ -21,5 +21,6 @@
     <color name="color_yellow_highlight">#FDD835</color>
     <color name="colorHighLightGreenAccent">#17D51E</color>
     <color name="colorBackground_ActionBar">#D8ED99</color>
+    <color name="colorRecording">#C95F7B</color>
 
 </resources>
