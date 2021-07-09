@@ -1,4 +1,4 @@
-package com.kelvin.midi.ezmusic.customview;
+package com.example.chordec.chordec.CSurfaceView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,16 +6,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-import java.util.Set;
 
 public class StaffView extends View {
     private static final String TAG = "Staff";
@@ -480,7 +475,7 @@ public class StaffView extends View {
 
     public void setNoteToStaff(int midiNote) {
         MIDI_NOTE.clear();
-        MIDI_NOTE.add(midiNote-12);
+        MIDI_NOTE.add(midiNote);
         invalidate();
 
     }

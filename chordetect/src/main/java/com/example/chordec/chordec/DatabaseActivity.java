@@ -1,9 +1,5 @@
 package com.example.chordec.chordec;
 
-/**
- * Created by thearith on 4/4/15.
- */
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

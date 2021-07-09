@@ -9,9 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by thearith on 4/4/15.
- */
+
 public class Database extends SQLiteOpenHelper {
 
     private static final String TAG = Database.class.getSimpleName();

@@ -18,11 +18,15 @@
         <activity
             android:name=".MainActivity"
             android:logo="@drawable/chordec_logo_small"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
         </activity>
         <activity
             android:name=".Splash"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +37,8 @@
             android:name=".DatabaseActivity"
             android:label="@string/app_name"
             android:logo="@drawable/app_logo"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity"
             android:parentActivityName="com.example.chordec.chordec.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +49,8 @@
             android:name=".PlayActivity"
             android:label="@string/app_name"
             android:logo="@drawable/app_logo"
+            android:screenOrientation="landscape"
+            tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity"
             android:parentActivityName="com.example.chordec.chordec.DatabaseActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

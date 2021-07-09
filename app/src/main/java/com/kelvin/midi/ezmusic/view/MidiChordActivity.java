@@ -506,5 +506,8 @@ public class MidiChordActivity extends AppCompatActivity {
         if (synth != null) {
             synth.close();
         }
+
+        chord_dialog.cancel();
     }
+
 }

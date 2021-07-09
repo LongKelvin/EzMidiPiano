@@ -16,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,20 +37,28 @@ import com.easyandroidanimations.library.BounceAnimation;
 import com.easyandroidanimations.library.FadeInAnimation;
 import com.easyandroidanimations.library.FadeOutAnimation;
 import com.easyandroidanimations.library.RotationAnimation;
+import com.example.chordec.chordec.CSurfaceView.ChordView;
+import com.example.chordec.chordec.CSurfaceView.StaffView;
 import com.example.chordec.chordec.Database.Chord;
 import com.example.chordec.chordec.Database.Database;
 import com.example.chordec.chordec.Helper.Constants;
+import com.example.chordec.chordec.Helper.Note;
+import com.example.chordec.chordec.Helper.NoteHz;
+import com.example.chordec.chordec.SoundSampler.ChordType;
+import com.example.chordec.chordec.SoundSampler.KeyMap;
 import com.example.chordec.chordec.TarsosDSP.AudioDispatcherFactory;
 import com.example.chordec.chordec.TarsosDSP.SpectralInfo;
 import com.example.chordec.chordec.TarsosDSP.SpectralPeakProcessor;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -80,10 +91,10 @@ public class MainActivity extends AppCompatActivity
             {61.735, 65.406, 69.296, 73.416, 77.782, 82.407, 87.307, 92.499, 97.999, 103.826, 110, 116.541, 123.471, 130.813}; // actual frequency of bass note in kHz
 
     // widgets in activity_main.xml
-    private ImageButton recordButton;
+    private Button recordButton;
     private ImageButton pauseButton;
     private ImageButton stopButton;
-    private ImageView recordingImage;
+    private ImageButton recordingImage;
     private TextView timerTextView;
 
     private TextView hintText;
@@ -94,9 +105,12 @@ public class MainActivity extends AppCompatActivity
     private TextView chordText;
     private TextView pitchText;
 
+    private Button enableChordMode;
+    private Button enableNoteMode;
+
     // layouts in activity_main.xml
     private RelativeLayout recordLayout;
-    private LinearLayout timerLayout;
+    private RelativeLayout timerLayout;
 
     // database
     private static Database database;
@@ -106,8 +120,8 @@ public class MainActivity extends AppCompatActivity
     private Thread dispatcherThread;
 
     // Tarsos DSP variables
-    private char prevChord = 0;
-    private char currChord = 0;
+    private String prevChord = "";
+    private String currChord = "";
     private String chordProgression;
 
     List<SpectralInfo> spectalInfo;
@@ -123,6 +137,24 @@ public class MainActivity extends AppCompatActivity
     private int screenHeight;
     private int translateY;
 
+    //Note Recognize
+    KeyMap keyMap = new KeyMap();
+    String noteName = "";
+    int noteMidiValue = 0;
+    NoteHz noteInHz;
+    ArrayList<NoteHz> ListOfPitch;
+    private static DecimalFormat df = new DecimalFormat("0.00");
+    boolean detectChordMode = false;
+
+
+    //ChordList
+    public ArrayList<Integer> currentChordList;
+    ArrayList<ChordType> ChordNoteMidi;
+    List<Integer> chordList;
+    public int RootNote = 60;
+
+    ArrayList<Note> ListOfRootNote;
+
 
     // states
     boolean isRecordLayoutVisible = false;
@@ -131,6 +163,11 @@ public class MainActivity extends AppCompatActivity
     /*
         overridden methods - crucial for the activity class
     */
+
+    // custom view
+    public ChordView chordView;
+    public StaffView staffView;
+
     protected boolean shouldAskPermissions() {
         return true;
     }
@@ -150,7 +187,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //create landscape screen
+        //request full screen for login activity
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main_2);
 
         if (shouldAskPermissions()) {
             askPermissions();
@@ -171,6 +213,27 @@ public class MainActivity extends AppCompatActivity
         initializeLayout();
 
         initializePositioning();
+
+        //Init ChordView
+        chordView = new ChordView(this);
+        chordView = findViewById(R.id.chord_view);
+
+
+        //Init StaffView
+        staffView = new StaffView(this);
+        staffView = findViewById(R.id.staff_view);
+        staffView.setVisibility(View.VISIBLE);
+        staffView.enableChordMode(false);
+
+        //Init KeyMap
+        keyMap.InitKeyMap();
+
+        //Init NoteHz
+        noteInHz = new NoteHz();
+        ListOfPitch = new ArrayList<>();
+        ListOfPitch = noteInHz.GenerateNotePitch();
+
+        System.out.println("ListOfPitch: " + ListOfPitch.toString());
 
     }
 
@@ -257,33 +320,54 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeWidgets() {
-        recordButton = (ImageButton) findViewById(R.id.recordButton);
+        recordButton = (Button) findViewById(R.id.recordButton);
         recordButton.setOnClickListener(this);
 
         pauseButton = (ImageButton) findViewById(R.id.pauseButton);
         pauseButton.setOnClickListener(this);
         pauseButton.setBackgroundResource(R.drawable.pause);
+        pauseButton.setVisibility(View.INVISIBLE);
 
         stopButton = (ImageButton) findViewById(R.id.stopButton);
         stopButton.setOnClickListener(this);
 
         timerTextView = (TextView) findViewById(R.id.timerTextView);
 
-        hintText = (TextView) findViewById(R.id.hintText);
-        hintImage = (ImageView) findViewById(R.id.hintImage);
-        hintText2 = (TextView) findViewById(R.id.hintText2);
+//        hintText = (TextView) findViewById(R.id.hintText);
+//        hintImage = (ImageView) findViewById(R.id.hintImage);
+//        hintText2 = (TextView) findViewById(R.id.hintText2);
 
-        recordingImage = (ImageView) findViewById(R.id.recordingImage);
+//        recordingImage = (ImageView) findViewById(R.id.recordingImage);
+//        recordingImage.setVisibility(View.VISIBLE);
 
-        hintChordText = (TextView) findViewById(R.id.hintChordText);
+//        hintChordText = (TextView) findViewById(R.id.hintChordText);
         chordText = (TextView) findViewById(R.id.chordText);
         pitchText = (TextView) findViewById(R.id.pitchText);
+
+        enableChordMode = findViewById(R.id.enableChordMode);
+        enableNoteMode = findViewById(R.id.enableNoteMode);
+        enableNoteMode.setBackgroundColor(Color.GREEN);
+
+        enableChordMode.setOnClickListener(v->{
+            enableChordMode();
+            enableChordMode.setBackgroundColor(Color.GREEN);
+            enableNoteMode.setBackgroundResource(android.R.drawable.btn_default);
+        });
+
+
+        enableNoteMode.setOnClickListener(v->{
+            disableChordMode();
+            enableNoteMode.setBackgroundColor(Color.GREEN);
+            enableChordMode.setBackgroundResource(android.R.drawable.btn_default);
+        });
+
+        //setLayoutsVisible();
     }
 
 
     private void initializeLayout() {
         recordLayout = (RelativeLayout) findViewById(R.id.recordLayout);
-        timerLayout = (LinearLayout) findViewById(R.id.timerLayout);
+        timerLayout = (RelativeLayout) findViewById(R.id.timerLayout);
     }
 
     private void initializeRecorder() {
@@ -336,27 +420,80 @@ public class MainActivity extends AppCompatActivity
             public void handlePitch(PitchDetectionResult result, AudioEvent e) {
                 final int pitchInHz = (int) result.getPitch();
 
-                if (pitchInHz == 25 || pitchInHz == 49 || pitchInHz == 98) {
-                    currChord = 'G';
-                } else if (pitchInHz == 16 || pitchInHz == 33 || pitchInHz == 65) {
-                    currChord = 'C';
-                } else if (pitchInHz == 18 || pitchInHz == 36 || pitchInHz == 73) {
-                    currChord = 'D';
-                } else if (pitchInHz == 20 || pitchInHz == 41 || pitchInHz == 82) {
-                    currChord = 'E';
-                } else if (pitchInHz == 22 || pitchInHz == 44) {
-                    currChord = 'F';
-                } else if (pitchInHz == 13 || pitchInHz == 28 || pitchInHz == 54 || pitchInHz == 55) {
-                    currChord = 'A';
+                if (!detectChordMode) {
+                    //final float pitchInHzf = result.getPitch();
+                    Log.e("Pitch Detect: ", String.valueOf(pitchInHz));
+
+                    int currentPlayingNote = noteInHz.CheckNotePitch(pitchInHz);
+                    if (currentPlayingNote != -1) {
+                        noteMidiValue = ListOfPitch.get(currentPlayingNote).getNoteNumber();
+                        Log.i("ListOfPitch: ", ListOfPitch.get(currentPlayingNote).toString());
+                        Log.e("CurrentPlaying: ", String.valueOf(pitchInHz));
+                        currChord = ListOfPitch.get(currentPlayingNote).getNoteName();
+                        Log.e("CurrentNote: ", String.valueOf(noteMidiValue));
+                        Log.e("CurrentNoteName: ", String.valueOf(currChord));
+                    }
+
+                    // noteMidiValue = keyMap.GenerateNoteMidiValueFromString(Character.toString(currChord));
+                    if (noteMidiValue != 0 && noteMidiValue != -1) {
+                        staffView.setNoteToStaff(noteMidiValue);
+                        chordView.releaseChordKey();
+                        chordView.setKey(noteMidiValue + 12, true);
+                    }
+                } else {
+
+                    if (pitchInHz == 25 || pitchInHz == 49 || pitchInHz == 98) {
+                        currChord = "G";
+                        RootNote = 67;
+                    } else if (pitchInHz == 16 || pitchInHz == 33 || pitchInHz == 65) {
+                        currChord = "C";
+                        RootNote = 60;
+                    } else if (pitchInHz == 18 || pitchInHz == 36 || pitchInHz == 73) {
+                        currChord = "D";
+                        RootNote = 62;
+                    } else if (pitchInHz == 20 || pitchInHz == 41 || pitchInHz == 82) {
+                        currChord = "E";
+                        RootNote = 64;
+                    } else if (pitchInHz == 22 || pitchInHz == 44) {
+                        currChord = "F";
+                        RootNote = 65;
+                    } else if (pitchInHz == 13 || pitchInHz == 28 || pitchInHz == 54 || pitchInHz == 55) {
+                        currChord = "A";
+                        RootNote = 69;
+                    }
+                    else if (pitchInHz == 15 || pitchInHz == 31 || pitchInHz == 62 || pitchInHz == 123) {
+                        currChord = "B";
+                        RootNote = 71;
+                    }
+
+                    ChordType chord = ChordNoteMidi.get(0); //major chord
+                    if (chord == null)
+                        return;
+                    //Check If RootNote is too high
+                    //System.out.println("LASTNOTE: " + chord.chord_note.get(2));
+                    if ((chord.chord_note.get(chord.chord_note.size() - 1) + RootNote) + 4 >= 72) {
+                        RootNote -= 12;
+                    }
+
+                    chordList.clear();
+                    chordView.releaseChordKey();
+
+                    for (int note : chord.chord_note
+                    ) {
+                        chordView.setKey(RootNote + note, true);
+                        chordList.add(RootNote + note);
+                    }
+
+                    staffView.setNoteToStaff((ArrayList<Integer>) chordList);
+
                 }
-                else if (pitchInHz == 15 || pitchInHz == 31 || pitchInHz == 62 || pitchInHz == 123) {
-                    currChord = 'B';
-                }
+
+
                 if (currChord != prevChord) {
                     prevChord = currChord;
                     chordProgression += prevChord + ", ";
                 }
-                final char displayChord = prevChord;
+                final String displayChord = prevChord;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -381,7 +518,7 @@ public class MainActivity extends AppCompatActivity
         int id = v.getId();
         if (id == R.id.recordButton) {
             if (!isRecordLayoutVisible) {
-                animateRecordButton();
+                //animateRecordButton();
                 initializeBeforeRecording();
                 Log.d(TAG, "after pressing record button");
             }
@@ -456,32 +593,32 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onAnimationEnd(Animation animation) {
                 recordButton.clearAnimation();
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                        recordButton.getWidth(), recordButton.getHeight());
+//                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+//                        recordButton.getWidth(), recordButton.getHeight());
+//
+//                lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
-                lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
+//                if (stopY > 0) { //move down
+//                    int marginBottom =
+//                            (int) getResources().getDimension(R.dimen.record_layout_height) / 2
+//                                    - (int) getResources().getDimension(R.dimen.record_button_height) / 2;
+//
+//                    lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//                    lp.setMargins(0, 0, 0, marginBottom);
 
-                if (stopY > 0) { //move down
-                    int marginBottom =
-                            (int) getResources().getDimension(R.dimen.record_layout_height) / 2
-                                    - (int) getResources().getDimension(R.dimen.record_button_height) / 2;
+//                    recordButton.setBackgroundResource(R.drawable.white_bg);
+//                } else { //move up
+//                    lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+//                    lp.setMargins(0,
+//                            (int) getResources().getDimension(R.dimen.record_button_margin_top), 0, 0);
 
-                    lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                    lp.setMargins(0, 0, 0, marginBottom);
+//                    recordButton.setBackgroundColor(Color.TRANSPARENT);
+//                }
 
-                    recordButton.setBackgroundResource(R.drawable.white_bg);
-                } else { //move up
-                    lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    lp.setMargins(0,
-                            (int) getResources().getDimension(R.dimen.record_button_margin_top), 0, 0);
-
-                    recordButton.setBackgroundColor(Color.TRANSPARENT);
-                }
-
-                recordButton.setLayoutParams(lp);
-                changeLayoutsVisibility();
-                changeWidgetsVisibility();
+                //               recordButton.setLayoutParams(lp);
+                //changeLayoutsVisibility();
+                //changeWidgetsVisibility();
                 startTimer();
             }
 
@@ -494,13 +631,13 @@ public class MainActivity extends AppCompatActivity
         recordButton.bringToFront();
     }
 
-    private void changeLayoutsVisibility() {
-        if (isRecordLayoutVisible) {
-            setLayoutsVisible();
-        } else {
-            setLayoutsInvisible();
-        }
-    }
+//    private void changeLayoutsVisibility() {
+//        if (isRecordLayoutVisible) {
+//            setLayoutsVisible();
+//        } else {
+//            setLayoutsInvisible();
+//        }
+//    }
 
     private void changeWidgetsVisibility() {
         if (isRecordLayoutVisible) {
@@ -510,34 +647,34 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void setLayoutsVisible() {
-        new FadeInAnimation(recordLayout).setDuration(FADE_DURATION).animate();
-        new FadeInAnimation(timerLayout).setDuration(FADE_DURATION).animate();
-    }
+//    private void setLayoutsVisible() {
+//        new FadeInAnimation(recordLayout).setDuration(FADE_DURATION).animate();
+//        new FadeInAnimation(timerLayout).setDuration(FADE_DURATION).animate();
+//    }
 
-    private void setLayoutsInvisible() {
-        new FadeOutAnimation(recordLayout).setDuration(FADE_DURATION).animate();
-        new FadeOutAnimation(timerLayout).setDuration(FADE_DURATION).animate();
-    }
+//    private void setLayoutsInvisible() {
+//        new FadeOutAnimation(recordLayout).setDuration(FADE_DURATION).animate();
+//        new FadeOutAnimation(timerLayout).setDuration(FADE_DURATION).animate();
+//    }
 
     private void setWidgetsVisible() {
-        new FadeOutAnimation(hintText).setDuration(FADE_DURATION).animate();
-        new FadeOutAnimation(hintImage).setDuration(FADE_DURATION).animate();
-        new FadeOutAnimation(hintText2).setDuration(FADE_DURATION).animate();
+//        new FadeOutAnimation(hintText).setDuration(FADE_DURATION).animate();
+//        new FadeOutAnimation(hintImage).setDuration(FADE_DURATION).animate();
+//        new FadeOutAnimation(hintText2).setDuration(FADE_DURATION).animate();
 
-        new FadeInAnimation(recordingImage).setDuration(FADE_DURATION).animate();
-        new FadeInAnimation(hintChordText).setDuration(FADE_DURATION).animate();
+        // new FadeInAnimation(recordingImage).setDuration(FADE_DURATION).animate();
+        // new FadeInAnimation(hintChordText).setDuration(FADE_DURATION).animate();
         new FadeInAnimation(chordText).setDuration(FADE_DURATION).animate();
         new FadeInAnimation(pitchText).setDuration(FADE_DURATION).animate();
     }
 
     private void setWidgetsInvisible() {
-        new FadeInAnimation(hintText).setDuration(FADE_DURATION).animate();
-        new FadeInAnimation(hintImage).setDuration(FADE_DURATION).animate();
-        new FadeInAnimation(hintText2).setDuration(FADE_DURATION).animate();
+//        new FadeInAnimation(hintText).setDuration(FADE_DURATION).animate();
+//        new FadeInAnimation(hintImage).setDuration(FADE_DURATION).animate();
+//        new FadeInAnimation(hintText2).setDuration(FADE_DURATION).animate();
 
-        new FadeOutAnimation(recordingImage).setDuration(FADE_DURATION).animate();
-        new FadeOutAnimation(hintChordText).setDuration(FADE_DURATION).animate();
+        //   new FadeOutAnimation(recordingImage).setDuration(FADE_DURATION).animate();
+//        new FadeOutAnimation(hintChordText).setDuration(FADE_DURATION).animate();
         new FadeOutAnimation(chordText).setDuration(FADE_DURATION).animate();
         new FadeOutAnimation(pitchText).setDuration(FADE_DURATION).animate();
     }
@@ -691,7 +828,7 @@ public class MainActivity extends AppCompatActivity
 
     private void resetChordString() {
         chordProgression = "";
-        currChord = prevChord = 0;
+        currChord = prevChord = "";
     }
 
     private void resetDispatcherThread() {
@@ -739,5 +876,41 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    private void disableChordMode(){
+        chordText.setText("");
+        staffView.releaseNote();
+        chordView.releaseChordKey();
+        detectChordMode = false;
+        staffView.enableChordMode(false);
+        if(currentChordList!=null)
+            currentChordList.clear();
+        if(ChordNoteMidi !=null)
+            ChordNoteMidi.clear();
+        ListOfRootNote.clear();
+    }
+
+    private void enableChordMode()
+    {
+        chordText.setText("");
+        staffView.releaseNote();
+        chordView.releaseChordKey();
+        detectChordMode = true;
+        staffView.enableChordMode(true);
+        //Init chord list
+        currentChordList = new ArrayList<Integer>();
+
+        //Init RootNote List
+        Note rootNote = new Note();
+        ListOfRootNote = rootNote.createRootNoteForChord();
+
+        //Init chord list
+        currentChordList = new ArrayList<Integer>();
+        ChordNoteMidi = new ArrayList<>();
+        ChordType chordType = new ChordType();
+        ChordNoteMidi = chordType.GenerateBasicChord();
+
+        chordList = new ArrayList<>();
+
+    }
 }
 

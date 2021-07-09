@@ -27,9 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="Save chord"
-            android:textSize = "25sp"
-            android:textColor="#3498db"/>
+            android:text="Save note"
+            android:textColor="#3498db"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
