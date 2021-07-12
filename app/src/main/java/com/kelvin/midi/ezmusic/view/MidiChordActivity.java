@@ -84,6 +84,11 @@ public class MidiChordActivity extends AppCompatActivity {
     AlertDialog.Builder chord_dialog_builder;
     AlertDialog chord_dialog;
 
+    private Button btnPracticeChord;
+    private Button btnDetectChord;
+    private boolean isPracticeChordMode = false;
+    private boolean isDetectChordMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -250,6 +255,42 @@ public class MidiChordActivity extends AppCompatActivity {
         Button btnSelectChord = findViewById(R.id.btnSelectChord);
         btnSelectChord.setOnClickListener(v -> {
             chord_dialog.show();
+        });
+
+        ImageButton btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v->{
+            finish();
+        });
+
+        btnPracticeChord = findViewById(R.id.btnPracticeChord);
+        btnDetectChord = findViewById(R.id.btnDetectChord);
+        btnPracticeChord.setOnClickListener(v->{
+            if(!isPracticeChordMode){
+                isPracticeChordMode = true;
+                isDetectChordMode = false;
+                btnPracticeChord.setBackgroundColor(Color.GREEN);
+                btnDetectChord.setBackgroundColor(Color.WHITE);
+            }
+            else
+            {
+                isPracticeChordMode=false;
+                btnPracticeChord.setBackgroundColor(Color.WHITE);
+            }
+        });
+
+        btnDetectChord.setOnClickListener(v->{
+            if(!isDetectChordMode){
+                isDetectChordMode = true;
+                isPracticeChordMode=false;
+
+                btnDetectChord.setBackgroundColor(Color.GREEN);
+                btnPracticeChord.setBackgroundColor(Color.WHITE);
+            }
+            else
+            {
+                isDetectChordMode=false;
+                btnDetectChord.setBackgroundColor(Color.WHITE);
+            }
         });
     }
 

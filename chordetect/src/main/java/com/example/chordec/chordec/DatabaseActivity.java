@@ -9,8 +9,12 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +35,8 @@ public class DatabaseActivity  extends AppCompatActivity {
     private CustomAdapter adapter;
 
     private TextView itemsText;
+    private Button btnDelete;
+    private ImageButton btn_back;
 
     /*
      * Overriden methods
@@ -39,14 +45,23 @@ public class DatabaseActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_database);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initializeDatabase();
         initializeAdapter();
         initializeListView();
         initializeTextView();
+        initializeButtonDelete();
+
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v->{
+            finish();
+        });
     }
 
     @Override
@@ -204,6 +219,50 @@ public class DatabaseActivity  extends AppCompatActivity {
         intent.putExtra(Constants.CHORD_ID, chordID);
 
         startActivity(intent);
+    }
+
+    private void initializeButtonDelete(){
+        btnDelete = findViewById(R.id.action_delete);
+        btnDelete.setOnClickListener(v->{
+            final SparseBooleanArray selected = adapter
+                    .getSelectedIds();
+            String itemText = selected.size() > 1 ?
+                    "items" : "item";
+
+            //create confirmation dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(DatabaseActivity.this);
+            builder.setTitle("Delete Confirmation")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setCancelable(false)
+                    .setMessage("Are you sure you wanted to delete " +
+                            selected.size() + " " + itemText + "?")
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            for (int i = (selected.size() - 1); i >= 0; i--) {
+                                if (selected.valueAt(i)) {
+                                    Chord chord = adapter
+                                            .getItem(selected.keyAt(i));
+
+                                    database.deleteChord(chord.getChordID());
+                                    adapter.remove(chord);
+                                }
+                            }
+
+                            initializeTextView();
+                        }
+                    });
+
+            builder.create().show();
+        });
     }
 
 

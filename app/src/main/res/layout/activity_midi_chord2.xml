@@ -7,79 +7,110 @@
     android:background="@color/colorBackground"
     tools:context=".view.MidiChordActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout_back"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/content_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back" />
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="800dp"
         android:layout_height="50dp"
-        android:padding="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:background="@color/colorPrimaryDark">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout_back"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <Button
             android:id="@+id/btnSelectChord"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Select Chord"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:text="Select Chord" />
 
         <ImageButton
-            android:src="@drawable/ic_play"
             android:id="@+id/btnPlayChord"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Play Chord"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:src="@drawable/ic_play"
+            android:text="Play Chord" />
 
 
         <ImageButton
-            android:src="@drawable/ic_rewind"
             android:id="@+id/btnSPreviousChord"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Previous Chord"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:src="@drawable/ic_rewind"
+            android:text="Previous Chord" />
 
         <ImageButton
             android:id="@+id/btnNextChord"
-            android:src="@drawable/ic_forward"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:text="Next Chord"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:src="@drawable/ic_forward"
+            android:text="Next Chord" />
 
         <Button
             android:id="@+id/btnReset"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Reset"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:text="Reset" />
 
         <Button
             android:id="@+id/btnPracticeChord"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Practice"
             android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:text="Practice" />
+
+        <Button
+            android:id="@+id/btnDetectChord"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorBackground"
+            android:text="Detect Chord" />
 
         <Button
             android:id="@+id/btnSelectSound"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:text=""
-            android:background="@drawable/btn_select_sound" />
+            android:background="@drawable/btn_select_sound"
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/content_layout"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -16,7 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,7 @@ public class PlayActivity extends AppCompatActivity implements MediaController.M
     private Database database;
 
     private Chord chord;
+    private ImageButton btn_back;
 
     // media player
     private MediaPlayer mMediaPlayer;
@@ -55,9 +59,13 @@ public class PlayActivity extends AppCompatActivity implements MediaController.M
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_play);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initializeDatabase();
 
@@ -67,6 +75,11 @@ public class PlayActivity extends AppCompatActivity implements MediaController.M
 
 
         initializeMedia();
+
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v->{
+            finish();
+        });
     }
 
 
@@ -104,12 +117,12 @@ public class PlayActivity extends AppCompatActivity implements MediaController.M
     public void onBackPressed() {
         super.onBackPressed();
 
-        mMediaController.hide();
-        mHandler.removeCallbacks(mRunnable);
-
-        mMediaPlayer.stop();
-        mMediaPlayer.release();
-        mMediaPlayer = null;
+//        mMediaController.hide();
+//        mHandler.removeCallbacks(mRunnable);
+//
+//        mMediaPlayer.stop();
+//        mMediaPlayer.release();
+ //      mMediaPlayer = null;
     }
 
     @Override
@@ -158,10 +171,10 @@ public class PlayActivity extends AppCompatActivity implements MediaController.M
     }
 
     private void initializeMedia() {
-        File file = new File(chord.getChordPath());
-        Log.d(TAG, file.getAbsolutePath());
-        if (file.exists())
-            initializeMediaPlayer();
+//        File file = new File(chord.getChordPath());
+//        Log.d(TAG, file.getAbsolutePath());
+//        if (file.exists())
+//            initializeMediaPlayer();
     }
 
     private void initializeMediaPlayer() {

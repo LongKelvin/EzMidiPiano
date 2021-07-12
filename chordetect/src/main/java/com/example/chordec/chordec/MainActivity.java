@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity
     private ImageButton stopButton;
     private ImageButton recordingImage;
     private TextView timerTextView;
+    private  Button btn_database;
+    private ImageButton btn_back;
 
     private TextView hintText;
     private ImageView hintImage;
@@ -335,6 +337,11 @@ public class MainActivity extends AppCompatActivity
 
         timerTextView = (TextView) findViewById(R.id.timerTextView);
 
+        btn_database = findViewById(R.id.action_database);
+        btn_database.setOnClickListener(v->{
+            goToDatabaseActivity();
+        });
+
 //        hintText = (TextView) findViewById(R.id.hintText);
 //        hintImage = (ImageView) findViewById(R.id.hintImage);
 //        hintText2 = (TextView) findViewById(R.id.hintText2);
@@ -364,6 +371,12 @@ public class MainActivity extends AppCompatActivity
         });
 
         //setLayoutsVisible();
+
+
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(v->{
+            finish();
+        });
     }
 
 
@@ -702,10 +715,11 @@ public class MainActivity extends AppCompatActivity
      * */
 
     private void stopRecording() {
-        releaseDispatcher();
+
         if(detectChordMode)
             saveChord();
         else {
+            releaseDispatcher();
             isRecordLayoutVisible = false;
             pauseTimer();
             resetAfterRecording();

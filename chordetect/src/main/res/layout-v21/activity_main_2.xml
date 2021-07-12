@@ -7,30 +7,53 @@
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="@string/back"
+                android:src="@drawable/ic_back" />
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="800dp"
         android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="50dp">
+
 
         <Button
             android:id="@+id/recordButton1"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:text="Start Detection"
             android:layout_marginRight="10dp"
-            android:visibility="invisible"
-            android:background="@color/colorBackground"/>
+            android:background="@color/colorBackground"
+            android:text="Start Detection"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/enableChordMode"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:background="@color/colorBackground"
@@ -38,11 +61,18 @@
 
         <Button
             android:id="@+id/enableNoteMode"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:background="@color/colorBackground"
             android:text="Detect Note" />
+
+        <Button
+            android:id="@+id/action_database"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ico_database" />
 
 
     </LinearLayout>
@@ -140,8 +170,8 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:translationZ="90dp" />
+                        android:translationZ="90dp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -150,6 +180,7 @@
 
 
         </LinearLayout>
+
 
 
     </LinearLayout>
@@ -198,15 +229,15 @@
             android:layout_centerVertical="true"
             android:background="@android:color/white" />
 
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/recordingImage"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:layout_marginStart="@+id/pauseButton"-->
-        <!--            android:src="@drawable/microphone"-->
-        <!--            android:visibility="visible"-->
-        <!--            android:layout_centerInParent="true"-->
-        <!--            android:layout_marginLeft="@+id/pauseButton" />-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/recordingImage"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginStart="@+id/pauseButton"-->
+<!--            android:src="@drawable/microphone"-->
+<!--            android:visibility="visible"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginLeft="@+id/pauseButton" />-->
 
         <ImageButton
             android:id="@+id/recordButton"
@@ -214,8 +245,9 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:src="@drawable/microphone"
-            android:scaleType="fitCenter"
-            android:background="@color/main_titlebar" />
+            android:background="@color/main_titlebar"
+            android:scaleType="fitCenter" />
+
         <com.skyfishjy.library.RippleBackground
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -234,8 +266,6 @@
                 android:id="@+id/centerImage"
                 android:src="@drawable/microphone"/>
         </com.skyfishjy.library.RippleBackground>
-
-
 
         <ImageButton
             android:id="@+id/stopButton"

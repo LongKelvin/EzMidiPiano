@@ -4,17 +4,44 @@
     android:background="@color/play_background"
     tools:context="com.example.chordec.chordec.PlayActivity">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:text="Every teardrop is a waterfall"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"/>
+    <LinearLayout
+        android:id="@+id/delete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Every teardrop is a waterfall"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+
+<!--        <Button-->
+<!--            android:id="@+id/action_edit"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/edit" />-->
+
+    </LinearLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"
