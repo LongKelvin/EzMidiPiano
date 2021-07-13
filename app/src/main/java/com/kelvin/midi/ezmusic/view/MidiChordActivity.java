@@ -1,6 +1,7 @@
 package com.kelvin.midi.ezmusic.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -27,26 +30,47 @@ import android.widget.Toast;
 
 import com.kelvin.midi.ezmusic.R;
 import com.kelvin.midi.ezmusic.customview.ChordView;
+import com.kelvin.midi.ezmusic.customview.PianoLargeView;
+import com.kelvin.midi.ezmusic.customview.PianoView;
 import com.kelvin.midi.ezmusic.customview.StaffView;
 import com.kelvin.midi.ezmusic.object.ChordType;
 import com.kelvin.midi.ezmusic.object.KeyMap;
 import com.kelvin.midi.ezmusic.object.Note;
+import com.kelvin.midi.midilib.event.NoteOff;
+import com.kelvin.midi.midilib.event.NoteOn;
+import com.midisheetmusic.ChooseSongActivity;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.sherlock.com.sun.media.sound.SF2Soundbank;
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
+import jp.kshoji.driver.midi.device.MidiInputDevice;
+import jp.kshoji.driver.midi.device.MidiOutputDevice;
+import jp.kshoji.driver.midi.util.UsbMidiDriver;
+import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
 import jp.kshoji.javax.sound.midi.MidiUnavailableException;
 import jp.kshoji.javax.sound.midi.Receiver;
 import jp.kshoji.javax.sound.midi.ShortMessage;
 
+import static com.kelvin.midi.util.Util.print;
+import static com.kelvin.midi.util.Util.print_;
+
 public class MidiChordActivity extends AppCompatActivity {
-    public ChordView chordView;
-    public StaffView staffView;
+    private ChordView chordView;
+    private StaffView staffView;
+    private PianoView piano;
     public ArrayList<Integer> currentChordList;
+
+    //MIDI device
+    private UsbMidiDriver usbMidiDriver;
 
     //Button array
     ArrayList<Button> ChordArrayButton;
@@ -61,8 +85,10 @@ public class MidiChordActivity extends AppCompatActivity {
     public int RootNote = 60;
 
     ArrayList<Note> ListOfRootNote;
+    private KeyMap k;
 
     //Chord Detect
+    public ArrayList<Integer> chord_input_note = new ArrayList<>();
     final Handler chordDetectEventHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
@@ -98,6 +124,9 @@ public class MidiChordActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_midi_chord2);
 
+        //Init Midi Driver
+        InitUsbDriver();
+        usbMidiDriver.open();
         //Setup Synthesizers SF2_Sound
         try {
             SF2Soundbank sf = new SF2Soundbank(getAssets().open(DEFAULT_INSTRUMENT + ".sf2"));
@@ -109,6 +138,33 @@ public class MidiChordActivity extends AppCompatActivity {
         } catch (IOException | MidiUnavailableException | IllegalStateException e) {
             e.printStackTrace();
         }
+
+        //Init PianoView
+        piano = new PianoView(this);
+        piano = findViewById(R.id.piano_view);
+        piano.setReceiverForSynthesizer(receiver);
+
+        piano.setPianoViewListener(new PianoLargeView.PianoViewListener() {
+            @Override
+            public void onNoteOnListener(int noteOn) {
+                chord_input_note.add(noteOn);
+                print("add note " + noteOn);
+                Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
+                print(String.valueOf(chord_input_note));
+                DetectChordFromMidiNote();
+                staffView.setNoteToStaff(noteOn);
+            }
+
+            @Override
+            public void onNoteOffListener(int noteOff) {
+                if (chord_input_note.size() > 4)
+                    chord_input_note.clear();
+                print("remove note " + noteOff);
+                Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
+                print(String.valueOf(chord_input_note));
+                staffView.releaseNote();
+            }
+        });
 
         //Init ChordView
         chordView = new ChordView(this);
@@ -164,7 +220,7 @@ public class MidiChordActivity extends AppCompatActivity {
             ) {
                 chordView.setKey(note, true);
             }
-            KeyMap k = new KeyMap();
+            k = new KeyMap();
             String root = k.GenerateNoteName(RootNote);
             String extension = ChordNoteMidi.get(selected.get()).name;
 
@@ -192,11 +248,11 @@ public class MidiChordActivity extends AppCompatActivity {
             ) {
                 chordView.setKey(note, true);
             }
-            KeyMap k = new KeyMap();
-            String root = k.GenerateNoteName(RootNote);
-            String extension = ChordNoteMidi.get(selected.get()).name;
-
-            txt_chordName.setText(root + " " + extension);
+//            KeyMap k = new KeyMap();
+//            String root = k.GenerateNoteName(RootNote);
+//            String extension = ChordNoteMidi.get(selected.get()).name;
+//
+//            txt_chordName.setText(root + " " + extension);
 
             if(selected.get()<=0){
                 selected.set(ChordNoteMidi.size()-1);
@@ -549,6 +605,285 @@ public class MidiChordActivity extends AppCompatActivity {
         }
 
         chord_dialog.cancel();
+    }
+
+
+
+    private void InitUsbDriver(){
+        usbMidiDriver = new UsbMidiDriver(this) {
+            @Override
+            public void onMidiMiscellaneousFunctionCodes(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onMidiCableEvents(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onMidiSystemCommonMessage(@NonNull MidiInputDevice midiInputDevice, int i, byte[] bytes) {
+
+            }
+
+            @Override
+            public void onMidiSystemExclusive(@NonNull MidiInputDevice midiInputDevice, int i, byte[] bytes) {
+
+            }
+
+            @Override
+            public void onMidiNoteOff(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int note, int velocity) {
+                try {
+
+                    print_("INPUT_SIZE_OFF ", String.valueOf(chord_input_note.size()));
+                    if (chord_input_note.size() > 0) {
+                        if (chord_input_note.contains(note)) {
+                            print_("INDEX : ", "CONTAINS");
+                            int index = chord_input_note.indexOf(note);
+                            print("INDEX OF NOTE OFF: " + index);
+                            chord_input_note.remove(index);
+                        }
+
+                    } else {
+                        chord_input_note.clear();
+                        chord_input_note = new ArrayList<>();
+
+                    }
+                    staffView.releaseNote();
+                    txt_chordName.setText("");
+
+                    Log.e("Chord Detect remove ", String.valueOf(note));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    ShortMessage msg = new ShortMessage();
+                    msg.setMessage(ShortMessage.NOTE_OFF, 0, note, velocity);
+                    receiver.send(msg, -1);
+
+                    // make key on in PianoView
+                    piano.setKey(note, false);
+
+                } catch (InvalidMidiDataException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onMidiNoteOn(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int note, int velocity) {
+                print_("INPUT_SIZE_ON ", String.valueOf(chord_input_note.size()));
+                try {
+                    msg.setMessage(ShortMessage.NOTE_ON, 0, note, velocity);
+                    receiver.send(msg, -1);
+
+                    // make key on in PianoView
+                    piano.setKey(note, true);
+
+                    try {
+                        chord_input_note.add(note);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (chord_input_note.size() >= 3)
+                    {
+                        Collections.sort(chord_input_note);
+                        DetectChordFromMidiNote();
+                        staffView.setNoteToStaff(chord_input_note);
+                    }
+
+
+                } catch (InvalidMidiDataException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onMidiPolyphonicAftertouch(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onMidiControlChange(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2, int i3) {
+
+            }
+
+            @Override
+            public void onMidiProgramChange(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onMidiChannelAftertouch(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onMidiPitchWheel(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onMidiSingleByte(@NonNull MidiInputDevice midiInputDevice, int i, int i1) {
+
+            }
+
+            @Override
+            public void onMidiTimeCodeQuarterFrame(@NonNull MidiInputDevice midiInputDevice, int i, int i1) {
+
+            }
+
+            @Override
+            public void onMidiSongSelect(@NonNull MidiInputDevice midiInputDevice, int i, int i1) {
+
+            }
+
+            @Override
+            public void onMidiSongPositionPointer(@NonNull MidiInputDevice midiInputDevice, int i, int i1) {
+
+            }
+
+            @Override
+            public void onMidiTuneRequest(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiTimingClock(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiStart(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiContinue(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiStop(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiActiveSensing(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onMidiReset(@NonNull MidiInputDevice midiInputDevice, int i) {
+
+            }
+
+            @Override
+            public void onDeviceDetached(@NonNull UsbDevice usbDevice) {
+
+            }
+
+            @Override
+            public void onMidiInputDeviceDetached(@NonNull MidiInputDevice midiInputDevice) {
+
+            }
+
+            @Override
+            public void onMidiOutputDeviceDetached(@NonNull MidiOutputDevice midiOutputDevice) {
+
+            }
+
+            @Override
+            public void onDeviceAttached(@NonNull UsbDevice usbDevice) {
+
+            }
+
+            @Override
+            public void onMidiInputDeviceAttached(@NonNull MidiInputDevice midiInputDevice) {
+
+            }
+
+            @Override
+            public void onMidiOutputDeviceAttached(@NonNull MidiOutputDevice midiOutputDevice) {
+
+            }
+        };
+    }
+
+    public void DetectChordFromMidiNote() {
+        if(!isDetectChordMode)
+            return;
+        print_("INPUT_SIZE_DETECT ", String.valueOf(chord_input_note.size()));
+        ArrayList<Integer> temp_list = new ArrayList<>();
+        Collections.sort(chord_input_note);
+
+        int root_note = chord_input_note.get(0);
+        for (int index = 0; index < chord_input_note.size(); index++) {
+            temp_list.add(chord_input_note.get(index) - root_note);
+        }
+        print("chord_input_ " + chord_input_note);
+        print_("chord temp: ", String.valueOf(temp_list));
+        print_("chord temp SIZE : ", String.valueOf(temp_list.size()));
+        print_("chord temp  : ", String.valueOf(temp_list));
+
+
+        int type = -1;
+        if (temp_list.size() > 2)
+            type = ChordType.FindChordType(temp_list);
+
+//        System.out.println("Chord Type: " + type);
+
+        String chord_extension = "";
+        for (ChordType chord : ChordNoteMidi) {
+            if (chord.type == type) {
+                if (chord.chord_note.equals(temp_list)) {
+                    chord_extension = chord.name;
+                    Log.i("Chord: ", chord.name + " Detect");
+                    break;
+                }
+            }
+        }
+
+//        ArrayList<ChordType> temp = new ArrayList<>();
+//        for (ChordType chord : Chord_List) {
+//            if (chord.type == type) {
+//                if (Collections.indexOfSubList(chord.chord_note, temp_list) != -1) {
+//                    temp.add(chord);
+//                }
+//            }
+//        }
+//        int index = 0;
+//        for(ChordType chord: temp){
+//            index = 0;
+//            int min = temp.get(0).chord_note.size();
+//            if(chord.chord_note.size()< min){
+//                min = chord.chord_note.size();
+//                index = temp.indexOf(chord);
+//            }
+//        }
+//        try{
+//            if (temp.size()>0)
+//                chord_extension = temp.get(index).name;
+//        }
+//        catch (Exception e){e.printStackTrace();}
+
+
+        try {
+            if(k==null) {
+                k = new KeyMap();
+                k.InitKeyMap();
+            }
+
+            String chord_key = k.GetStringNoteName(chord_input_note.get(0));
+            print_("CHORD DETECT ", chord_key + " " + chord_extension);
+            chordDetectEventHandler.sendMessage(Message.obtain(chordDetectEventHandler, 0, chord_key + " " + chord_extension));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
