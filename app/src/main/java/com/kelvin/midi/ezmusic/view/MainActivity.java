@@ -162,6 +162,16 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
     });
 
+    //Note Midi Detect
+    final Handler noteDetectEventHandler = new Handler(new Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+            NoteLabel.setText((String) message.obj);
+            return true;
+        }
+
+    });
+
 
     /**
      * Choose device from spinner
@@ -239,21 +249,23 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         piano.setPianoViewListener(new PianoLargeView.PianoViewListener() {
             @Override
             public void onNoteOnListener(int noteOn) {
-                chord_input_note.add(noteOn);
-                print("add note " + noteOn);
-                Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
-                print(String.valueOf(chord_input_note));
-                DetectChordFromMidiNote();
+//                chord_input_note.add(noteOn);
+//                print("add note " + noteOn);
+//                Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
+//                print(String.valueOf(chord_input_note));
+//                DetectChordFromMidiNote();
+                activeNoteToScreen(noteOn);
                 staffView.setNoteToStaff(noteOn);
             }
 
             @Override
             public void onNoteOffListener(int noteOff) {
-                if (chord_input_note.size() > 4)
-                    chord_input_note.clear();
-                print("remove note " + noteOff);
-                Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
-                print(String.valueOf(chord_input_note));
+//                if (chord_input_note.size() > 4)
+//                    chord_input_note.clear();
+//                print("remove note " + noteOff);
+//                Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
+//                print(String.valueOf(chord_input_note));
+                removeNoteOnScreen(noteOff);
                 staffView.releaseNote();
             }
         });
@@ -366,10 +378,10 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
         //START_REGION_CHORD_DETECT
         InitChordDetectFunction();
-        Button btnResetChord = findViewById(R.id.btn_reset_chord);
-        btnResetChord.setOnClickListener(v -> {
-            chord_input_note.clear();
-        });
+//        Button btnResetChord = findViewById(R.id.btn_reset_chord);
+//        btnResetChord.setOnClickListener(v -> {
+//            chord_input_note.clear();
+//        });
         //END_REGION
 
     }
@@ -837,7 +849,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
     }
 
-    private void InitUsbDriver(){
+    private void InitUsbDriver() {
         usbMidiDriver = new UsbMidiDriver(this) {
             @Override
             public void onDeviceAttached(@NonNull UsbDevice usbDevice) {
@@ -957,16 +969,17 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                         newMidiFile.insertEvent(noteOn);
                     }
 
-                    try {
-                        chord_input_note.add(note);
+//                    try {
+//                        chord_input_note.add(note);
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    if (chord_input_note.size() >= 3)
+//                        //DetectChordFromMidiNote();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (chord_input_note.size() >= 3)
-                        DetectChordFromMidiNote();
-                    // activeNoteToScreen(note);
 
+                    activeNoteToScreen(note);
                     staffView.setNoteToStaff(note);
 
                 } catch (InvalidMidiDataException e) {

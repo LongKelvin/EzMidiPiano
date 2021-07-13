@@ -271,9 +271,8 @@
             <TextView
                 android:id="@+id/chordSymbol"
                 style="@style/Widget.AppCompat.TextView.SpinnerItem"
-                android:layout_width="0dp"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:padding="5dp"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
@@ -307,13 +306,13 @@
                     android:typeface="sans"
                     app:autoSizeTextType="none" />
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_reset_chord"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/recording_button"
-                android:text="Reset" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_reset_chord"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:background="@drawable/recording_button"-->
+<!--                android:text="Reset" />-->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -347,7 +346,7 @@
                 android:background="@drawable/custiom_textview"
                 android:layerType="software"
                 android:requiresFadingEdge="horizontal|vertical"
-                android:text="@string/Mididata"
+                android:text="Note on staff"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/colorBackground"
                 android:textStyle="normal|bold"
@@ -367,7 +366,7 @@
                     android:background="@drawable/custiom_textview"
                     android:layerType="software"
                     android:requiresFadingEdge="horizontal|vertical"
-                    android:text="@string/MidiEvent"
+                    android:text="@string/Display"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/colorBackground"
                     android:textStyle="normal|bold"
@@ -384,7 +383,7 @@
                     android:background="@drawable/custiom_textview"
                     android:layerType="software"
                     android:requiresFadingEdge="horizontal|vertical"
-                    android:text="All Event"
+                    android:text="All Note"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/color_yellow_highlight"
                     android:textStyle="normal|bold"

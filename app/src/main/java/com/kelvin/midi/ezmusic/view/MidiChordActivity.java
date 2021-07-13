@@ -82,6 +82,7 @@ public class MidiChordActivity extends AppCompatActivity {
     //ChordList
     ArrayList<ChordType> ChordNoteMidi;
     List<Integer> chordList;
+    List<Integer> practice_chordList;
     public int RootNote = 60;
 
     ArrayList<Note> ListOfRootNote;
@@ -200,6 +201,7 @@ public class MidiChordActivity extends AppCompatActivity {
         ChordNoteMidi = chordType.GenerateBasicChord();
 
         chordList = new ArrayList<>();
+        practice_chordList = new ArrayList<>();
         AtomicInteger selected = new AtomicInteger();
         ImageButton btnNextChord = findViewById(R.id.btnNextChord);
         btnNextChord.setOnClickListener(v -> {
@@ -208,9 +210,11 @@ public class MidiChordActivity extends AppCompatActivity {
             }
 
             chordList.clear();
+            practice_chordList.clear();
             for (int note : ChordNoteMidi.get(selected.get()).chord_note
             ) {
                 chordList.add(RootNote + note);
+                practice_chordList.add(RootNote + note);
             }
 
             staffView.setNoteToStaff((ArrayList<Integer>) chordList);
@@ -231,8 +235,8 @@ public class MidiChordActivity extends AppCompatActivity {
 
         ImageButton btnPreviousChord = findViewById(R.id.btnSPreviousChord);
         btnPreviousChord.setOnClickListener(v -> {
-            if (selected.get() <0) {
-                selected.set(ChordNoteMidi.size()-1);
+            if (selected.get() < 0) {
+                selected.set(ChordNoteMidi.size() - 1);
             }
 
             chordList.clear();
@@ -254,11 +258,10 @@ public class MidiChordActivity extends AppCompatActivity {
 //
 //            txt_chordName.setText(root + " " + extension);
 
-            if(selected.get()<=0){
-                selected.set(ChordNoteMidi.size()-1);
+            if (selected.get() <= 0) {
+                selected.set(ChordNoteMidi.size() - 1);
                 Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
-            }
-            else{
+            } else {
                 selected.set(selected.get() - 1);
                 Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
             }
@@ -314,37 +317,33 @@ public class MidiChordActivity extends AppCompatActivity {
         });
 
         ImageButton btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(v->{
+        btn_back.setOnClickListener(v -> {
             finish();
         });
 
         btnPracticeChord = findViewById(R.id.btnPracticeChord);
         btnDetectChord = findViewById(R.id.btnDetectChord);
-        btnPracticeChord.setOnClickListener(v->{
-            if(!isPracticeChordMode){
+        btnPracticeChord.setOnClickListener(v -> {
+            if (!isPracticeChordMode) {
                 isPracticeChordMode = true;
                 isDetectChordMode = false;
                 btnPracticeChord.setBackgroundColor(Color.GREEN);
                 btnDetectChord.setBackgroundColor(Color.WHITE);
-            }
-            else
-            {
-                isPracticeChordMode=false;
+            } else {
+                isPracticeChordMode = false;
                 btnPracticeChord.setBackgroundColor(Color.WHITE);
             }
         });
 
-        btnDetectChord.setOnClickListener(v->{
-            if(!isDetectChordMode){
+        btnDetectChord.setOnClickListener(v -> {
+            if (!isDetectChordMode) {
                 isDetectChordMode = true;
-                isPracticeChordMode=false;
+                isPracticeChordMode = false;
 
                 btnDetectChord.setBackgroundColor(Color.GREEN);
                 btnPracticeChord.setBackgroundColor(Color.WHITE);
-            }
-            else
-            {
-                isDetectChordMode=false;
+            } else {
+                isDetectChordMode = false;
                 btnDetectChord.setBackgroundColor(Color.WHITE);
             }
         });
@@ -402,7 +401,7 @@ public class MidiChordActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void showChordTable(ArrayList<ChordType> listChordData, ArrayList<Note> listRootNote) {
         // create an alert builder
-        chord_dialog_builder = new AlertDialog.Builder(this,R.style.MyDialogTheme);
+        chord_dialog_builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.midi_chord_dialog, null);
         chord_dialog_builder.setView(customLayout);
@@ -549,12 +548,14 @@ public class MidiChordActivity extends AppCompatActivity {
 
         RootNote = rootNote;
         chordList.clear();
+        practice_chordList.clear();
         chordView.releaseChordKey();
 
         for (int note : chord.chord_note
         ) {
             chordView.setKey(rootNote + note, true);
             chordList.add(rootNote + note);
+            practice_chordList.add(rootNote + note);
         }
 
         staffView.setNoteToStaff((ArrayList<Integer>) chordList);
@@ -608,8 +609,7 @@ public class MidiChordActivity extends AppCompatActivity {
     }
 
 
-
-    private void InitUsbDriver(){
+    private void InitUsbDriver() {
         usbMidiDriver = new UsbMidiDriver(this) {
             @Override
             public void onMidiMiscellaneousFunctionCodes(@NonNull MidiInputDevice midiInputDevice, int i, int i1, int i2, int i3) {
@@ -649,8 +649,10 @@ public class MidiChordActivity extends AppCompatActivity {
                         chord_input_note = new ArrayList<>();
 
                     }
-                    staffView.releaseNote();
-                    txt_chordName.setText("");
+                    if (isDetectChordMode) {
+                        staffView.releaseNote();
+                        txt_chordName.setText("");
+                    }
 
                     Log.e("Chord Detect remove ", String.valueOf(note));
                 } catch (Exception e) {
@@ -686,11 +688,15 @@ public class MidiChordActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (chord_input_note.size() >= 3)
-                    {
+                    if (chord_input_note.size() >= 3) {
                         Collections.sort(chord_input_note);
                         DetectChordFromMidiNote();
-                        staffView.setNoteToStaff(chord_input_note);
+                        if (isDetectChordMode)
+                            staffView.setNoteToStaff(chord_input_note);
+                    }
+
+                    if (isPracticeChordMode) {
+                        PracticeChord();
                     }
 
 
@@ -814,7 +820,7 @@ public class MidiChordActivity extends AppCompatActivity {
     }
 
     public void DetectChordFromMidiNote() {
-        if(!isDetectChordMode)
+        if (!isDetectChordMode)
             return;
         print_("INPUT_SIZE_DETECT ", String.valueOf(chord_input_note.size()));
         ArrayList<Integer> temp_list = new ArrayList<>();
@@ -872,7 +878,7 @@ public class MidiChordActivity extends AppCompatActivity {
 
 
         try {
-            if(k==null) {
+            if (k == null) {
                 k = new KeyMap();
                 k.InitKeyMap();
             }
@@ -882,6 +888,27 @@ public class MidiChordActivity extends AppCompatActivity {
             chordDetectEventHandler.sendMessage(Message.obtain(chordDetectEventHandler, 0, chord_key + " " + chord_extension));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private void PracticeChord() {
+        if (!isPracticeChordMode)
+            return;
+
+
+        Collections.sort(chord_input_note);
+        Collections.sort(practice_chordList);
+
+        if (practice_chordList.size() >= chord_input_note.size()) {
+            if (practice_chordList.equals(chord_input_note)) {
+                //do something here
+                Log.i("PRACTICE->", "TRUE");
+            } else {
+                //do something here
+                Log.i("PRACTICE->", "FALSE");
+            }
+
         }
 
     }
