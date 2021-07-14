@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_back" />
 
@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/replay"
         android:src="@drawable/ic_replay" />
 
@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/play"
         android:scaleY="1.5"
         android:src="@drawable/ic_play" />
@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/rewind"
         android:src="@drawable/ic_rewind" />
 
@@ -55,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/forward"
         android:src="@drawable/ic_forward" />
 
@@ -87,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.7"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:enabled="false"
         android:text="MIDI"
         android:textColor="@color/md_white_1000"
@@ -102,7 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:text="L"
         android:textColor="@color/md_white_1000"
         android:autoSizeTextType="uniform"
@@ -115,7 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:text="R"
         android:textColor="@color/md_white_1000"
         android:autoSizeTextType="uniform"
@@ -129,7 +129,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/show_hide_piano"
         android:src="@drawable/ic_piano"
         />
@@ -140,7 +140,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-        android:background="#00000000"
+        android:background="@drawable/select_button2"
         android:contentDescription="@string/settings"
         android:src="@drawable/ic_settings" />
 </LinearLayout>

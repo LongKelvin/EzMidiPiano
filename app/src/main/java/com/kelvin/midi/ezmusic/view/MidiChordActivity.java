@@ -324,7 +324,7 @@ public class MidiChordActivity extends AppCompatActivity {
             if(!isPracticeChordMode){
                 isPracticeChordMode = true;
                 isDetectChordMode = false;
-                btnPracticeChord.setBackgroundColor(Color.GREEN);
+                btnPracticeChord.setBackgroundColor(getColor(R.color.colorButtonSelect));
                 btnDetectChord.setBackgroundColor(Color.WHITE);
             }
             else
@@ -338,8 +338,7 @@ public class MidiChordActivity extends AppCompatActivity {
             if(!isDetectChordMode){
                 isDetectChordMode = true;
                 isPracticeChordMode=false;
-
-                btnDetectChord.setBackgroundColor(Color.GREEN);
+                btnDetectChord.setBackgroundColor(getColor(R.color.colorButtonSelect));
                 btnPracticeChord.setBackgroundColor(Color.WHITE);
             }
             else
