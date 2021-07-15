@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -29,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -322,6 +324,7 @@ public class MainActivity extends AppCompatActivity
         spectalInfo = new ArrayList<SpectralInfo>();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initializeWidgets() {
         recordButton =  findViewById(R.id.recordButton);
         recordButton.setOnClickListener(this);
@@ -355,18 +358,18 @@ public class MainActivity extends AppCompatActivity
 
         enableChordMode = findViewById(R.id.enableChordMode);
         enableNoteMode = findViewById(R.id.enableNoteMode);
-        enableNoteMode.setBackgroundColor(Color.GREEN);
+        enableNoteMode.setBackgroundColor(getColor(R.color.colorButtonSelect));
 
         enableChordMode.setOnClickListener(v->{
             enableChordMode();
-            enableChordMode.setBackgroundColor(Color.GREEN);
+            enableChordMode.setBackgroundColor(getColor(R.color.colorButtonSelect));
             enableNoteMode.setBackgroundResource(android.R.drawable.btn_default);
         });
 
 
         enableNoteMode.setOnClickListener(v->{
             disableChordMode();
-            enableNoteMode.setBackgroundColor(Color.GREEN);
+            enableNoteMode.setBackgroundColor(getColor(R.color.colorButtonSelect));
             enableChordMode.setBackgroundResource(android.R.drawable.btn_default);
         });
 

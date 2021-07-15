@@ -31,32 +31,32 @@
         android:weightSum="4"
         android:layout_marginBottom="8dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.42"
-                android:layout_marginRight="5dp"
-                android:text="@string/TimeSignature"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/colorBackground" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.42"
+            android:layout_marginRight="5dp"
+            android:text="@string/TimeSignature"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorBackground" />
 
-            <EditText
-                android:id="@+id/time_signature"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="2.58"
-                android:padding="10dp"
-                android:background="@drawable/edittext_background"
-                android:spinnerMode="dropdown"
-                android:autofillHints="@string/EnterTimeSignature"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="textNoSuggestions"
-                android:textSize="15sp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="5sp"
-                android:autoSizeStepGranularity="1sp"
-                android:hint="@string/EnterTimeSignature"/>
+        <EditText
+            android:id="@+id/time_signature"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="2.58"
+            android:padding="10dp"
+            android:background="@drawable/edittext_background"
+            android:spinnerMode="dropdown"
+            android:autofillHints="@string/EnterTimeSignature"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textNoSuggestions"
+            android:textSize="15sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeStepGranularity="1sp"
+            android:hint="@string/EnterTimeSignature"/>
 
     </LinearLayout>
 
@@ -81,23 +81,23 @@
             android:textColor="@color/colorBackground" />
 
         <EditText
-                android:id="@+id/tempo_spinner"
-                android:layout_width="0dp"
-                android:layout_weight="2.6"
-                android:layout_height="38dp"
-                android:padding="10dp"
-                android:background="@drawable/edittext_background"
-                android:dropDownSelector="@color/colorAccent"
-                android:spinnerMode="dropdown"
-                android:textColor="@color/colorPrimaryDark"
-                android:autofillHints="120"
-                android:inputType="number"
-                android:textSize="15sp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="5sp"
-                android:autoSizeStepGranularity="1sp"
-                android:hint="@string/EnterTempo"/>
+            android:id="@+id/tempo_spinner"
+            android:layout_width="0dp"
+            android:layout_weight="2.6"
+            android:layout_height="38dp"
+            android:padding="10dp"
+            android:background="@drawable/edittext_background"
+            android:dropDownSelector="@color/colorAccent"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/colorPrimaryDark"
+            android:autofillHints="120"
+            android:inputType="number"
+            android:textSize="15sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeStepGranularity="1sp"
+            android:hint="@string/EnterTempo"/>
 
     </LinearLayout>
 
@@ -110,32 +110,32 @@
         android:layout_marginBottom="8dp">
 
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:layout_marginRight="5dp"
-                android:text="@string/SongName"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/colorBackground" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.4"
+            android:layout_marginRight="5dp"
+            android:text="@string/SongName"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorBackground" />
 
-            <EditText
-                android:id="@+id/song_name"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="2.6"
-                android:padding="10dp"
-                android:background="@drawable/edittext_background"
-                android:spinnerMode="dropdown"
-                android:autofillHints="@string/EnterSongName"
-                android:textColor="@color/colorPrimaryDark"
-                android:inputType="textNoSuggestions"
-                android:textSize="15sp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="5sp"
-                android:autoSizeStepGranularity="1sp"
-                android:hint="@string/EnterSongName"/>
+        <EditText
+            android:id="@+id/song_name"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="2.6"
+            android:padding="10dp"
+            android:background="@drawable/edittext_background"
+            android:spinnerMode="dropdown"
+            android:autofillHints="@string/EnterSongName"
+            android:textColor="@color/colorPrimaryDark"
+            android:inputType="textNoSuggestions"
+            android:textSize="15sp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeStepGranularity="1sp"
+            android:hint="@string/EnterSongName"/>
     </LinearLayout>
 
     <LinearLayout
@@ -145,24 +145,24 @@
         android:background="@color/colorPrimaryDark"
         android:baselineAligned="false">
 
-            <Button
-                android:id="@+id/button_cancel"
-                android:layout_margin="10dp"
-                android:text="@string/cancel"
-                android:background="@drawable/custom_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"/>
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_margin="10dp"
+            android:text="@string/cancel"
+            android:background="@drawable/custom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
 
-            <Button
-                android:id="@+id/button_ok"
-                android:layout_margin="10dp"
-                android:text="@string/OK"
-                android:background="@drawable/custom_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"/>
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_margin="10dp"
+            android:text="@string/OK"
+            android:background="@drawable/custom_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
 
     </LinearLayout>
+
+</LinearLayout>
 
 

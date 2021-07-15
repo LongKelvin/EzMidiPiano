@@ -120,7 +120,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="wrap_content">
 
                 <TableLayout
                     android:id="@+id/table_chord"
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:baselineAligned="false"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord_area_view">
@@ -154,7 +154,8 @@
             android:id="@+id/button_cancel"
             android:layout_width="80dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginRight="10dp"
+            style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/custom_button"
             android:text="@string/cancel" />
 
@@ -162,8 +163,8 @@
             android:id="@+id/button_ok"
             android:layout_width="80dp"
             android:layout_height="38dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="10dp"
+            style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/custom_button"
             android:text="@string/OK" />
 

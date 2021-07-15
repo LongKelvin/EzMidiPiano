@@ -73,19 +73,27 @@
             android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
             android:textColor="@color/colorBackground" />
 
-        <TableLayout
-            android:id="@+id/table_chord"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:stretchColumns="*" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/table_chord"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:stretchColumns="*" />
+
+        </ScrollView>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
+        android:padding="10dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:baselineAligned="false"
@@ -95,22 +103,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord_area_view">
-            <Button
-                android:id="@+id/button_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/cancel" />
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/cancel" />
 
-            <Button
-                android:id="@+id/button_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/custom_button"
-                android:text="@string/OK" />
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/OK" />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

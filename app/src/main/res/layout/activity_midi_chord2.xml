@@ -7,108 +7,131 @@
     android:background="@color/colorBackground"
     tools:context=".view.MidiChordActivity">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout_back"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/content_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:contentDescription="@string/back"
-            android:src="@drawable/ic_back" />
-
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:weightSum="10"
         android:background="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/relativeLayout_back"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <Button
-            android:id="@+id/btnSelectChord"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:text="Select Chord" />
-
         <ImageButton
-            android:id="@+id/btnPlayChord"
+            android:id="@+id/btn_back"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:src="@drawable/ic_play"
-            android:text="Play Chord" />
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/select_button2"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="9"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="10">
 
 
-        <ImageButton
-            android:id="@+id/btnSPreviousChord"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:src="@drawable/ic_rewind"
-            android:text="Previous Chord" />
+            <Button
+                android:id="@+id/btnSelectChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/select_button"
+                android:padding="2dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginRight="5dp"
+                android:text="Select Chord" />
 
-        <ImageButton
-            android:id="@+id/btnNextChord"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:src="@drawable/ic_forward"
-            android:text="Next Chord" />
+            <ImageButton
+                android:id="@+id/btnPlayChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:src="@drawable/ic_play"
+                android:text="Play Chord" />
 
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:text="Reset" />
 
-        <Button
-            android:id="@+id/btnPracticeChord"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="0dp"
-            android:background="@color/colorBackground"
-            android:visibility="invisible"
-            android:text="Practice" />
+            <ImageButton
+                android:id="@+id/btnSPreviousChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/select_button"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:src="@drawable/ic_rewind"
+                android:text="Previous Chord" />
 
-        <Button
-            android:id="@+id/btnDetectChord"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorBackground"
-            android:text="Detect Chord" />
+            <ImageButton
+                android:id="@+id/btnNextChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/select_button"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:src="@drawable/ic_forward"
+                android:text="Next Chord" />
 
-        <Button
-            android:id="@+id/btnSelectSound"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_select_sound"
-            android:text="" />
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/select_button"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="Reset" />
+
+            <Button
+                android:id="@+id/btnPracticeChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@color/colorBackground"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="Practice" />
+
+            <Button
+                android:id="@+id/btnDetectChord"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@color/colorBackground"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="Detect Chord" />
+
+            <Button
+                android:id="@+id/btnSelectSound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:background="@drawable/btn_select_sound"
+                android:text="" />
+        </LinearLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -125,11 +148,13 @@
 
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/txt_staffView"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="30dp"
                 android:text="Staffline View"
                 android:textAlignment="center"
@@ -139,7 +164,8 @@
 
             <TextView
                 android:id="@+id/txt_pianoView"
-                android:layout_width="437dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="30dp"
                 android:text="Piano View"
                 android:textAlignment="center"
@@ -157,37 +183,37 @@
             android:orientation="horizontal"
             android:weightSum="2"
             >
-        <com.kelvin.midi.ezmusic.customview.StaffView
-            android:id="@+id/staff_view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="2"
-            android:orientation="vertical">
-
-            <com.kelvin.midi.ezmusic.customview.ChordView
-                android:id="@+id/chord_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:id="@+id/txt_chordName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <com.kelvin.midi.ezmusic.customview.StaffView
+                android:id="@+id/staff_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="C major7"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
+                android:weightSum="2"
+                android:orientation="vertical">
+
+                <com.kelvin.midi.ezmusic.customview.ChordView
+                    android:id="@+id/chord_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/txt_chordName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="C major7"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
 
