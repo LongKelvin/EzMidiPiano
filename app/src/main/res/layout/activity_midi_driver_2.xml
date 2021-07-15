@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -307,13 +307,6 @@
                     android:typeface="sans"
                     app:autoSizeTextType="none" />
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_reset_chord"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/recording_button"
-                android:text="Reset" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

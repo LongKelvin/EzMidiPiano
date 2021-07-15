@@ -23,7 +23,7 @@
         android:layout_width="50dp"
         android:layout_weight="0.1"
         android:layout_height="match_parent"
-        android:background="#00000000"
+        android:background="@drawable/select_button3"
         android:contentDescription="@string/back"
         android:src="@drawable/ic_back" />
 
