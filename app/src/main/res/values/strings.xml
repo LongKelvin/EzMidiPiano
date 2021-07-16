@@ -45,7 +45,7 @@
     <string name="Chord_Extension">Chord Extension</string>
     <string name="Chord_Root">Chord_Root</string>
     <string name="StaffNote">Musical Note</string>
-    <string name="StartNoteDetection">"Start Note Detection "</string>
+    <string name="StartNoteDetection">Microphone Note Detection </string>
     <string name="StartPianoLargeView">Start Piano Large View</string>
     <string name="StartChordLearning">Chord Picker</string>
 

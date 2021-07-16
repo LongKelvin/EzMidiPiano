@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity
         requestPermissions(permissions, requestCode);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -384,8 +385,8 @@ public class MainActivity extends AppCompatActivity
 
 
     private void initializeLayout() {
-        recordLayout = (RelativeLayout) findViewById(R.id.recordLayout);
-        timerLayout = (RelativeLayout) findViewById(R.id.timerLayout);
+//        recordLayout = (RelativeLayout) findViewById(R.id.recordLayout);
+//        timerLayout = (RelativeLayout) findViewById(R.id.timerLayout);
     }
 
     private void initializeRecorder() {

@@ -361,6 +361,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         });
 
 
+        Intent LargePianoViewIntent = new Intent(this, PianoLargeViewActivity.class);
         ImageButton btn_touch_mode = findViewById(R.id.btn_touchMode);
         btn_touch_mode.setOnClickListener(new View.OnClickListener() {
 
@@ -371,8 +372,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
              */
             @Override
             public void onClick(View v) {
-
-
+                startActivity(LargePianoViewIntent);
             }
         });
 
@@ -696,11 +696,11 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             return true;
         }
 
-        if (menuItem.getItemId() == R.id.menu_start_pianoLargeView) {
-            final Intent LargePianoViewIntent = new Intent(this, PianoLargeViewActivity.class);
-            startActivity(LargePianoViewIntent);
-            return true;
-        }
+//        if (menuItem.getItemId() == R.id.menu_start_pianoLargeView) {
+//            final Intent LargePianoViewIntent = new Intent(this, PianoLargeViewActivity.class);
+//            startActivity(LargePianoViewIntent);
+//            return true;
+//        }
 
         if (menuItem.getItemId() == R.id.menu_start_note_detection) {
             final Intent MicroNoteDetectIntent = new Intent(this, com.example.chordec.chordec.MainActivity.class);

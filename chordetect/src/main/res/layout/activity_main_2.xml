@@ -47,25 +47,28 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/colorBackground"
                 android:text="Start Detection"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:layout_marginEnd="10dp" />
 
             <Button
                 android:id="@+id/enableChordMode"
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:background="@color/colorBackground"
                 style="?android:attr/borderlessButtonStyle"
-                android:text="Detect Chord" />
+                android:text="@string/detect_chord"
+                android:layout_marginEnd="10dp" />
 
             <Button
                 android:id="@+id/enableNoteMode"
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:background="@color/colorBackground"
                 style="?android:attr/borderlessButtonStyle"
-                android:text="Detect Note" />
+                android:text="@string/detect_note"
+                android:layout_marginEnd="10dp" />
 
             <Button
                 android:id="@+id/action_database"

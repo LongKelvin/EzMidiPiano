@@ -12,5 +12,8 @@
     <string name="title_activity_play">PlayActivity</string>
     <string name="_0_00"></string>
     <string name="back">Back</string>
+    <string name="detect_chord">Detect Chord</string>
+    <string name="detect_note">Detect Note</string>
+
 
 </resources>
