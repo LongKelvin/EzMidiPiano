@@ -81,6 +81,7 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
     //Note Name to Screen
     private KeyMap keyMap;
+    private ArrayList<String> ListCurrentNote = new ArrayList<>();
 
     //Midi Path
     private final File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
@@ -166,7 +167,15 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     final Handler noteDetectEventHandler = new Handler(new Callback() {
         @Override
         public boolean handleMessage(@NonNull Message message) {
-            NoteLabel.setText((String) message.obj);
+            //NoteLabel.setText((String) message.obj);
+            String temp = "";
+            for (String data: (ArrayList<String>)message.obj
+                 ) {
+                temp+=data;
+            }
+
+            NoteLabel.setText(temp);
+
             return true;
         }
 
@@ -229,6 +238,9 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
         NoteLabel.setText(" ");
         keyMap = new KeyMap();
         keyMap.InitKeyMap();
+
+        ListCurrentNote = new ArrayList<>();
+
 
         //Chord Control
         txtChordDetect = findViewById(R.id.chordSymbol);
@@ -642,15 +654,22 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
 
     public void activeNoteToScreen(int note) {
 
-        if (noteName == null || noteName.isEmpty()) {
-            noteName = "";
-        }
+//        if (noteName == null || noteName.isEmpty()) {
+//            noteName = "";
+//        }
         String stringNoteName = (keyMap.GetStringNoteName(note));
-        if (noteName != null)
-            noteName += stringNoteName;
+        if(!stringNoteName.equals(""))
+            ListCurrentNote.add(stringNoteName);
+//        if (noteName != null){
+//            noteName += stringNoteName;
+//            ListCurrentNote.add(noteName)
+//
+//        }
+
+
 
         try {
-            noteDetectEventHandler.sendMessage(Message.obtain(noteDetectEventHandler, 0, noteName));
+            noteDetectEventHandler.sendMessage(Message.obtain(noteDetectEventHandler, 0, ListCurrentNote));
             //NoteLabel.setText(noteName);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -659,28 +678,56 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
     public void removeNoteOnScreen(int note) {
+        Log.e("LIST NOTE SIZE : ",String.valueOf(ListCurrentNote.size()));
         countTimeDisplay += 1;
         String noteRemove = keyMap.GetStringNoteName(note);
-        if (noteRemove == null)
+        if (noteRemove == null || noteRemove.equals("")){
+           ListCurrentNote.clear();
+            noteDetectEventHandler.sendMessage(Message.obtain(noteDetectEventHandler, 0, ListCurrentNote));
+            Log.e("NOTE ", "RETURN NULL");
             return;
-        noteName = noteName.replace(noteRemove, "");
-        if (noteName != null) {
-            try {
-                NoteLabel.setText(noteName);
-            } catch (Exception exception) {
-                exception.printStackTrace();
+        }
+
+
+//        for (String data:ListCurrentNote
+//             ) {
+//            if(data.equals(noteRemove)){
+//                ListCurrentNote.remove(ListCurrentNote.indexOf(data));
+//                Log.e("REMOVE_: ", data);
+//            }
+//        }
+        try {
+            if(ListCurrentNote.contains(noteRemove)){
+                ListCurrentNote.remove(noteRemove);
+                Log.e("REMOVE_NOTE: ", noteRemove);
             }
 
         }
-
-        Log.e("COUNT_TIME: ", String.valueOf(countTimeDisplay));
-        Log.e("NOTENAME: ", String.valueOf(noteName));
-        //reset value of string note name
-        if (countTimeDisplay > 30) {
-            countTimeDisplay = 0;
-            noteName = "";
-            NoteLabel.setText("");
+        catch (Exception e){
+            e.printStackTrace();
+            ListCurrentNote.clear();
         }
+
+        noteDetectEventHandler.sendMessage(Message.obtain(noteDetectEventHandler, 0, ListCurrentNote));
+
+//        //noteName = noteName.replace(noteRemove, "");
+//        if (noteName != null) {
+//            try {
+//                NoteLabel.setText(noteName);
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//            }
+//
+//        }
+
+//        Log.e("COUNT_TIME: ", String.valueOf(countTimeDisplay));
+//        Log.e("NOTENAME: ", String.valueOf(noteName));
+//        //reset value of string note name
+//        if (countTimeDisplay > 30) {
+//            countTimeDisplay = 0;
+//            noteName = "";
+//            NoteLabel.setText("");
+//        }
     }
 
     @Override
@@ -931,17 +978,40 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
                     //msg.setMessage(ShortMessage.NOTE_OFF, 0, note);
                     receiver.send(msg, -1);
 
-                    // make key on in PianoView
-                    piano.setKey(note, false);
-                    removeNoteOnScreen(note);
+
+                    try {
+                        // make key on in PianoView
+                        piano.setKey(note, false);
+                        runOnUiThread(() -> {
+                            removeNoteOnScreen(note);
+                        });
+
+                        staffView.releaseNote();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        piano.setKey(note, false);
+                        runOnUiThread(() -> {
+                            NoteLabel.setText("");
+                        });
+
+                        staffView.releaseNote();
+                    }
+
+
                     //recording
                     if (isRecording) {
                         ticks += 120;
                         NoteOff noteOff = new NoteOff(ticks, channel, note, velocity);
                         newMidiFile.insertEvent(noteOff);
                     }
-                    staffView.releaseNote();
+
                 } catch (InvalidMidiDataException e) {
+                    Log.e("NOTE_OFF_ERR->", "CAN NOT SEND MIDI OFF");
+                    ListCurrentNote.clear();
+                    runOnUiThread(()->{
+                        NoteLabel.setText("");
+                    });
                     e.printStackTrace();
                 }
 
