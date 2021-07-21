@@ -101,12 +101,14 @@ public class PianoLargeViewActivity extends AppCompatActivity {
             public void onNoteOnListener(int noteOn) {
                 _noteOn = noteOn;
                 Log.e("PianoView_noteOn:: ", String.valueOf(_noteOn));
+                //pianoLargeView.setKey(noteOn,true);
             }
 
             @Override
             public void onNoteOffListener(int noteOff) {
                 _noteOff = noteOff;
                 Log.e("PianoView_noteOff:: ", String.valueOf(_noteOff));
+                //pianoLargeView.setKey(noteOff,false);
             }
         });
 

@@ -650,7 +650,8 @@ public class MainActivity extends Activity implements PopupMenu.OnMenuItemClickL
             noteName += stringNoteName;
 
         try {
-            NoteLabel.setText(noteName);
+            noteDetectEventHandler.sendMessage(Message.obtain(noteDetectEventHandler, 0, noteName));
+            //NoteLabel.setText(noteName);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

@@ -83,7 +83,8 @@ public class MidiChordActivity extends AppCompatActivity {
     ArrayList<ChordType> ChordNoteMidi;
     List<Integer> chordList;
     List<Integer> practice_chordList;
-    public int RootNote = 60;
+    private int RootNote = 60;
+    private int temp_RootNote = 60;
 
     ArrayList<Note> ListOfRootNote;
     private KeyMap k;
@@ -148,21 +149,21 @@ public class MidiChordActivity extends AppCompatActivity {
         piano.setPianoViewListener(new PianoLargeView.PianoViewListener() {
             @Override
             public void onNoteOnListener(int noteOn) {
-                chord_input_note.add(noteOn);
-                print("add note " + noteOn);
-                Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
-                print(String.valueOf(chord_input_note));
-                DetectChordFromMidiNote();
+//                chord_input_note.add(noteOn);
+//                print("add note " + noteOn);
+//                Log.e("PianoView_noteOn:: ", String.valueOf(noteOn));
+//                print(String.valueOf(chord_input_note));
+//                DetectChordFromMidiNote();
                 staffView.setNoteToStaff(noteOn);
             }
 
             @Override
             public void onNoteOffListener(int noteOff) {
-                if (chord_input_note.size() > 4)
-                    chord_input_note.clear();
-                print("remove note " + noteOff);
-                Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
-                print(String.valueOf(chord_input_note));
+//                if (chord_input_note.size() > 4)
+//                    chord_input_note.clear();
+//                print("remove note " + noteOff);
+//                Log.e("PianoView_noteOff:: ", String.valueOf(noteOff));
+//                print(String.valueOf(chord_input_note));
                 staffView.releaseNote();
             }
         });
@@ -189,6 +190,12 @@ public class MidiChordActivity extends AppCompatActivity {
         Note rootNote = new Note();
         ListOfRootNote = rootNote.createRootNoteForChord();
 
+
+        //Init keymap
+        k = new KeyMap();
+        k.InitKeyMap();
+
+        //Button Reset
         Button btnReset = findViewById(R.id.btnReset);
         btnReset.setOnClickListener(v -> {
             chordView.releaseChordKey();
@@ -203,6 +210,8 @@ public class MidiChordActivity extends AppCompatActivity {
         chordList = new ArrayList<>();
         practice_chordList = new ArrayList<>();
         AtomicInteger selected = new AtomicInteger();
+
+        //Button NextChord
         ImageButton btnNextChord = findViewById(R.id.btnNextChord);
         btnNextChord.setOnClickListener(v -> {
             if (selected.get() >= ChordNoteMidi.size()) {
@@ -213,8 +222,8 @@ public class MidiChordActivity extends AppCompatActivity {
             practice_chordList.clear();
             for (int note : ChordNoteMidi.get(selected.get()).chord_note
             ) {
-                chordList.add(RootNote + note);
-                practice_chordList.add(RootNote + note);
+                chordList.add(temp_RootNote + note);
+                practice_chordList.add(temp_RootNote + note);
             }
 
             staffView.setNoteToStaff((ArrayList<Integer>) chordList);
@@ -224,8 +233,7 @@ public class MidiChordActivity extends AppCompatActivity {
             ) {
                 chordView.setKey(note, true);
             }
-            k = new KeyMap();
-            String root = k.GenerateNoteName(RootNote);
+            String root = k.GetStringNoteName(temp_RootNote);
             String extension = ChordNoteMidi.get(selected.get()).name;
 
             txt_chordName.setText(root + " " + extension);
@@ -242,7 +250,7 @@ public class MidiChordActivity extends AppCompatActivity {
             chordList.clear();
             for (int note : ChordNoteMidi.get(selected.get()).chord_note
             ) {
-                chordList.add(RootNote + note);
+                chordList.add(temp_RootNote + note);
             }
 
             staffView.setNoteToStaff((ArrayList<Integer>) chordList);
@@ -253,18 +261,17 @@ public class MidiChordActivity extends AppCompatActivity {
                 chordView.setKey(note, true);
             }
 //            KeyMap k = new KeyMap();
-//            String root = k.GenerateNoteName(RootNote);
-//            String extension = ChordNoteMidi.get(selected.get()).name;
-//
-//            txt_chordName.setText(root + " " + extension);
+            String root = k.GetStringNoteName(temp_RootNote);
+            String extension = ChordNoteMidi.get(selected.get()).name;
+
+            txt_chordName.setText(root + " " + extension);
 
             if (selected.get() <= 0) {
                 selected.set(ChordNoteMidi.size() - 1);
-                Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
             } else {
                 selected.set(selected.get() - 1);
-                Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
             }
+            Log.i("SELECTED_VALUE:: ", String.valueOf(selected.get()));
 
         });
 
@@ -345,6 +352,7 @@ public class MidiChordActivity extends AppCompatActivity {
             } else {
                 isDetectChordMode = false;
                 btnDetectChord.setBackgroundColor(Color.WHITE);
+                RootNote = temp_RootNote;
             }
         });
     }
@@ -547,6 +555,7 @@ public class MidiChordActivity extends AppCompatActivity {
         }
 
         RootNote = rootNote;
+        temp_RootNote = rootNote;
         chordList.clear();
         practice_chordList.clear();
         chordView.releaseChordKey();
@@ -636,19 +645,21 @@ public class MidiChordActivity extends AppCompatActivity {
                 try {
 
                     print_("INPUT_SIZE_OFF ", String.valueOf(chord_input_note.size()));
-                    if (chord_input_note.size() > 0) {
-                        if (chord_input_note.contains(note)) {
-                            print_("INDEX : ", "CONTAINS");
-                            int index = chord_input_note.indexOf(note);
-                            print("INDEX OF NOTE OFF: " + index);
-                            chord_input_note.remove(index);
-                        }
-
-                    } else {
-                        chord_input_note.clear();
-                        chord_input_note = new ArrayList<>();
-
-                    }
+//                    if (chord_input_note.size() > 0) {
+////                        if (chord_input_note.contains(note)) {
+////                            print_("INDEX : ", "CONTAINS");
+////                            int index = chord_input_note.indexOf(note);
+////                            print("INDEX OF NOTE OFF: " + index);
+////                            chord_input_note.remove(index);
+////                        }
+//
+//                    } else {
+//                        chord_input_note.clear();
+//                        chord_input_note = new ArrayList<>();
+//
+//                    }
+                    chord_input_note.clear();
+                    chord_input_note = new ArrayList<>();
                     if (isDetectChordMode) {
                         staffView.releaseNote();
                         txt_chordName.setText("");
@@ -826,7 +837,12 @@ public class MidiChordActivity extends AppCompatActivity {
         ArrayList<Integer> temp_list = new ArrayList<>();
         Collections.sort(chord_input_note);
 
-        int root_note = chord_input_note.get(0);
+        int root_note;
+        if(chord_input_note.size()>0)
+             root_note = chord_input_note.get(0);
+        else
+            return;
+
         for (int index = 0; index < chord_input_note.size(); index++) {
             temp_list.add(chord_input_note.get(index) - root_note);
         }
@@ -883,7 +899,9 @@ public class MidiChordActivity extends AppCompatActivity {
                 k.InitKeyMap();
             }
 
-            String chord_key = k.GetStringNoteName(chord_input_note.get(0));
+            RootNote = root_note;
+            Log.e("RootsNOte: ", String.valueOf(RootNote));
+            String chord_key = k.GetStringNoteName(RootNote);
             print_("CHORD DETECT ", chord_key + " " + chord_extension);
             chordDetectEventHandler.sendMessage(Message.obtain(chordDetectEventHandler, 0, chord_key + " " + chord_extension));
         } catch (Exception e) {
