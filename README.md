@@ -15,39 +15,37 @@ An Android app provide Midi connection device and javax.sound.midi
 ## About EzMidiPiano
 - I started this project for my interesting on Music and Midi Technology. Before this project, It take me 2 month to discover
 where to start with. Midi is something popular in Desktop app, but it may be some more different with Android device.
-- My main popurse is learning about Midi Technology and apply it to Android device with it is more different from the orginal.
+- My main purpose is learning about Midi Technology and apply it to Android device with it is more different from the orginal.
 - By using EzMidiPiano, you can easily to connect your Midi controller to your Android phone and enjoy it.
 
 
-## Setup
-- If anyone interesting on this project, feel free to clone it into your local repository.
+
+## Installation
+To get started you need Android Studio which you can find here: 
+[Android Studio](https://developer.android.com/studio)
+
+After that, just clone or download zip file project and then run src code in Android Studio IDE.
+
+Or if you just need a APK file, find here:
+[EzMidiPiano-Release APK](https://github.com/LongKelvin/EzMidiPiano/releases) 
+
+Download the latest APK release file and install it to your Android Phone.
 
 
-- For setup, it is better to use Android Studio with the lastest version (or maybe some ide that support Android project) to open.
-
-
-- This project is not completed but you can build a APK full version of it and install to your Android phone.
-
-## Language
+## Programming Language
 - Java Android
 - C/C++ JNI
 
 ## Library
 - [SherlockMidi Synthesiszer]((https://github.com/KyoSherlock/MidiDriver))
-- [Kshoij USB Midi Driver]((https://github.com/kshoji/javax.sound.midi-for-Android) )
+- [Kshoji USB Midi Driver]((https://github.com/kshoji/javax.sound.midi-for-Android) )
 
-## Sf2 Setup
-You can easily add your favorite sound into app. 
-
-Just copy sf2 file into your Android phone. This app will auto recognizes your sound.
 
 ## Sf2 Sound
 This project have some good sf2 sound. Here is list of some instruments: 
 - Korg Grand Piano
 - Korg Epiano
 - Yamha Organ
-- Monstate Live String
-
 - Acoustic Guitar
 - Finger Bass
 - Synth Lead (Free SF2)
@@ -57,7 +55,7 @@ This project have some good sf2 sound. Here is list of some instruments:
 - In Progressing
 
 ## Special Thanks
-+ Kshoij for USB Midi Driver
++ Kshoji for USB Midi Driver
 + SherLock for Midi Synthesiszer
 
 ## Authors
