@@ -24,10 +24,12 @@ public class KeyMap {
             }
         }
         return keyMap;
-
     }
 
+
     public String GenerateNoteName(int note) {
+        if(note>47)
+            note -=12;
         String noteName = "";
         switch (note) {
             case 36:
@@ -69,7 +71,6 @@ public class KeyMap {
             default:
                 noteName = " ";
                 break;
-
         }
         return noteName;
     }
@@ -80,5 +81,53 @@ public class KeyMap {
             return keyMap.get(noteValue);
         else return "";
     }
+
+    public int GenerateNoteMidiValueFromString(String noteName) {
+        int noteValue = 0;
+        switch (noteName) {
+            case "C":
+                noteValue = 36;
+                break;
+            case "C#":
+                noteValue = 37;
+                break;
+            case "D":
+                noteValue = 38;
+                break;
+            case "D#":
+                noteValue = 39;
+                break;
+            case "E":
+                noteValue = 40;
+                break;
+            case "F":
+                noteValue = 41;
+                break;
+            case "F#":
+                noteValue = 42;
+                break;
+            case "G":
+                noteValue = 43;
+                break;
+            case "G#":
+                noteValue = 44;
+                break;
+            case "A":
+                noteValue = 45;
+                break;
+            case "Bb":
+                noteValue = 46;
+                break;
+            case "B":
+                noteValue = 47;
+                break;
+            default:
+                noteValue = -1;
+                break;
+        }
+        return noteValue;
+    }
+
+
 
 }

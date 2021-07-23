@@ -1,0 +1,52 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:weightSum="10"
+        android:id="@+id/delete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:background="#00000000"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/itemsText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9.8"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:text="10 records 110 minutes"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/action_delete"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/delete" />
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"></ListView>
+
+</LinearLayout>

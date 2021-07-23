@@ -38,6 +38,7 @@ public class RecentSongsActivity extends ListActivity {
         super.onCreate(state);
         setTitle("MidiSheetMusic: Recent Songs");
         getListView().setBackgroundColor(Color.rgb(0, 0, 0));
+        getListView().setDrawSelectorOnTop(true);
         // Load the list of songs
         loadFileList();
         IconArrayAdapter<FileUri> adapter = new IconArrayAdapter<FileUri>(this, android.R.layout.simple_list_item_1, filelist);

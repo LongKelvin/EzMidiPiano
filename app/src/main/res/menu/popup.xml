@@ -4,6 +4,18 @@
         android:title="@string/StartMidiSheet"
         android:icon="@drawable/ic_piano" />
 
+    <item android:id="@+id/menu_start_chord_activity"
+        android:title="@string/StartChordLearning"
+        android:icon="@drawable/ic_piano" />
+
+<!--    <item android:id="@+id/menu_start_pianoLargeView"-->
+<!--        android:title="@string/StartPianoLargeView"-->
+<!--        android:icon="@drawable/ic_piano" />-->
+
+    <item android:id="@+id/menu_start_note_detection"
+        android:title="@string/StartNoteDetection"
+        android:icon="@drawable/ic_piano" />
+
 </menu>
 
 

@@ -28,7 +28,7 @@
     <string name="SongName">Song Name</string>
     <string name="EnterSongName">Tap To Enter Song Name</string>
     <string name="str_recording">RECORDING</string>
-    <string name="note_letter"></string>
+    <string name="note_letter" />
     <string name="note_C">C</string>
     <string name="instruments_name_tv">Instruments Information</string>
     <string name="name">Name:</string>
@@ -39,6 +39,15 @@
     <string name="Mididata">Midi Data Send</string>
     <string name="MidiEvent">Midi Event</string>
     <string name="StartMidiSheet">Open Midi Sheet Page</string>
+    <string name="start_metronome">Start</string>
+    <string name="stop_metronome">Stop</string>
+    <string name="Select_Chord">Select Chord</string>
+    <string name="Chord_Extension">Chord Extension</string>
+    <string name="Chord_Root">Chord_Root</string>
+    <string name="StaffNote">Musical Note</string>
+    <string name="StartNoteDetection">Microphone Note Detection </string>
+    <string name="StartPianoLargeView">Start Piano Large View</string>
+    <string name="StartChordLearning">Chord Picker</string>
 
     <!-- Order is important here: -->
     <string-array name="instrument_name">

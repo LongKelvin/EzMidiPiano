@@ -1,101 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<merge xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--tools:parentTag="android.widget.LinearLayout">-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="fill_parent"
     android:layout_height="@dimen/toolbar_height"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginEnd="8dp"
-    android:orientation="horizontal">
+    android:weightSum="20"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <ImageButton
         android:id="@+id/btn_back"
-        style="@style/ToolbarButtonStyle"
-        android:src="@drawable/ic_back"
-        android:contentDescription="@string/back" />
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back" />
 
     <ImageButton
         android:id="@+id/btn_replay"
-        style="@style/ToolbarButtonStyle"
-        android:src="@drawable/ic_replay"
-        android:contentDescription="@string/replay" />
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/replay"
+        android:src="@drawable/ic_replay" />
 
     <ImageButton
         android:id="@+id/btn_play"
-        style="@style/ToolbarButtonStyle"
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/play"
         android:scaleY="1.5"
-        android:src="@drawable/ic_play"
-        android:contentDescription="@string/play" />
+        android:src="@drawable/ic_play" />
 
     <ImageButton
         android:id="@+id/btn_rewind"
-        style="@style/ToolbarButtonStyle"
-        android:src="@drawable/ic_rewind"
-        android:contentDescription="@string/rewind" />
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/rewind"
+        android:src="@drawable/ic_rewind" />
 
     <ImageButton
         android:id="@+id/btn_forward"
-        style="@style/ToolbarButtonStyle"
-        android:src="@drawable/ic_forward"
-        android:contentDescription="@string/forward" />
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/forward"
+        android:src="@drawable/ic_forward" />
 
     <TextView
         android:id="@+id/txt_speed"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/toolbar_height"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
         android:fontFamily="monospace"
-        android:padding="8dp"
+        android:gravity="center"
         android:text="100%"
-        tools:text="100%" />
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeStepGranularity="1sp"
+        android:textColor="@color/md_white_1000"/>
 
     <SeekBar
         android:id="@+id/speed_bar"
-        android:layout_width="146dp"
-        android:layout_height="@dimen/toolbar_height"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
         android:max="150"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:progress="100" />
+        android:progress="100"
+        />
 
     <Button
         android:id="@+id/btn_midi"
-        style="@style/DisabledToolbarButton"
-        android:layout_width="59dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.7"
+        android:background="@drawable/select_button2"
         android:enabled="false"
         android:text="MIDI"
-        android:textSize="16sp" />
+        android:textColor="@color/md_white_1000"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeStepGranularity="1sp"/>
 
 
     <Button
         android:id="@+id/btn_left"
-        style="@style/ToolbarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:background="@drawable/select_button2"
         android:text="L"
-        android:textColor="@color/IconColor"
-        android:textSize="16sp" />
+        android:textColor="@color/md_white_1000"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeStepGranularity="1sp"/>
 
     <Button
         android:id="@+id/btn_right"
-        style="@style/ToolbarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:background="@drawable/select_button2"
         android:text="R"
-        android:textColor="@color/IconColor"
-        android:textSize="16sp" />
+        android:textColor="@color/md_white_1000"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeStepGranularity="1sp"/>
 
     <ImageButton
         android:id="@+id/btn_piano"
-        style="@style/ToolbarButtonStyle"
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/show_hide_piano"
         android:src="@drawable/ic_piano"
-        android:contentDescription="@string/show_hide_piano" />
+        />
 
     <ImageButton
         android:id="@+id/btn_settings"
-        style="@style/ToolbarButtonStyle"
-        android:src="@drawable/ic_settings"
-        android:contentDescription="@string/settings" />
+        android:tint="@color/md_white_1000"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:background="@drawable/select_button2"
+        android:contentDescription="@string/settings"
+        android:src="@drawable/ic_settings" />
 </LinearLayout>
-<!--</merge>-->
+    <!--</merge>-->

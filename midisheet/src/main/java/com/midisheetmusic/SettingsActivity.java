@@ -17,6 +17,8 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +59,10 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.settings_activity);
         options = (MidiOptions) getIntent().getSerializableExtra(settingsID);
         defaultOptions = (MidiOptions) getIntent().getSerializableExtra(defaultSettingsID);
