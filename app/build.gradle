@@ -66,4 +66,7 @@ dependencies {
     implementation 'jp.kshoji:midi-driver:0.1.4:@aar'
     implementation 'jp.kshoji:javax-sound-midi:0.0.3:@aar'
 
+    //implement custom pianoview
+    implementation 'com.github.ParadiseHell:PianoView:1.1.1'
+
 }

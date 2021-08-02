@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.PianoLargeViewActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--        <SeekBar-->
+<!--            android:id="@+id/pianoViewSeekBar"-->
+<!--            android:layout_width="400dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:maxHeight="6dip"-->
+<!--            android:minHeight="6dip"-->
+<!--            android:paddingLeft="30dp"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:paddingRight="30dp"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            />-->
+
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+<!--            <com.kelvin.midi.ezmusic.customview.PianoLargeView-->
+<!--                android:id="@+id/piano_large_view"-->
+<!--                android:layout_width="3200dp"-->
+<!--                android:layout_height="200dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            </com.kelvin.midi.ezmusic.customview.PianoLargeView>-->
+            <com.chengtao.pianoview.view.PianoView
+                android:id="@+id/pv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

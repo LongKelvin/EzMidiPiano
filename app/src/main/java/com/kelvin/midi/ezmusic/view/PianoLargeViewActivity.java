@@ -1,137 +1,280 @@
 package com.kelvin.midi.ezmusic.view;
 
-import android.os.Build;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.chengtao.pianoview.entity.AutoPlayEntity;
+import com.chengtao.pianoview.entity.Piano;
+import com.chengtao.pianoview.listener.OnLoadAudioListener;
+import com.chengtao.pianoview.listener.OnPianoAutoPlayListener;
+import com.chengtao.pianoview.listener.OnPianoListener;
+import com.chengtao.pianoview.utils.AutoPlayUtils;
+import com.chengtao.pianoview.view.PianoView;
 import com.kelvin.midi.ezmusic.R;
-import com.kelvin.midi.ezmusic.customview.PianoLargeView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import cn.sherlock.com.sun.media.sound.SF2Soundbank;
-import cn.sherlock.com.sun.media.sound.SoftSynthesizer;
-import jp.kshoji.javax.sound.midi.MidiUnavailableException;
-import jp.kshoji.javax.sound.midi.Receiver;
-import jp.kshoji.javax.sound.midi.ShortMessage;
+@SuppressWarnings("FieldCanBeLocal")
+public class PianoLargeViewActivity extends Activity
+        implements OnPianoListener, OnLoadAudioListener, SeekBar.OnSeekBarChangeListener,
+        View.OnClickListener, OnPianoAutoPlayListener {
+    //flight_of_the_bumble_bee,simple_little_star_config
+    private static final String CONFIG_FILE_NAME = "simple_little_star_config";
+    private static final boolean USE_CONFIG_FILE = true;
+    private PianoView pianoView;
+    private SeekBar seekBar;
+    private Button leftArrow;
+    private Button rightArrow;
+    private Button btnMusic;
+    private int scrollProgress = 0;
+    private final static float SEEKBAR_OFFSET_SIZE = -12;
+    //
+    private boolean isPlay = false;
+    private ArrayList<AutoPlayEntity> litterStarList = null;
+    private static final long LITTER_STAR_BREAK_SHORT_TIME = 500;
+    private static final long LITTER_STAR_BREAK_LONG_TIME = 1000;
 
-public class PianoLargeViewActivity extends AppCompatActivity {
-    private ShortMessage msg = new ShortMessage();
-
-    final private String DEFAULT_INSTRUMENT = "GrandPiano";
-    private SoftSynthesizer synth;
-    PianoLargeView pianoLargeView;
-    int piano_size_on_change = 36;
-    int _noteOn = 0;
-    int _noteOff = 0;
-    private Receiver receiver;
-
-    //View
-    HorizontalScrollView horizontalScrollView;
-    int pianoViewWidth = 3200;
-    SeekBar pianoViewSeekBar;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //create landscape screen
-        //request full screen for login activity
+    @Override protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piano_large_view);
-
-        horizontalScrollView = findViewById(R.id.scrollView);
-        horizontalScrollView.setScrollBarSize(300);
-        horizontalScrollView.setHorizontalScrollBarEnabled(true);
-
-        //Init PianoView
-        pianoLargeView = new PianoLargeView(this);
-        pianoLargeView = findViewById(R.id.piano_large_view);
-        pianoViewWidth = pianoLargeView.getWidth();
-
-
-        //Set PianoView to Center
-        SetPianoViewToCenter();
-
-        //Seek bar
-        pianoViewSeekBar = findViewById(R.id.pianoViewSeekBar);
-        pianoViewSeekBar.setMax(36);
-        pianoViewSeekBar.setProgress(36);
-        this.pianoViewSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progress = 36;
-
-            // When Progress value changed.
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
-                if(progressValue<20)
-                    progressValue = 20;
-
-                progress = progressValue;
-                pianoLargeView.setPianoViewWidth(progress);
-
+        //view
+        pianoView = findViewById(R.id.pv);
+        pianoView.setSoundPollMaxStream(10);
+        seekBar = findViewById(R.id.sb);
+        seekBar.setThumbOffset((int) convertDpToPixel(SEEKBAR_OFFSET_SIZE));
+        leftArrow = findViewById(R.id.iv_left_arrow);
+        rightArrow = findViewById(R.id.iv_right_arrow);
+        btnMusic = findViewById(R.id.iv_music);
+        //listener
+        pianoView.setPianoListener(this);
+        pianoView.setAutoPlayListener(this);
+        pianoView.setLoadAudioListener(this);
+        seekBar.setOnSeekBarChangeListener(this);
+        rightArrow.setOnClickListener(this);
+        leftArrow.setOnClickListener(this);
+        btnMusic.setOnClickListener(this);
+        //init
+        if (USE_CONFIG_FILE) {
+            AssetManager assetManager = getAssets();
+            try {
+                litterStarList = AutoPlayUtils.getAutoPlayEntityListByCustomConfigInputStream(
+                        assetManager.open(CONFIG_FILE_NAME));
+            } catch (IOException e) {
+                Log.e("TAG", e.getMessage());
             }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-
-            }
-        });
-
-
-        pianoLargeView.setPianoViewListener(new PianoLargeView.PianoViewListener() {
-            @Override
-            public void onNoteOnListener(int noteOn) {
-                _noteOn = noteOn;
-                Log.e("PianoView_noteOn:: ", String.valueOf(_noteOn));
-                //pianoLargeView.setKey(noteOn,true);
-            }
-
-            @Override
-            public void onNoteOffListener(int noteOff) {
-                _noteOff = noteOff;
-                Log.e("PianoView_noteOff:: ", String.valueOf(_noteOff));
-                //pianoLargeView.setKey(noteOff,false);
-            }
-        });
-
-        //Setup Synthesizers SF2_Sound
-        try {
-            SF2Soundbank sf = new SF2Soundbank(getAssets().open(DEFAULT_INSTRUMENT + ".sf2"));
-            synth = new SoftSynthesizer();
-            synth.open();
-            synth.loadAllInstruments(sf);
-            synth.getChannels()[0].programChange(0);
-            receiver = synth.getReceiver();
-        } catch (IOException | MidiUnavailableException | IllegalStateException e) {
-            e.printStackTrace();
+        } else {
+            initLitterStarList();
         }
-
-        pianoLargeView.setReceiverForSynthesizer(receiver);
     }
 
-    private void SetPianoViewToCenter() {
-        int hsvWidth = horizontalScrollView.getWidth();
-        int offset = pianoViewWidth/2;
 
-        // Horizontal smooth scroll offset
-        horizontalScrollView.smoothScrollBy(500, 0);
+    private void initLitterStarList() {
+        litterStarList = new ArrayList<>();
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 5, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 5, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_LONG_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_LONG_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_LONG_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_LONG_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 5, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 5, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 4, LITTER_STAR_BREAK_LONG_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 3, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 2, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 1, LITTER_STAR_BREAK_SHORT_TIME));
+        litterStarList.add(
+                new AutoPlayEntity(Piano.PianoKeyType.WHITE, 4, 0, LITTER_STAR_BREAK_LONG_TIME));
+    }
+
+    @Override public void onPianoInitFinish() {
+
+    }
+
+    @Override public void onPianoClick(Piano.PianoKeyType type, Piano.PianoVoice voice, int group,
+                                       int positionOfGroup) {
+    }
+
+    @Override public void loadPianoAudioStart() {
+        Toast.makeText(getApplicationContext(), "loadPianoMusicStart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public void loadPianoAudioFinish() {
+        Toast.makeText(getApplicationContext(), "loadPianoMusicFinish", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public void loadPianoAudioError(Exception e) {
+        Toast.makeText(getApplicationContext(), "loadPianoMusicError", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public void loadPianoAudioProgress(int progress) {
+        Log.e("TAG", "progress:" + progress);
+    }
+
+    @Override public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        pianoView.scroll(i);
+    }
+
+    @Override public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override protected void onResume() {
+
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        super.onResume();
+    }
+
+    @Override public void onClick(View view) {
+        if (scrollProgress == 0) {
+            try {
+                scrollProgress = (pianoView.getLayoutWidth() * 100) / pianoView.getPianoWidth();
+            } catch (Exception e) {
+
+            }
+        }
+        int progress;
+        switch (view.getId()) {
+            case R.id.iv_left_arrow:
+                if (scrollProgress == 0) {
+                    progress = 0;
+                } else {
+                    progress = seekBar.getProgress() - scrollProgress;
+                    if (progress < 0) {
+                        progress = 0;
+                    }
+                }
+                seekBar.setProgress(progress);
+                break;
+            case R.id.iv_right_arrow:
+                if (scrollProgress == 0) {
+                    progress = 100;
+                } else {
+                    progress = seekBar.getProgress() + scrollProgress;
+                    if (progress > 100) {
+                        progress = 100;
+                    }
+                }
+                seekBar.setProgress(progress);
+                break;
+            case R.id.iv_music:
+                if (!isPlay) {
+                    pianoView.autoPlay(litterStarList);
+                }
+                break;
+        }
+    }
+
+
+    private float convertDpToPixel(float dp) {
+        Resources resources = this.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    @Override public void onPianoAutoPlayStart() {
+        Toast.makeText(this, "onPianoAutoPlayStart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override public void onPianoAutoPlayEnd() {
+        Toast.makeText(this, "onPianoAutoPlayEnd", Toast.LENGTH_SHORT).show();
+        isPlay = false;
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        if (pianoView != null) {
+            pianoView.releaseAutoPlay();
+        }
     }
 }
